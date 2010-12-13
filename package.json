@@ -1,0 +1,25 @@
+{
+    "name": "sunrise",
+    "main": "index.js",
+    "version": "0.0.1",
+    "description": "A framework for web site development using CouchApps and node.js",
+    "tags": ["cms", "web", "framework", "couchdb"],
+    "author": "Yohei Sasaki",
+    "bin": {
+        "startServer" : "./bin/startServer.js"
+    },
+    "directories": {
+        "lib": "./lib",
+        "deps": "./deps"
+    },
+    "dependencies": {
+        "oauth": "=0.8.3",
+        "jquery": "=1.4.3",
+        "express": "=1.0.0",
+        "ejs": "=0.2.1",
+        "cradle": "0.3.0"
+    },
+    "licenses" : [{
+        "type": "MIT"
+    }]
+}

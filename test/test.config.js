@@ -1,26 +1,26 @@
+var assert = require('assert');
 var helper = require('./helper');
 var config = require('sunrise/config');
 
 module.exports = {
-   "test default": function(test){
-      test.ok(config.db);
-      test.equal("127.0.0.1", config.db.host);
-      test.equal(5984, config.db.port);
-      test.equal("sunrise", config.db.database);
-      test.equal("admin", config.db.user);
-      test.equal("password", config.db.password);
-      test.done();
-   },
+   "assert configuraiton": function(){
+      assert.ok(config.db);
+      assert.eql("127.0.0.1", config.db.host);
+      assert.eql(5984, config.db.port);
+      assert.eql("sunrise", config.db.database);
+      assert.eql("admin", config.db.user);
+      assert.eql("password", config.db.password);
+      assert.eql();
 
-   "test config override" : function(test){
-      config.load(__dirname + '/../fixtures/test_conf');
-      test.ok(config.db);
-      test.equal("192.168.1.1", config.db.host);
-      test.equal(15984, config.db.port);
-      // other fields not specified in the conf dir are as default.
-      test.equal("sunrise", config.db.database);
-      test.equal("admin", config.db.user);
-      test.equal("password", config.db.password);
-      test.done();
-   },
-}
+      // overide
+      config.load(__dirname + '/fixtures/test_conf');
+      assert.ok(config.db);
+      assert.eql("192.168.1.1", config.db.host);
+      assert.eql(15984, config.db.port);
+      assert.eql("sunrise", config.db.database);
+      assert.eql("admin", config.db.user);
+      assert.eql("password", config.db.password);
+
+   }
+};
+

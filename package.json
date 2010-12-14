@@ -2,7 +2,7 @@
     "name": "sunrise",
     "main": "index.js",
     "version": "0.0.1",
-    "description": "A framework for web site development using CouchApps and node.js",
+    "description": "A application middleware set using CouchApp and node.js/Express",
     "tags": ["cms", "web", "framework", "couchdb"],
     "author": "Yohei Sasaki",
     "bin": {

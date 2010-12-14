@@ -8,6 +8,18 @@ function setUp(){
 }
 
 module.exports = {
+   "test title": function(){
+      var app = setUp();
+      app.get('/',
+              util.title('title'),
+              util.dumpBindings());
+      assert.response(app, {
+         url: '/'
+      }, function(res){
+         assert.ok(JSON.parse(res.body).page.title, 'title');
+      });
+   },
+
    "test redirect": function(){
       var app = setUp();
       app.get('/', util.redirect('/'));

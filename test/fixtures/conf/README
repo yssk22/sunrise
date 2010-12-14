@@ -1,0 +1,10 @@
+test configuration
+-------------------------
+
+web.json
+
+   session option 'reapInterval' requires -1 to shutdown expresso test correctly.
+
+
+
+

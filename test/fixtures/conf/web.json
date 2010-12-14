@@ -1,10 +1,10 @@
 {
     "port": 8888,
-    "listen": "0.0.0.0",
+    "listen": "1.0.0.0",
     "session": {
         "store": "memory",
         "options": {
-            "reapInterval": 30,
+            "reapInterval": -1,
             "maxAge" : 24,
             "cookie" : {
                 "path": "/",

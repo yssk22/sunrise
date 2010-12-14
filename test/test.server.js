@@ -2,6 +2,7 @@ var assert = require('assert');
 var helper = require('./helper');
 var server = require('sunrise/server');
 
+
 module.exports = {
    "test createServer": function(){
       var app = server.createServer('foo');

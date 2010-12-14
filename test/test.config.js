@@ -1,3 +1,4 @@
+var $ = require('jquery');
 var assert = require('assert');
 /***
  * DO NOT use helper, which sets the test configuraton.
@@ -28,6 +29,13 @@ module.exports = {
       assert.eql("sunrise", config.db.database);
       assert.eql("admin", config.db.user);
       assert.eql("password", config.db.password);
+   },
+
+   "non existance directory does not affects anything": function(){
+      var before = $.extend({}, config);
+      config.load("path/to/non/existance");
+      var after = $.extend({}, config);
+      assert.eql(before, after);
    }
 };
 

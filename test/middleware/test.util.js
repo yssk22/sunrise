@@ -20,6 +20,20 @@ module.exports = {
       });
    },
 
+   "test javascripts and stylesheets": function(){
+      var app = setUp();
+      app.get('/',
+              util.javascripts('a.js', 'b.js'),
+              util.stylesheets('a.css', 'b.css'),
+              util.dumpBindings());
+      assert.response(app, {
+         url: '/'
+      }, function(res){
+         assert.ok(JSON.parse(res.body).page.javascripts, ['a.js', 'b.js']);
+         assert.ok(JSON.parse(res.body).page.stylesheets, ['a.css', 'b.css']);
+      });
+   },
+
    "test redirect": function(){
       var app = setUp();
       app.get('/', util.redirect('/'));

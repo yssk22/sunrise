@@ -70,6 +70,25 @@ module.exports = {
       }, {
          body: "bar\n"
       });
-   }
+   },
 
+   "test bindView": function(){
+      var app = setUp();
+      app.get('/',
+              function(req,res, next){
+                 res.bindings.foo = 'bar';
+                 next();
+              },
+              util.bindView('test_render.ejs', {
+                 as: 'hoge',
+                 layout: false
+              }),
+              util.dumpBindings());
+      assert.response(app, {
+         url: '/'
+      }, function(res){
+         assert.ok(JSON.parse(res.body).foo, 'bar');
+         assert.ok(JSON.parse(res.body).hoge, "bar\n");
+      });
+   }
 }

@@ -90,5 +90,27 @@ module.exports = {
          assert.ok(JSON.parse(res.body).foo, 'bar');
          assert.ok(JSON.parse(res.body).hoge, "bar\n");
       });
+   },
+
+   "test bindPartial": function(){
+      var app = setUp();
+      app.get('/',
+              function(req,res, next){
+                 res.bindings.foo = 'bar';
+                 next();
+              },
+              util.bindPartial('test_partial.ejs', {
+                 as: 'hoge',
+                 object: {
+                    abc: '123'
+                 }
+              }),
+              util.dumpBindings());
+      assert.response(app, {
+         url: '/'
+      }, function(res){
+         assert.ok(JSON.parse(res.body).foo, 'bar');
+         assert.ok(JSON.parse(res.body).hoge, "bar123\n");
+      });
    }
-}
+};

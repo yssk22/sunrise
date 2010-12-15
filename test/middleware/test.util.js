@@ -112,5 +112,31 @@ module.exports = {
          assert.ok(JSON.parse(res.body).foo, 'bar');
          assert.ok(JSON.parse(res.body).hoge, "bar123\n");
       });
+   },
+
+   "test parallel": function(){
+      var app = setUp();
+
+      function fun(req, res, next){
+         res.bindings.foo += 1;
+         setTimeout(next, 1);
+      }
+      app.get('/',
+              function(req, res, next){
+                 res.bindings.foo = 0;
+                 next();
+              },
+              util.parallel(
+                 fun,
+                 fun,
+                 fun,
+                 util.dumpBindings()
+              ));
+      assert.response(app, {
+         url: '/'
+      }, function(res){
+         assert.ok(JSON.parse(res.body).foo, 3);
+      });
+
    }
 };

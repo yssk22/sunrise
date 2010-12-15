@@ -4,7 +4,7 @@ var server = require('sunrise/server');
 var util   = require('sunrise/middleware/util');
 
 function setUp(){
-  return server.createServer('foo');
+  return server.createServer(__dirname + "/../fixtures/test_app");
 }
 
 module.exports = {
@@ -57,5 +57,19 @@ module.exports = {
             "location": '/'
          }
       });
+   },
+
+   "test render": function(){
+      var app = setUp();
+      app.get('/', function(req,res, next){
+         res.bindings.foo = 'bar';
+         next();
+      }, util.render('test_render.ejs', {layout: false}));
+      assert.response(app, {
+         url: '/'
+      }, {
+         body: "bar\n"
+      });
    }
+
 }

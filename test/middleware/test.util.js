@@ -1,5 +1,5 @@
 var assert = require('assert');
-var helper = require('../helper');
+var helper = require('../test_env');
 var server = require('sunrise/server');
 var util   = require('sunrise/middleware/util');
 

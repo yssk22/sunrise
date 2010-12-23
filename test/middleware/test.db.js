@@ -27,7 +27,7 @@ module.exports = {
          assert.response(app, {
             url: '/'
          }, function(res){
-            assert.ok(JSON.parse(res.body).data.result.title, 'this is test');
+            assert.eql(JSON.parse(res.body).data.result.title, 'this is test');
          });
       });
    },
@@ -49,9 +49,44 @@ module.exports = {
          method: "POST",
          url: '/?id=test_save&title=foo'
       }, function(res){
-         assert.ok(JSON.parse(res.body).data.result.id, 'test_save');
+         assert.eql(JSON.parse(res.body).data.result.id, 'test_save');
          conn.get('test_save', function(err, doc){
-            assert.ok(doc.title, "foo");
+            assert.eql(doc.title, "foo");
+         });
+      });
+   },
+
+   "test view": function(){
+      app.get('/view',
+              db.bind(conn, 'view', 'foo/all', {
+                 limit: 5
+              },{
+                 as: 'data'
+              }),
+              util.dumpBindings());
+      conn.save('_design/foo', {
+         all: {
+            map: function(doc){
+               if( doc.title == 'view_test'){
+                  emit(null, doc);
+               }
+            }
+         }
+      }, function(err, res){
+         var count = 0;
+         var bulk = [];
+         for(var i=0; i<10; i++){
+            bulk.push({title: 'view_test'});
+         }
+         conn.save(bulk, function(err, res){
+            assert.ok(res);
+            assert.response(app, {
+               url: '/view'
+            }, function(res){
+               var result = JSON.parse(res.body).data.result;
+               assert.eql(result.total_rows, 10);
+               assert.eql(result.rows.length, 5);
+            });
          });
       });
    }

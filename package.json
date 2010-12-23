@@ -6,10 +6,10 @@
     "tags": ["cms", "web", "framework", "couchdb"],
     "author": "Yohei Sasaki",
     "bin": {
-        "startServer" : "./bin/startServer.js"
+        "sunrise:server" : "./bin/server.js",
     },
     "directories": {
-        "lib": "./lib",
+        "lib": "./lib/sunrise",
         "deps": "./deps"
     },
     "dependencies": {

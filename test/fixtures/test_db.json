@@ -1,0 +1,10 @@
+{
+    "foo": {
+        "type": "test_db",
+        "title": "foo"
+    },
+    "bar": {
+        "type": "test_db",
+        "title": "bar"
+    }
+}

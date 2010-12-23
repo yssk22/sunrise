@@ -4,6 +4,11 @@ var assert = require('assert');
 var helper = require('sunrise/helper');
 
 module.exports = {
+   "test abspath" : function(){
+      var base = process.cwd();
+      assert.equal(base + "/foo/bar", helper.abspath("foo/bar"));
+      assert.equal("/foo/bar", helper.abspath("/foo/bar"));
+   },
    "test dynamicObject": function(){
       // number, string, boolean, null, undefined
 

@@ -1,0 +1,17 @@
+<% for(var i in result.rows){ %>
+<% var post = result.rows[i].value; %>
+<article class="post">
+  <header>
+    <h3><%= post.title %></h3>
+  </header>
+  <div class="content">
+    <%- post.content %>
+  </div>
+  <footer>
+    <a href="/posts/<%= post._id.split(':')[1] %>" title=""><%= _("posts.permalink") %></a>
+    <a href="/posts/<%= post._id.split(':')[1] %>#comment" title=""><%= _("posts.comment") %></a>
+    <%= _("posts.created_by") %>: <%= post.updated_by %>
+    <%= php.strftime(_("posts.date_format"), new Date(post.updated_at)) %>
+  </footer>
+</article>
+<% } %>

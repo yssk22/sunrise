@@ -1,0 +1,30 @@
+<aside class="sidebar">
+  <div class="content">
+    <h3>メニュー</h3>
+    <ul>
+      <li><a href="/posts/admin/new" class="ctrl"><%= _("posts.new") %></a></li>
+      <li><a href="/posts/admin/" class="ctrl"><%= _("posts.admin") %></a></li>
+    </ul>
+  </div>
+  <div class="content">
+    <h3>アーカイブ</h3>
+    <%- archives %>
+  </div>
+</aside>
+<div class="mainContents">
+  <section class="posts">
+    <article class="post">
+      <header>
+        <h3><%= post.result.title %></h3>
+      </header>
+      <div class="content">
+        <%- post.result.content %>
+      </div>
+      <footer>
+        <a href="/posts/<%= post.result._id.split(':')[1] %>" title=""><%= _("posts.permalink") %></a>
+        <%= _("posts.created_by") %>: <%= post.result.updated_by %>
+        <%= php.strftime(_("posts.date_format"), new Date(post.result.updated_at)) %>
+      </footer>
+    </article>
+  </section>
+</div>

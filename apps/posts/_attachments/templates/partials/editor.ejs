@@ -1,0 +1,49 @@
+<% 
+var action = "/posts/";
+var hidden = {};
+if( result._rev && result._id ){ 
+   action = "/posts/" + result._id.split(":")[1];
+   hidden = { 
+   _rev: result._rev,
+   _method: "PUT"
+   };
+} 
+%>
+<% if( error && error.error != 'not_found' ) { %>
+<div class="error">
+  <%= error.reason %>
+</div>
+<% } %>
+<form id="postEditor" action="<%= action %>" method="POST" class="post">
+  <% for(var name in hidden){ %>
+  <input type="hidden" name="<%= name %>" value="<%= hidden[name] %>" >
+  <% } %>
+  <div class="item">
+    <label for="title"><%= _('posts.title') %></label>
+    <div class="input">
+      <input type="text" id="title" name="title" 
+             class="validate[required]"
+             value="<%= result.title %>"
+             style="width:99%;"></input>
+    </div>
+  </div>
+  <div class="item">
+    <label for="tags"><%= _("posts.tags") %></label>
+    <div class="input">
+      <input type="text" id="tags" name="tags" 
+             value="<%= (result.tags || []).join(', ') %>"
+             style="width:99%;"></input>
+    </div>
+  </div>
+  <div class="item clearfix">
+    <textarea name="content" style="width:99%" rows="20"><%= result.content || "" %></textarea>
+  </div>
+  <div class="item clearfix">
+    <label for="is_draft"><%= _("posts.is_draft") %></label>
+    <input type="checkbox" name="is_draft" value="1"></input>
+  </div>
+  <div class="item buttons clearfix">
+    <button type="submit"><%= _("posts.submit") %></button>
+    <button type="button"><%= _("posts.cancel") %></button>
+  </div>
+</form>

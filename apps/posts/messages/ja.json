@@ -1,0 +1,25 @@
+{
+    "posts.recent": "Recent Posts",
+    "posts.date_format"  : "%Y年%m月%d日 %H時%M分",
+    "posts.archive_label": "%Y年%m月",
+
+    "posts.title"      : "タイトル",
+    "posts.tags"       : "タグ",
+    "posts.is_draft"   : "下書き",
+    "posts.permalink"  : "リンク",
+    "posts.created_by" : "投稿者",
+    "posts.created_at" : "作成日時",
+    "posts.updated_at" : "更新日時",
+    "posts.comment"    : "コメント",
+
+    "posts.previous": "前へ",
+    "posts.next": "次へ",
+    "posts.submit": "投稿",
+    "posts.cancel": "キャンセル",
+    
+    "posts.new": "新規投稿",
+    "posts.edit": "編集",
+    "posts.delete": "削除",
+    "posts.admin": "投稿の管理",
+    "posts._________" : ""
+}

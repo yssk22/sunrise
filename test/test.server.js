@@ -1,60 +1,48 @@
 var assert = require('assert');
-var helper = require('./test_env');
-var server = require('sunrise/server');
-
+var env = require('./test_env');
+var createServer = require('sunrise/server').createServer;
 
 module.exports = {
-   "test createServer": function(){
-      var app = server.createServer('foo');
-      assert.eql(typeof app.setUp, 'function');
-      assert.eql(typeof app.install, 'function');
-   },
+  "test Server default instance": function(){
+    var s = createServer();
+    assert.eql(s.namespace, '/');
+    assert.eql(s.i18n.defaultLocale, 'en');
+    assert.isNotNull(s.i18n);;
+    assert.isNotNull(s.db);
+    assert.isNotNull(s.logger);
 
-   "test application setUp": function(){
-      var app = server.createServer('foo');
-      app.setUp({
-         setUp: function(app){
-            app.get('/', function(req, res, next){
-               res.writeHead(200, {'Content-Type': "text/plain"});
-               res.end("Hello World");
-            });
-         }
-      });
-      assert.response(app, {
-         url: '/', method: "GET"
-      }, {
-         body: "Hello World"
-      });
-   },
+    s.get('/foo', function(req, res, next){
+      assert.eql(req.locale, 'en');
+      assert.isNotNull(req.logger);
+      assert.isNotNull(res.bindings);
+      res.writeHead(200);
+      res.end("Hello World");
+    });
 
-   "test sunriseHelper" : function(){
-      var app = server.createServer('foo');
-      app.setUp({
-         setUp: function(app){
-            app.get('/', function(req, res, next){
-               assert.isDefined(req.logger);
-               assert.isDefined(res.logger);
-               assert.isDefined(res.bindings);
-               assert.isDefined(res.bindings.page);
-               assert.eql(res.bindings.page.title, "");
-               assert.eql(res.bindings.page.description, "");
-               assert.eql(res.bindings.page.keywords, "");
-               assert.eql(res.bindings.page.javascripts, []);
-               assert.eql(res.bindings.page.stylesheets, []);
-               next();
-            }, function(req, res, next){
-               res.bindings.foo = 'Hello';
-               next();
-            }, function(req, res, next){
-               res.writeHead(200, {'Content-Type': "text/plain"});
-               res.end(res.bindings.foo);
-            });
-         }
-      });
-      assert.response(app, {
-         url: '/', method: "GET"
-      }, {
-         body: "Hello"
-      });
-   }
-};
+    assert.response(s, {
+      url: '/foo', method: "GET"
+    }, {
+      body: "Hello World"
+    });
+  },
+
+  "test Server with namespaced": function(){
+    var s = createServer({namespace: '/foo'});
+    s.get('/bar', function(req, res, next){
+      assert.eql(req.url, '/foo/bar');
+      res.writeHead(200);
+      res.end("Hello World");
+    });
+    assert.response(s, {
+      url: '/foo/bar', method: "GET"
+    }, {
+      body: "Hello World"
+    });
+
+    assert.response(s, {
+      url: '/bar', method: "GET"
+    }, {
+      status: 404
+    });
+  }
+}

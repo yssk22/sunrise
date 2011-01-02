@@ -1,0 +1,23 @@
+<% for(var i in result.rows){ %>
+<% var post = result.rows[i].value; %>
+<tr>
+  <td><input type="checkbox"></td>
+  <td>
+    <%= post._id %><br/>
+    <a href="/posts/<%= post._id.split(':')[1] %>"><%= post.title %></a>
+  </td>
+  <td><%= php.strftime(_("posts.date_format"), new Date(post.updated_at)) %></td>
+  <td><a href="/posts/admin/edit/<%= post._id.split(':')[1] %>" title=""><%= _("posts.edit") %></a></td>
+  <td>
+    <form action="/posts/<%= post._id.split(':')[1] %>" method="POST">
+      <input type="hidden" name="_method" value="DELETE"></input>
+      <input type="hidden" name="_rev" value="<%= post._rev %>"></input>
+      <button type="submit"><%= _("posts.delete") %></button>
+    </form>
+    <form class="meta" style="display:none">
+      <input type="hidden" name="docid" value="<%= result.rows[i].id.split(':')[1] %>"></input>
+      <input type="hidden" name="key" value="<%= result.rows[i].key %>"></input>
+    </form>
+  </td>
+</tr>
+<% } %>

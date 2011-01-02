@@ -1,0 +1,36 @@
+<aside class="sidebar">
+  <div class="content">
+    <h3>メニュー</h3>
+    <ul>
+      <li><a href="/posts/admin/new" class="ctrl"><%= _("posts.new") %></a></li>
+      <li><a href="/posts/admin/" class="ctrl"><%= _("posts.admin") %></a></li>
+    </ul>
+  </div>
+  <div class="content">
+    <h3>アーカイブ</h3>
+  </div>
+</aside>
+<div class="mainContents">
+  <article class="posts" id="posts">
+    <h2><%= _("posts.admin") %></h2>
+    <div class="content">
+      <div class="pagination">
+        <a href="#prev" class="prev"><%= _("posts.previous") %></a>
+        <a href="#next" class="next"><%= _("posts.next") %></a>
+      </div>
+      <table class="posts" style="width:99%">
+        <thead>
+          <tr>
+            <th></th>
+            <th><%= _("posts.title") %></th>
+            <th class="datetime"><%= _("posts.updated_at") %></th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%- posts %>
+        </tbody>
+      </table>
+    </div>
+  </article>
+</div>

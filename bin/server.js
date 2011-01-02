@@ -13,17 +13,17 @@ var confDir = path.join(base, 'conf');
 config.load(confDir);
 
 var mod = require(appPath);
-var app =server.createServer(base);
-app.setup(mod, function(err){
+var s = server.createServer(base);
+s.setup(mod, function(err){
    if( err ){
       throw err;
    }else{
-      app.logger.info("server initialized from " + appPath);
-      app.listen(config.web.port, function(err){
+      s.logger.info("server initialized from " + appPath);
+      s.listen(config.web.port, function(err){
          if( err ){
             throw err;
          }
-         app.logger.info("listening on " + config.web.port);
+         s.logger.info("listening on " + config.web.port);
       });
    }
 });

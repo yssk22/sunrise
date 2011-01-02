@@ -1,0 +1,25 @@
+{
+    "posts.recent": "最近の投稿",
+    "posts.date_format"  : "%Y-%m-%d %H:%M",
+    "posts.archive_label": "%Y/%m",
+
+    "posts.title"      : "Title",
+    "posts.tags"       : "Tag",
+    "posts.is_draft"   : "Draft",
+    "posts.permalink"  : "Permalink",
+    "posts.created_by" : "Author",
+    "posts.created_at" : "Created At",
+    "posts.updated_at" : "Updated At",
+    "posts.comment"    : "Comment",
+
+    "posts.previous": "Previous",
+    "posts.next": "Next",
+    "posts.submit": "Submit",
+    "posts.cancel": "Cancel",
+
+    "posts.new": "New Post",
+    "posts.edit": "Edit",
+    "posts.delete": "Delete",
+    "posts.admin": "Manage Posts",
+    "posts._________" : ""
+}

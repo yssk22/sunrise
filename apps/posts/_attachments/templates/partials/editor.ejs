@@ -1,10 +1,10 @@
 <% 
 var action = "/posts/";
 var hidden = {};
-if( result._rev && result._id ){ 
-   action = "/posts/" + result._id.split(":")[1];
+if( data._rev && data._id ){ 
+   action = "/posts/" + data._id;
    hidden = { 
-   _rev: result._rev,
+   _rev: data._rev,
    _method: "PUT"
    };
 } 
@@ -23,7 +23,7 @@ if( result._rev && result._id ){
     <div class="input">
       <input type="text" id="title" name="title" 
              class="validate[required]"
-             value="<%= result.title %>"
+             value="<%= data.title %>"
              style="width:99%;"></input>
     </div>
   </div>
@@ -31,12 +31,12 @@ if( result._rev && result._id ){
     <label for="tags"><%= _("posts.tags") %></label>
     <div class="input">
       <input type="text" id="tags" name="tags" 
-             value="<%= (result.tags || []).join(', ') %>"
+             value="<%= (data.tags || []).join(', ') %>"
              style="width:99%;"></input>
     </div>
   </div>
   <div class="item clearfix">
-    <textarea name="content" style="width:99%" rows="20"><%= result.content || "" %></textarea>
+    <textarea name="content" style="width:99%" rows="20"><%= data.content || "" %></textarea>
   </div>
   <div class="item clearfix">
     <label for="is_draft"><%= _("posts.is_draft") %></label>

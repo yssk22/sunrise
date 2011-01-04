@@ -1,9 +1,10 @@
 <ul class="post_archives">
-  <% for(var i in result.rows){ %>
-  <% var archive = result.rows[i]; %>
-  <% var label = php.strftime(_("posts.archive_label"), new Date(archive.key[0], archive.key[1] -1, 1)) %>
+  <% for(var i in data.rows){ %>
+  <% var archive = data.rows[i]; %>
+  <% var t = new Date(archive.key[0], archive.key[1] -1, 1) %>
+  <% var label = php.strftime(_("posts.archive_label"), t) %>
   <li>
-      <a href="/posts/archives/<%= archive.key[0] %>/<%= archive.key[1] %>/"
+      <a href="/posts/archives/<%= php.strftime('%Y', t) %>/<%= php.strftime('%m', t) %>/"
          title="<%= label %>">
       <%= label %> (<%= archive.value %>)
     </a>

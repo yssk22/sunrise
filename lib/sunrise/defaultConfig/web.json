@@ -4,8 +4,8 @@
     "session": {
         "store": "memory",
         "options": {
-            "reapInterval": 30,
-            "maxAge" : 24,
+            "reapInterval": 600000,
+            "maxAge" : 7776000000,
             "cookie" : {
                 "path": "/",
                 "httpOnly": true

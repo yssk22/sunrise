@@ -1,13 +1,13 @@
 <aside class="sidebar">
   <div class="content">
-    <h3>メニュー</h3>
+    <h3><%= _("posts.menu") %></h3>
     <ul>
       <li><a href="/posts/admin/new" class="ctrl"><%= _("posts.new") %></a></li>
       <li><a href="/posts/admin/" class="ctrl"><%= _("posts.admin") %></a></li>
     </ul>
   </div>
   <div class="content">
-    <h3>アーカイブ</h3>
+    <h3><%= _("posts.archive") %></h3>
     <%- archives %>
   </div>
 </aside>
@@ -15,15 +15,15 @@
   <section class="posts">
     <article class="post">
       <header>
-        <h3><%= post.result.title %></h3>
+        <h3><%= post.data.title %></h3>
       </header>
       <div class="content">
-        <%- post.result.content %>
+        <%- sanitizer.sanitize(post.data.content, function(id){return id;}, function(id){return id;} ) %>
       </div>
       <footer>
-        <a href="/posts/<%= post.result._id.split(':')[1] %>" title=""><%= _("posts.permalink") %></a>
-        <%= _("posts.created_by") %>: <%= post.result.updated_by %>
-        <%= php.strftime(_("posts.date_format"), new Date(post.result.updated_at)) %>
+        <a href="/posts/<%= post.data._id %>" title=""><%= _("posts.permalink") %></a>
+        <%= _("posts.updated_by") %>: <%= post.data.updated_by.userName %>
+        <%= php.strftime(_("posts.date_format"), new Date(post.data.updated_at)) %>
       </footer>
     </article>
   </section>

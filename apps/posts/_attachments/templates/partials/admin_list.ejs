@@ -1,23 +1,39 @@
-<% for(var i in result.rows){ %>
-<% var post = result.rows[i].value; %>
-<tr>
-  <td><input type="checkbox"></td>
-  <td>
-    <%= post._id %><br/>
-    <a href="/posts/<%= post._id.split(':')[1] %>"><%= post.title %></a>
-  </td>
-  <td><%= php.strftime(_("posts.date_format"), new Date(post.updated_at)) %></td>
-  <td><a href="/posts/admin/edit/<%= post._id.split(':')[1] %>" title=""><%= _("posts.edit") %></a></td>
-  <td>
-    <form action="/posts/<%= post._id.split(':')[1] %>" method="POST">
-      <input type="hidden" name="_method" value="DELETE"></input>
-      <input type="hidden" name="_rev" value="<%= post._rev %>"></input>
-      <button type="submit"><%= _("posts.delete") %></button>
-    </form>
-    <form class="meta" style="display:none">
-      <input type="hidden" name="docid" value="<%= result.rows[i].id.split(':')[1] %>"></input>
-      <input type="hidden" name="key" value="<%= result.rows[i].key %>"></input>
-    </form>
-  </td>
-</tr>
-<% } %>
+<table class="posts" style="width:99%">
+  <thead>
+    <tr>
+      <th class="title"><%= _("posts.title") %></th>
+      <th class="datetime"><%= _("posts.updated_at") %></th>
+      <th class="menu" colspan="2">
+        <form class="meta" style="display:none">
+          <input type="hidden" name="total_rows" value="<%= data.total_rows %>"></input>
+          <input type="hidden" name="num_rows" value="<%= (data.rows || []).length %>"></input>
+          <input type="hidden" name="offset" value="<%= data.offset %>"></input>
+        </form>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(var i in data.rows){ %>
+    <% var row = data.rows[i]; %>
+    <% var post = row.value; %>
+    <tr>
+      <td class="title">
+        <a href="/posts/<%= post._id %>"><%= post.title %></a>
+      </td>
+      <td class="datetime"><%= php.strftime(_("posts.date_format"), new Date(post.updated_at)) %></td>
+      <td class="menu"><a href="/posts/admin/edit/<%= post._id %>" title=""><%= _("posts.edit") %></a></td>
+      <td class="menu">
+        <form action="/posts/<%= post._id %>" method="POST">
+          <input type="hidden" name="_method" value="DELETE"></input>
+          <input type="hidden" name="_rev" value="<%= post._rev %>"></input>
+          <button type="submit"><%= _("posts.delete") %></button>
+        </form>
+        <form class="meta" style="display:none">
+          <input type="hidden" name="docid" value="<%= row.id %>"></input>
+          <input type="hidden" name="key" value="<%= row.key %>"></input>
+        </form>
+      </td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>

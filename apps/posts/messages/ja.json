@@ -1,7 +1,9 @@
 {
-    "posts.recent": "Recent Posts",
+    "posts.recent": "最新の投稿",
     "posts.date_format"  : "%Y年%m月%d日 %H時%M分",
     "posts.archive_label": "%Y年%m月",
+    "posts.archive": "アーカイブ",
+    "posts.menu": "メニュー",
 
     "posts.title"      : "タイトル",
     "posts.tags"       : "タグ",
@@ -9,6 +11,7 @@
     "posts.permalink"  : "リンク",
     "posts.created_by" : "投稿者",
     "posts.created_at" : "作成日時",
+    "posts.updated_by" : "投稿者",
     "posts.updated_at" : "更新日時",
     "posts.comment"    : "コメント",
 

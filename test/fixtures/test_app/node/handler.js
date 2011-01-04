@@ -15,4 +15,18 @@ module.exports = function(app){
     res.end(req.session.test_string);
   });
 
+  app.get('/multifilter', function(req, res, next){
+    res.writeHead(200);
+    next();
+  }, function(req, res, next){
+    res.end('Multifilter GET');
+  });;
+
+  app.post('/multifilter', function(req, res, next){
+    res.writeHead(200);
+    next();
+  }, function(req, res, next){
+    res.end('Multifilter POST');
+  });
+
 };

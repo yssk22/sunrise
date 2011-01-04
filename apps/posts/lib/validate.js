@@ -29,8 +29,12 @@ exports.init = function(newDoc, oldDoc, userCtx, secObj){
    v.unchanged = function() {
       for (var i=0; i < arguments.length; i++) {
          var field = arguments[i];
-         if (oldDoc && oldDoc[field] != newDoc[field]) {
-            v.forbidden("You may not change the '"+field+"' field.");
+         if (oldDoc){
+           var _old = JSON.stringify(oldDoc[field]);
+           var _new = JSON.stringify(newDoc[field]);
+           if( _old != _new ){
+             v.forbidden("You may not change the '"+field+"' field.");
+           }
          }
       }
    };

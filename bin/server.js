@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var path = require('path');
-var server = require('sunrise/server');
+var site = require('sunrise/site');
 var config = require('sunrise/config');
 var helper = require('sunrise/helper');
 
@@ -13,7 +13,7 @@ var confDir = path.join(base, 'conf');
 config.load(confDir);
 
 var mod = require(appPath);
-var s = server.createServer(base);
+var s = site.createSite(base);
 s.setup(mod, function(err){
    if( err ){
       throw err;

@@ -1,0 +1,15 @@
+.posts #admin_list th.title,
+.posts #admin_list td.title {
+    text-align: left;
+}
+
+.posts #admin_list th.datetime,
+.posts #admin_list td.datetime {
+    width: 15em;
+}
+
+.posts #admin_list th.menu, 
+.posts #admin_list td.menu {
+    text-align: center;
+    width: 5em;
+}

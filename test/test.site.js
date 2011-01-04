@@ -40,6 +40,16 @@ module.exports = {
       }, {
         body: "Session Test"
       });
+      assert.response(site, {
+        url: '/test_app/multifilter', method: 'GET'
+      }, {
+        body: 'Multifilter GET'
+      });
+      assert.response(site, {
+        url: '/test_app/multifilter', method: 'POST'
+      }, {
+        body: 'Multifilter POST'
+      });
     });
   }
 };

@@ -1,14 +1,18 @@
 var $ = require('sunrise').util;
 var php = require('sunrise/vendor/php');
-exports.setup = function(app){
-  var posts = app.db;
+module.exports = function(app){
+  var posts = app.model;
   // administration
   app.all("*",
-          $.javascripts("/javascripts/posts.js"));
+          $.javascripts("/javascripts/posts.js"),
+          $.stylesheets("/stylesheets/posts.css"));
 
   app.get('/admin/new',
-          $.title("posts.new"),
-          posts.editor({newDoc: true}),
+          $.parallel(
+            $.title("posts.new"),
+            posts.countByDate(),
+            posts.editor({newDoc: true})
+          ),
           $.render(posts.template_dir + '/admin/new.ejs')
          );
 
@@ -21,8 +25,7 @@ exports.setup = function(app){
             }),
             $.title("posts.admin")
           ),
-          $.render(posts.template_dir + '/admin/index.ejs'),
-          $.stop() // do not delegate '/posts/:id'
+          $.render(posts.template_dir + '/admin/index.ejs')
          );
 
   // partial views for list contents
@@ -37,8 +40,11 @@ exports.setup = function(app){
 
 
   app.get('/admin/edit/:id',
-          $.title("posts.edit"),
-          posts.editor(),
+          $.parallel(
+            $.title("posts.edit"),
+            posts.countByDate(),
+            posts.editor()
+          ),
           $.render(posts.template_dir + '/admin/edit.ejs')
          );
 
@@ -52,18 +58,18 @@ exports.setup = function(app){
               next();
             },
             posts.countByDate(),
-            posts.byMonth(),
-            $.render(posts.template_dir + '/index.ejs')
-          )
+            posts.byMonth()
+          ),
+          $.render(posts.template_dir + '/index.ejs')
          );
 
   app.get('/',
           $.parallel(
             $.title("posts.recent"),
             posts.countByDate(),
-            posts.byUpdatedAt(),
-            $.render(posts.template_dir + '/index.ejs')
-          )
+            posts.byUpdatedAt()
+          ),
+          $.render(posts.template_dir + '/index.ejs')
          );
 
 
@@ -73,11 +79,10 @@ exports.setup = function(app){
             posts.byId({template: false})
           ),
           function(req, res, next){
-            res.bindings.page.title = res.bindings.post.result.title;
+            res.bindings.page.title = res.bindings.post.data.title;
             next();
           },
           $.render(posts.template_dir + '/show.ejs')
-
          );
 
   // Create/Update/Delete
@@ -86,8 +91,7 @@ exports.setup = function(app){
              success: $.redirect('/posts/')
            }),
            $.title("posts.new"),
-           $.render(posts.template_dir + '/admin/new.ejs')
-          );
+           $.redirect('/posts/'));
 
   app.put('/:id',
           posts.save({
@@ -99,9 +103,9 @@ exports.setup = function(app){
           $.title("posts.edit"),
           $.render(posts.template_dir + '/admin/edit.ejs'));
 
-  app.delete('/posts/:id',
-             posts.delete({
-               success: $.redirect('/posts/admin/')
-             }));
+  app.del('/:id',
+          posts.delete({
+            success: $.redirect('/posts/admin/')
+          }));
 
 }

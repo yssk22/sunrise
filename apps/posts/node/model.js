@@ -7,14 +7,18 @@ var dummyId = "________dummy";
 var TEMPLATE_DIR = __dirname + '/../_attachments/templates';
 
 function pagenationSupport(params){
-  function _docid(id, f){
+  function _docid(id){
     return id ?  id : undefined;
   }
-  function _key(key, f){
-    return key ? JSON.parse(key) : undefined;
+  function _key(key){
+    try{
+      return key ? JSON.parse(key) : undefined;
+    }catch(e){
+      return undefined;
+    }
   }
 
-  return $.extend(params, {
+  return $.extend({}, params, {
     startkey: function(f){
       f(undefined, _key(this.request.query.startkey));
     },
@@ -55,7 +59,11 @@ module.exports = {
     LIST_TEMPLATE:TEMPLATE_DIR + '/partials/post_list.ejs',
     ARCHIVE_LINK_TEMPLATE: TEMPLATE_DIR + '/partials/archive_list.ejs',
     EDITOR_TEMPLATE: TEMPLATE_DIR + '/partials/editor.ejs',
-    LIST_PER_PAGE: 2
+    LIST_PER_PAGE: 15,
+    CONTENT_FORMAT: "HTML",
+    CONTENT_FORMATTER: function(c){
+
+    }
   },
 
   byId : function(options){
@@ -105,7 +113,15 @@ module.exports = {
     }, params));
     options = $.extend({
       as: 'posts',
-      template: this.config.LIST_TEMPLATE
+      template: this.config.LIST_TEMPLATE,
+      onResponse: function(err, data, args, cb){
+        if( data && data.rows && this.request.query.reverse == "true" ){
+          console.log('reversing');
+          data.rows.reverse();
+          data.offset = data.total_rows - (data.offset + data.rows.length);
+        }
+        cb(err, data);
+      }
     }, options);
     return this.bind('view', 'posts/recent', params, options);
   },
@@ -123,6 +139,8 @@ module.exports = {
 
     var yearParam  = options.yearParam;
     var monthParam = options.monthParam;
+
+
     var params = {
       startkey: function(f){
         f(undefined, this.request.params[yearParam] + "-" + this.request.params[monthParam]);
@@ -161,10 +179,11 @@ module.exports = {
       descending: true
     };
     options = $.extend({
-          as: 'archives',
+      as: 'archives',
       template: this.config.ARCHIVE_LINK_TEMPLATE
     }, options);
-    return this.bind('view', 'posts/date_count', params, options);
+    var fun = this.bind('view', 'posts/date_count', params, options);
+    return fun;
   },
 
   countTags: function(options){
@@ -190,7 +209,7 @@ module.exports = {
           layout: false,
           locals: {
             error: null,
-            result: $.extend({}, self.docTemplate)
+            data: $.extend({}, self.docTemplate)
           }
         }, function(err, str){
           res.bindings[options.as] = err || str;
@@ -220,11 +239,11 @@ module.exports = {
     options = $.extend({
       failure: this.config.EDITOR_TEMPLATE,
       as: 'post',
-      onResponse: function(err, args, result, cb){
+      onResponse: function(err, data, args, cb){
         if( err ){
-          result = args[1];
+          data = args[1];
         }
-        cb(err, result);
+        cb(err, data);
       }
     }, options);
     return this.bind(options.merge ? 'merge' : 'save',
@@ -232,7 +251,7 @@ module.exports = {
                        if( options.merge) {
                          f(undefined, encodeURIComponent(this.request.params.id));
                        }else{
-                         this.db.genId(DOCTYPE, function(err, id){
+                         this.db.uuid(function(err, id){
                            f(undefined, encodeURIComponent(id));
                          });
                        }
@@ -243,13 +262,13 @@ module.exports = {
                                           self.docTemplate, this.request.body,
                                           {
                                             updated_at: ts,
-                                            updated_by: 'yssk22'
+                                            updated_by: this.request.currentUser()
                                           });
                        if( !options.merge ){
                          doc.created_at = ts;
-                         doc.created_by = 'yssk22';
+                         doc.created_by = this.request.currentUser();
                        }
                        f(undefined, doc);
-                         }, options);
+                     }, options);
   }
 };

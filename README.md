@@ -17,25 +17,26 @@ for various community/personal sites.
 
 ## Install
 
-   $ git clone git://github.com/couchdb-jp/sunrise
-   $ cd sunrise
-   $ npm install .
+    $ git clone git://github.com/couchdb-jp/sunrise
+    $ cd sunrise
+    $ npm install .
 
 ## Test (for developers)
 
 Before you launch test script, you need to install expresso package using npm.
 
-   $ expresso -I lib test/test.*
+    $ expresso -I lib test/test.*
 
 or you can check coverage:
 
-   $ expresso -I lib --cov test/test.*
+    $ expresso -I lib --cov test/test.*
 
 ## Available Applicaitons
 
 - posts
-- wiki
-- twitter
+- file uploader (TBD)
+- wiki (TBD)
+- realtime chat (TBD)
 - ....
 
 ## Example
@@ -45,4 +46,3 @@ see examples directory.
 ## Licesnse
 
 MIT license
-

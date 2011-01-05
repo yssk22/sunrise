@@ -15,6 +15,9 @@
     "posts.updated_at" : "更新日時",
     "posts.comment"    : "コメント",
 
+    "posts.no_posts"   : "まだ記事が存在しません。",
+    "posts.not_found"  : "記事が見つかりませんでした。",
+
     "posts.previous": "前へ",
     "posts.next": "次へ",
     "posts.submit": "投稿",

@@ -15,6 +15,9 @@
     "posts.updated_at" : "Updated At",
     "posts.comment"    : "Comment",
 
+    "posts.no_posts"   : "No posts are submitted yet.",
+    "posts.not_found"  : "No posts are found.",
+
     "posts.previous": "Previous",
     "posts.next": "Next",
     "posts.submit": "Submit",

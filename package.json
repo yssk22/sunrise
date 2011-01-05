@@ -18,6 +18,7 @@
         "express": "=1.0.0",
         "ejs": "=0.2.1",
         "cradle": ">=0.3.0",
+        "node-markdown": "=0.1.0",
         "log4js": "=0.2.2"
     },
     "licenses" : [{

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= page.title %> - sunrise</title>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/blitzer/jquery-ui.css" type="text/css" />
+    <link rel="stylesheet" href="/stylesheets/vendor/blueprint/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="/stylesheets/vendor/blueprint/blueprint/print.css" type="text/css" media="print">	
+    <!--[if lt IE 8]><link rel="stylesheet" href="/stylesheets/vendor/blueprint/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    <link rel="stylesheet" href="/stylesheets/sunrise.css" type="text/css" />
+    <% for(var i in page.stylesheets){ %>
+    <link rel="stylesheet" href="<%= page.stylesheets[i] %>" type="text/css" />
+    <% } %>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+  </head>
+  <body>
+    <header id="siteHeader" class="container">
+      <div class="span-21">
+        <h1>
+          <a href="/">Sunrise</a>
+          <span class="subTitle">Application container framework powered by node.js</span>
+        </h1>
+      </div>
+      <nav id="accountNavigation">
+        <ul>
+          <% if( userCtx.userId ){ %>
+          <li class="user span-1"><%= userCtx.userName %></li>
+          <li class="user span-1 last"><a href="/logout">Logout</a></li>
+          <% }else{ %>
+          <li class="guest span-1"><%= userCtx.userName %></li>
+          <li class="user span-1 last"><a href="/login">Login</a></li>
+          <% } %>
+        </ul>
+      </nav>
+      <nav id="siteNavigation" class="clear">
+        <ul>
+          <li class="span-2"><a href="/">Home</a></li>
+          <li class="span-2 append-17"><a href="/posts/">Posts</a></li>
+        </ul>
+      </nav>
+    </header>
+    <hr />
+    <div id="main" class="container">
+      <%- body %>
+    </div>
+    <hr />
+    <footer id="siteFooter" class="container">
+      <div id="copyright" class="prepend-9 append-9">
+        <p>
+          &copy; 2010 - 2011
+          <a href="http://github.com/yssk22">@yssk22</a>
+          <a href="https://github.com/yssk22/sunrise">sunrise</a>
+        </p>
+      </div>
+    </footer>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/vendor/json2.js"></script>
+    <% for(var i in page.javascripts){ %>
+    <script type="text/javascript" src="<%= page.javascripts[i] %>"></script>
+    <% } %>
+  </body>
+</html>

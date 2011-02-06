@@ -7,6 +7,7 @@
 
     "posts.title"      : "タイトル",
     "posts.tags"       : "タグ",
+    "posts.content"    : "本文",
     "posts.is_draft"   : "下書き",
     "posts.permalink"  : "リンク",
     "posts.created_by" : "投稿者",

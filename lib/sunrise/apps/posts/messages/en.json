@@ -7,6 +7,7 @@
 
     "posts.title"      : "Title",
     "posts.tags"       : "Tag",
+    "posts.content"    : "Content",
     "posts.is_draft"   : "Draft",
     "posts.permalink"  : "Permalink",
     "posts.created_by" : "Author",

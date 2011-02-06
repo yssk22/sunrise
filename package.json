@@ -7,17 +7,19 @@
     "author": "Yohei Sasaki",
     "bin": {
         "sunrise:server" : "./bin/server.js",
+        "sunrise:create" : "./bin/create.js"
     },
     "directories": {
         "lib": "./lib/sunrise",
         "deps": "./deps"
     },
     "dependencies": {
-        "oauth": "=0.8.3",
-        "jquery": "=1.4.3",
+        "oauth": ">=0.8.3",
+        "jquery": ">=1.4.3",
+        "connect": "=0.5.4",
         "express": "=1.0.0",
         "ejs": "=0.2.1",
-        "cradle": ">=0.3.0",
+        "cradle": ">=0.5.1",
         "node-markdown": "=0.1.0",
         "log4js": "=0.2.2"
     },

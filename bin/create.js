@@ -25,7 +25,7 @@ path.exists(base, function(exists){
          console.log("Your site has been successfully created.");
          console.log("To start up your site: ");
          console.log("");
-         console.log("   $ sunrise:server " + base);
+         console.log("   $ node " + path.join(base, 'boot.js'));
          console.log("");
        }
      });

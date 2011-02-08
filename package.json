@@ -6,7 +6,6 @@
     "tags": ["cms", "web", "framework", "couchdb"],
     "author": "Yohei Sasaki",
     "bin": {
-        "sunrise:server" : "./bin/server.js",
         "sunrise:create" : "./bin/create.js"
     },
     "directories": {

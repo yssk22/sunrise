@@ -21,6 +21,30 @@ for various community/personal sites.
     $ cd sunrise
     $ npm install .
 
+## Create Site
+
+To host a sunrise site, you can generate a site application using sunrise:create command.
+
+    $ sunrise:create /path/to/your/site
+
+Then you can launch boot.js to 
+
+    $ node /path/to/your/site/boot.js
+    
+By default, following configurations are used.
+
+- admin/password for CouchDB authentication
+- 0.0.0.0:8888 for the container server.
+
+Go to http://{your_host}:8888/ to see your site.
+
+## Modify Your Site
+
+Sunrise site can install or customize by node script.  See /path/to/your/site/node/handler.js, which is an endpoint of the container.
+
+For more details, please check source code and documentations in official repository.
+
+
 ## Test (for developers)
 
 Before you launch test script, you need to install expresso package using npm.
@@ -34,14 +58,11 @@ or you can check coverage:
 ## Available Applicaitons
 
 - posts
-- file uploader (TBD)
+- chat (TBD)
 - wiki (TBD)
+- file uploader (TBD)
 - realtime chat (TBD)
 - ....
-
-## Example
-
-see examples directory.
 
 ## Licesnse
 

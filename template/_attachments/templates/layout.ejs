@@ -22,18 +22,18 @@
       <nav id="accountNavigation">
         <ul>
           <% if( userCtx.userId ){ %>
-          <li class="user span-1"><%= userCtx.userName %></li>
-          <li class="user span-1 last"><a href="/logout">Logout</a></li>
+          <li class="user"><%= userCtx.userName %></li>
+          <li class="user"><a href="/logout">Logout</a></li>
           <% }else{ %>
-          <li class="guest span-1"><%= userCtx.userName %></li>
-          <li class="user span-1 last"><a href="/login">Login</a></li>
+          <li class="guest"><%= userCtx.userName %></li>
+          <li class="guest"><a href="/login">Login</a></li>
           <% } %>
         </ul>
       </nav>
       <nav id="siteNavigation" class="clear">
         <ul>
-          <li class="span-2"><a href="/">Home</a></li>
-          <li class="span-2 append-17"><a href="/posts/">Posts</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/posts/">Posts</a></li>
         </ul>
       </nav>
     </header>
@@ -43,13 +43,10 @@
     </div>
     <hr />
     <footer id="siteFooter" class="container">
-      <div id="copyright" class="prepend-9 append-9">
-        <p>
-          &copy; 2010 - 2011
-          <a href="http://github.com/yssk22">@yssk22</a>
-          <a href="https://github.com/yssk22/sunrise">sunrise</a>
-        </p>
-      </div>
+      <p class="copyright">
+        &copy; 2010 - 2011
+        <a href="https://github.com/yssk22/sunrise">sunrise</a>
+      </p>
     </footer>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/vendor/json2.js"></script>

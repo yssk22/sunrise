@@ -11,6 +11,15 @@ var oauth = sunrise.oauth;
  *
  */
 
+/**
+ * CSS Compiler setup
+ *
+ * addCssMacro make css frameworks as macro for less or sass scripts.
+ *
+ */
+sunrise.ext.addCssMacro(__dirname + '/../_attachments/stylesheets/vendor/blueprint/blueprint/screen.css');
+sunrise.ext.addCssMacro(__dirname + '/../_attachments/stylesheets/vendor/blueprint/blueprint/print.css');
+
 module.exports = function(site){
   /**
    * oauth filters.

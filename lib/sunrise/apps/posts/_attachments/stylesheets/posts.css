@@ -1,15 +1,71 @@
-.posts #admin_list th.title,
-.posts #admin_list td.title {
-    text-align: left;
+.posts .main {
+  float: left;
+  margin-right: 10px;
+  width: 750px;
+  padding-right: 40px;
 }
-
-.posts #admin_list th.datetime,
-.posts #admin_list td.datetime {
-    width: 15em;
+.posts .sidebar {
+  float: left;
+  margin-right: 10px;
+  width: 150px;
+  margin-right: 0;
+  padding-right: 0;
+  margin-right: 0;
 }
-
-.posts #admin_list th.menu, 
-.posts #admin_list td.menu {
-    text-align: center;
-    width: 5em;
+.posts .sidebar ul li {
+  list-style: none;
+}
+.posts .main article.entry {
+  margin-bottom: 10px;
+}
+.posts .main article.entry header h3 {
+  border-top: 1px solid #dddddd;
+  padding-top: 5px;
+  border-bottom: 3px double #dddddd;
+  padding-bottom: 5px;
+}
+.posts .main article.entry div.content {
+  padding-left: 40px;
+}
+.posts .main article.entry footer {
+  border-top: 1px solid #dddddd;
+  padding-top: 5px;
+  text-align: right;
+  margin-bottom: 30px;
+}
+.posts .main .pagination {
+  float: left;
+  margin-right: 10px;
+  width: 750px;
+}
+.posts .main .pagination .prev {
+  float: left;
+  margin-right: 10px;
+  width: 70px;
+  padding-right: 600px;
+  text-align: left;
+}
+.posts .main .pagination .next {
+  float: left;
+  margin-right: 10px;
+  width: 70px;
+  margin-right: 0;
+  padding-right: 0;
+  margin-right: 0;
+  text-align: right;
+}
+.posts .main #admin_list {
+  float: left;
+  margin-right: 10px;
+  width: 750px;
+}
+.posts #admin_list th.title, .posts #admin_list td.title {
+  text-align: left;
+}
+.posts #admin_list th.datetime, .posts #admin_list td.datetime {
+  width: 15em;
+}
+.posts #admin_list th.menu, .posts #admin_list td.menu {
+  text-align: center;
+  width: 5em;
 }

@@ -1,0 +1,75 @@
+@border-color: #DDDDDD;
+
+.posts .main {
+    .span-19;
+    .append-1;
+}
+
+.posts .sidebar {
+    .span-4;
+    .last;
+}
+
+.posts .sidebar ul li {
+    list-style: none;
+}
+
+.posts .main article.entry {
+    margin-bottom: 10px;
+    header h3 {
+        border-top: 1px solid @border-color;
+        padding-top: 5px;
+        border-bottom: 3px double @border-color;
+        padding-bottom: 5px;
+    }
+    div.content {
+        .prepend-1;
+    }
+    footer {
+        border-top: 1px solid @border-color;
+        padding-top: 5px;
+        text-align: right;
+        margin-bottom: 30px;
+    }
+}
+
+.posts .main article.list {
+}
+
+.posts .main article.permalink {
+}
+
+
+.posts .main .pagination {
+    .span-19;
+    .prev {
+        .span-2;
+        .append-15;
+        text-align: left;
+    }
+    .next {
+        .span-2;
+        .last;
+        text-align: right;
+    }
+}
+
+.posts .main #admin_list {
+    .span-19;
+}
+
+.posts #admin_list th.title,
+.posts #admin_list td.title {
+    text-align: left;
+}
+
+.posts #admin_list th.datetime,
+.posts #admin_list td.datetime {
+    width: 15em;
+}
+
+.posts #admin_list th.menu, 
+.posts #admin_list td.menu {
+    text-align: center;
+    width: 5em;
+}

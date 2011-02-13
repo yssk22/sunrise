@@ -1,3 +1,7 @@
+.posts {
+  /** icons **/
+
+}
 .posts .main {
   float: left;
   margin-right: 10px;
@@ -23,6 +27,15 @@
   padding-top: 5px;
   border-bottom: 3px double #dddddd;
   padding-bottom: 5px;
+  margin-bottom: 0px;
+}
+.posts .main article.entry ul.tags {
+  margin: 0;
+  list-style: none;
+  text-align: right;
+}
+.posts .main article.entry ul.tags li {
+  display: inline;
 }
 .posts .main article.entry div.content {
   padding-left: 40px;
@@ -68,4 +81,46 @@
 .posts #admin_list th.menu, .posts #admin_list td.menu {
   text-align: center;
   width: 5em;
+}
+.posts #admin_list tr.draft {
+  background-color: #ececec;
+}
+.posts #admin_list tr.draft td.title {
+  font-style: italic;
+}
+.posts a.posts-new {
+  background-image: url('../images/posts-new.png');
+  background-repeat: no-repeat;
+  padding-left: 20px;
+  padding-bottom: 5px;
+}
+.posts a.posts-admin {
+  background-image: url('../images/posts-admin.png');
+  background-repeat: no-repeat;
+  padding-left: 20px;
+  padding-bottom: 5px;
+}
+.posts a.archive-link {
+  background-image: url('../images/archive-link.png');
+  background-repeat: no-repeat;
+  padding-left: 20px;
+  padding-bottom: 5px;
+}
+.posts a.tag-link {
+  background-image: url('../images/tag-link.png');
+  background-repeat: no-repeat;
+  padding-left: 20px;
+  padding-bottom: 5px;
+}
+.posts a.permalink {
+  background-image: url('../images/permalink.png');
+  background-repeat: no-repeat;
+  padding-left: 20px;
+  padding-bottom: 5px;
+}
+.posts tr.draft a.permalink {
+  background-image: url('../images/draft.png');
+  background-repeat: no-repeat;
+  padding-left: 20px;
+  padding-bottom: 5px;
 }

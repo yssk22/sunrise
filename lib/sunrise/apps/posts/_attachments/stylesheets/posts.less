@@ -1,75 +1,108 @@
 @border-color: #DDDDDD;
 
-.posts .main {
-    .span-19;
-    .append-1;
-}
+.posts {
+    .main {
+        .span-19;
+        .append-1;
+    }
 
-.posts .sidebar {
-    .span-4;
-    .last;
-}
+    .sidebar {
+        .span-4;
+        .last;
+    }
 
-.posts .sidebar ul li {
-    list-style: none;
-}
+    .sidebar ul li {
+        list-style: none;
+    }
 
-.posts .main article.entry {
-    margin-bottom: 10px;
-    header h3 {
-        border-top: 1px solid @border-color;
-        padding-top: 5px;
-        border-bottom: 3px double @border-color;
+    .main article.entry {
+        margin-bottom: 10px;
+        header h3 {
+            border-top: 1px solid @border-color;
+            padding-top: 5px;
+            border-bottom: 3px double @border-color;
+            padding-bottom: 5px;
+            margin-bottom: 0px;
+        }
+        ul.tags {
+            margin:0;
+            list-style:none;
+            text-align: right;
+        }
+        ul.tags li {
+            display: inline; 
+        }
+
+        div.content {
+            .prepend-1;
+        }
+        footer {
+            border-top: 1px solid @border-color;
+            padding-top: 5px;
+            text-align: right;
+            margin-bottom: 30px;
+        }
+    }
+
+    .main article.list {
+    }
+
+    .main article.permalink {
+    }
+
+
+    .main .pagination {
+        .span-19;
+        .prev {
+            .span-2;
+            .append-15;
+            text-align: left;
+        }
+        .next {
+            .span-2;
+            .last;
+            text-align: right;
+        }
+    }
+
+    .main #admin_list {
+        .span-19;
+    }
+
+    #admin_list {
+        th.title, td.title {
+            text-align: left;
+        }
+        th.datetime, td.datetime {
+            width: 15em;
+        }
+        th.menu, td.menu {
+            text-align: center;
+            width: 5em;
+        }
+        tr.draft {
+            td.title {
+                font-style : italic;
+            }
+            background-color: #ececec;
+        }
+    }
+
+    .icon (@file){
+        background-image: url(@file);
+        background-repeat: no-repeat;
+        padding-left: 20px;
         padding-bottom: 5px;
     }
-    div.content {
-        .prepend-1;
-    }
-    footer {
-        border-top: 1px solid @border-color;
-        padding-top: 5px;
-        text-align: right;
-        margin-bottom: 30px;
-    }
-}
 
-.posts .main article.list {
-}
-
-.posts .main article.permalink {
+    /** icons **/
+    a.posts-new    { .icon ('../images/posts-new.png'); }
+    a.posts-admin  { .icon ('../images/posts-admin.png'); }
+    a.archive-link { .icon('../images/archive-link.png')}
+    a.tag-link     { .icon('../images/tag-link.png')}
+    a.permalink    { .icon('../images/permalink.png') }
+    tr.draft a.permalink     { .icon('../images/draft.png') }
 }
 
 
-.posts .main .pagination {
-    .span-19;
-    .prev {
-        .span-2;
-        .append-15;
-        text-align: left;
-    }
-    .next {
-        .span-2;
-        .last;
-        text-align: right;
-    }
-}
 
-.posts .main #admin_list {
-    .span-19;
-}
-
-.posts #admin_list th.title,
-.posts #admin_list td.title {
-    text-align: left;
-}
-
-.posts #admin_list th.datetime,
-.posts #admin_list td.datetime {
-    width: 15em;
-}
-
-.posts #admin_list th.menu, 
-.posts #admin_list td.menu {
-    text-align: center;
-    width: 5em;
-}

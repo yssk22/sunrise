@@ -6,8 +6,12 @@ var oauth = sunrise.oauth;
 /**
  * OAuth provider setup
  *
- * oauth.providers.{providerName}.consumerKey    = "*********";
- * oauth.providers.{providerName}.consumerSecret = "*********";
+ * oauth.providers.providerName.consumerKey    = "*********";
+ * oauth.providers.providerName.consumerSecret = "*********";
+ *
+ * supported providerNames are:
+ *
+ *   twitter
  *
  */
 
@@ -25,16 +29,22 @@ module.exports = function(site){
    * oauth filters.
    * You can authorized actions with oauth.requiredWith() or your custom filters.
    *
-   * example: /posts/admin/ actions requires twitter authentication
+   * example1: /posts/admin/ actions requires twitter authentication
    *
    *   site.all('/posts/admin/*',
    *      oauth.requiredWith('twitter'));
+   *
+   * example2: /posts/ actions requires authorized by any providers.
+   *
+   *   site.all('/posts/*', oauth.authorized());
+   *
    */
+  // protected resources
+  site.all('/posts/admin/*', oauth.authorized());
 
   // install applications
   site.install('posts', function(err, app){
     var posts = app.model;
-
     /**
      * Define the top page using posts resources.
      */

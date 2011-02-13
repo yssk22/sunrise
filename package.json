@@ -20,7 +20,8 @@
         "ejs": "=0.2.1",
         "cradle": ">=0.5.1",
         "node-markdown": "=0.1.0",
-        "log4js": "=0.2.2"
+        "log4js": "=0.2.2",
+        "optimist": "=0.1.5"
     },
     "licenses" : [{
         "type": "MIT"

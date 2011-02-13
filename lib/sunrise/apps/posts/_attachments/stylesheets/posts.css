@@ -33,6 +33,7 @@
   margin: 0;
   list-style: none;
   text-align: right;
+  min-height: 1em;
 }
 .posts .main article.entry ul.tags li {
   display: inline;

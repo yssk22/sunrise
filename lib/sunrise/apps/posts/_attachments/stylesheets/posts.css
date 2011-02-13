@@ -8,6 +8,43 @@
   width: 750px;
   padding-right: 40px;
 }
+.posts .main ul.tag-cloud {
+  margin-top: -20px;
+}
+.posts .main ul.tag-cloud li {
+  display: inline;
+  padding-left: 10px;
+}
+.posts .main ul.tag-cloud a.rank-10 {
+  font-size: 250%;
+}
+.posts .main ul.tag-cloud a.rank-9 {
+  font-size: 210%;
+}
+.posts .main ul.tag-cloud a.rank-8 {
+  font-size: 170%;
+}
+.posts .main ul.tag-cloud a.rank-7 {
+  font-size: 130%;
+}
+.posts .main ul.tag-cloud a.rank-6 {
+  font-size: 90%;
+}
+.posts .main ul.tag-cloud a.rank-5 {
+  font-size: 90%;
+}
+.posts .main ul.tag-cloud a.rank-4 {
+  font-size: 90%;
+}
+.posts .main ul.tag-cloud a.rank-3 {
+  font-size: 90%;
+}
+.posts .main ul.tag-cloud a.rank-2 {
+  font-size: 90%;
+}
+.posts .main ul.tag-cloud a.rank-1 {
+  font-size: 90%;
+}
 .posts .sidebar {
   float: left;
   margin-right: 10px;

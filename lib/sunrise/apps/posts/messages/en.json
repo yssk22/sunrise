@@ -2,6 +2,7 @@
     "posts.recent": "最近の投稿",
     "posts.date_format"  : "%Y-%m-%d %H:%M",
     "posts.archive_label": "%Y/%m",
+    "posts.taglist": "Tags",
     "posts.archive": "Archive",
     "posts.menu": "Menu",
 

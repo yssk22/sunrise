@@ -14,6 +14,10 @@ Sunrise is an application container framework on top of node.js. It is easy to e
 
    getting_started
    architecture
+   app
+   site
+   deployment
+   
 
 Indices and tables
 ==================

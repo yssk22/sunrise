@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title><%= page.title %> - sunrise</title>
+    <% if( page.feed ){ %><link rel="alternate" type="application/rss+xml" title="<%= page.title %>" href="<%= page.feed %>" /><% } %>
+    <% if( page.canonical ){ %><link rel="canonical" href="<%= page.canonical %>" /><% } %>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/blitzer/jquery-ui.css" type="text/css" />
     <link rel="stylesheet" href="/stylesheets/vendor/blueprint/blueprint/screen.css" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="/stylesheets/vendor/blueprint/blueprint/print.css" type="text/css" media="print">	

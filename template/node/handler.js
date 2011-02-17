@@ -40,7 +40,7 @@ module.exports = function(site){
    *
    */
   // protected resources
-  site.all('/posts/admin/*', oauth.authorized());
+  // site.all('/posts/admin/*', oauth.authorized());
 
   // install applications
   site.install('posts', function(err, app){

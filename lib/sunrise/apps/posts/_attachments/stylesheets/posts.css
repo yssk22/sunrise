@@ -59,6 +59,10 @@
 .posts .main article.entry {
   margin-bottom: 10px;
 }
+.posts .main article.entry header div.sns {
+  float: right;
+  padding-top: 5px;
+}
 .posts .main article.entry header h3 {
   border-top: 1px solid #dddddd;
   padding-top: 5px;
@@ -76,12 +80,14 @@
   display: inline;
 }
 .posts .main article.entry div.content {
+  clear: both;
   padding-left: 40px;
 }
 .posts .main article.entry footer {
   border-top: 1px solid #dddddd;
   padding-top: 5px;
   text-align: right;
+  vertical-align: top;
   margin-bottom: 30px;
 }
 .posts .main .pagination {

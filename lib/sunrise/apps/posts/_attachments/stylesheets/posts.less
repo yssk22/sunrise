@@ -30,15 +30,21 @@
             list-style: none;
         }
     }
-
+    
     .main article.entry {
         margin-bottom: 10px;
-        header h3 {
-            border-top: 1px solid @border-color;
-            padding-top: 5px;
-            border-bottom: 3px double @border-color;
-            padding-bottom: 5px;
-            margin-bottom: 0px;
+        header {
+            div.sns {
+                float: right;
+                padding-top: 5px;
+            }
+            h3 {
+                border-top: 1px solid @border-color;
+                padding-top: 5px;
+                border-bottom: 3px double @border-color;
+                padding-bottom: 5px;
+                margin-bottom: 0px;
+            }
         }
         ul.tags {
             margin:0;
@@ -51,12 +57,14 @@
         }
 
         div.content {
+            clear: both;
             .prepend-1;
         }
         footer {
             border-top: 1px solid @border-color;
             padding-top: 5px;
             text-align: right;
+            vertical-align: top;
             margin-bottom: 30px;
         }
     }

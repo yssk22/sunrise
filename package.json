@@ -13,7 +13,7 @@
         "deps": "./deps"
     },
     "dependencies": {
-        "oauth": ">=0.8.3",
+        "oauth": "=0.9.0",
         "jquery": ">=1.4.3",
         "connect": "=0.5.4",
         "express": "=1.0.0",
@@ -24,6 +24,7 @@
         "optimist": "=0.1.5",
         "less": "==1.0.41"
     },
+    "engines" : { "node" : ">=0.4" },
     "licenses" : [{
         "type": "MIT"
     }]

@@ -1,1 +1,1 @@
-require('sunrise/boot')(__dirname);
+require('sunrise').boot(__dirname);

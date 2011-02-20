@@ -2,7 +2,7 @@
 
 var fs = require('fs');
 var path = require('path');
-var helper = require('sunrise/helper');
+var helper = require(require('sunrise').helper
 var exec = require('child_process').exec;
 
 

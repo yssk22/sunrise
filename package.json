@@ -1,7 +1,7 @@
 {
     "name": "sunrise",
     "main": "index.js",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "A application middleware set using CouchApp and node.js/Express",
     "tags": ["cms", "web", "framework", "couchdb"],
     "author": "Yohei Sasaki",
@@ -9,14 +9,13 @@
         "sunrise:create" : "./bin/create.js"
     },
     "directories": {
-        "lib": "./lib/sunrise",
         "deps": "./deps"
     },
     "dependencies": {
         "oauth": "=0.9.0",
         "jquery": ">=1.4.3",
         "connect": "=0.5.4",
-        "express": "1.0.7",
+        "express": "=2.0.0beta3",
         "ejs": "=0.2.1",
         "cradle": ">=0.5.1",
         "node-markdown": "=0.1.0",
@@ -24,7 +23,7 @@
         "optimist": "=0.1.5",
         "less": "==1.0.41"
     },
-    "engines" : { "node" : ">=0.4" },
+    "engines" : { "node" : "=0.4.2" },
     "licenses" : [{
         "type": "MIT"
     }]

@@ -9,9 +9,13 @@ module.exports = {
     var b = {
       bar: 'hogehoge'
     };
-    utils.merge(a, b);
+    var c = {
+      piyo: 'hogehogehoge'
+    };
+    utils.merge(a, b, c);
     assert.eql(a.foo, 'hoge');
     assert.eql(a.bar, 'hogehoge');
+    assert.eql(a.piyo, 'hogehogehoge');
   },
 
   "test clone": function(){

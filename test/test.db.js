@@ -1,33 +1,34 @@
 var assert = require('assert');
-var env = require('./test_env');
-var db = require('sunrise/db').connect("test_sunrise");
+var env = require('./env');
+var db = require('db');
 
 module.exports = {
-  "setup": function(fn){
-    db.reset(function(err, res){
-      fn();
+  "test createConnection": function(){
+    assert.isDefined(db.createConnection);
+    var instance = db.createConnection('foo');
+    assert.isNotNull(instance);
+    assert.isNotNull(instance.connection);
+    assert.isNotNull(instance.url);
+    assert.isNotNull(instance.deployApp);
+    assert.isNotNull(instance.uuid);
+  },
+
+  "test uuid": function(){
+    var instance = db.createConnection('foo');
+    instance.uuid(function(err, id){
+      assert.isNotNull(id);
     });
   },
 
-  "test uuid": function(next){
-    db.uuid(function(err, id){
-      assert.ok(id);
-      next();
-    });
+  "test deployApp": function(){
+    // TODO
   },
 
-  "test load": function(next){
-    db.load(env.fixtureFile('test_db.json'), {
-      is_fixture: true
-    }, function(err, list){
-      assert.equal(err, undefined);
-      db.get('foo', function(err, doc){
-        assert.equal(doc.title, 'foo');
-        db.get('bar', function(err, doc){
-          assert.equal(doc.title, 'bar');
-          next();
-        });
-      });
-    });
+  "test load": function(){
+    // TODO
+  },
+
+  "test reset": function(){
+    // TODO
   }
-}
+};

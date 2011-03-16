@@ -13,6 +13,7 @@ module.exports = {
     assert.eql(s.db.name, 'sunrise');
     assert.eql(s.i18n.defaultLocale, 'en');
 
+    s.use(s.router);
     s.get('/foo', function(req, res, next){
       res.writeHead(200);
       res.end("Hello World");
@@ -23,5 +24,9 @@ module.exports = {
     }, {
       body: "Hello World"
     });
+  },
+
+  "test HTTPSserver": function(){
+    // TODO
   }
 }

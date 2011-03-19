@@ -31,14 +31,27 @@ module.exports = {
   "test createApp": function(){
     var test_app = app.createApp('test_app');
     assert.isNotNull(test_app);
-    assert.eql(testAppPath, test_app.root);
+    assert.eql(testAppPath, test_app.documentRoot);
     assert.eql(typeof(test_app.deploy), 'function');
-
     assert.response(test_app, {
       url: '/', method: "GET"
     }, {
       body: "Hello World"
     });
+  },
+
+  'test view rendering': function(){
+    var test_app = app.createApp('test_app');
+    assert.response(test_app, {
+      url: "/test", method: 'GET'
+    }, {
+      body: "This is Test Application.\n"
+    });
+  },
+
+  'test createApp in a context': function(){
+    var test_app = app.createApp('test_app', {rootUrl: '/foo'});
+    assert.eql(test_app.set('home'), '/foo/');
   }
 
   /*

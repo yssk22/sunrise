@@ -162,6 +162,23 @@ module.exports = {
       assert.eql(asyncFun, nested3.b.a[1]);
       assert.eql(1, nested3.b.a[2]);
     });
+  },
 
+  "test parallel": function(){
+    var a = 0;
+    utils.parallel(function(done){
+      setTimeout(function(){
+        a++;
+        done();
+      }, 100);
+    }, function(done){
+      setTimeout(function(){
+        a++;
+        done();
+      }, 200);
+    }, function(){
+      assert.eql(2, a);
+    });
   }
+
 };

@@ -1,6 +1,6 @@
 {
     "port": 8888,
-    "listen": "1.0.0.0",
+    "listen": "0.0.0.0",
     "session": {
         "store": "memory",
         "options": {

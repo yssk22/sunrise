@@ -13,12 +13,5 @@ ddoc.routes = function(app){
   app.get('/', function(req, res, next){
     res.send('Hello World');
   });
-
-  app.get('/test', function(req, res, next){
-    res.render('test.ejs', {layout: false});
-  });
-
-  app.get('/redirect_home', function(req, res, next){
-    res.redirect();
-  });
+  // all reoutes except above are defined in test script.
 };

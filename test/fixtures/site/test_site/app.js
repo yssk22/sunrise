@@ -12,13 +12,5 @@ ddoc.routes = function(app){
   app.get('/', function(req, res, next){
     res.send('Hello World');
   });
-
-  app.get('/test_session', function(req, res, next){
-    var sess = req.session;
-    if( req.session.test_session === undefined ){
-        sess.test_session = 0;
-    }
-    sess.test_session += 1;
-    res.send('test_session = ' + sess.test_session);
-  });
+  // all reoutes except above are defined in test script.
 };

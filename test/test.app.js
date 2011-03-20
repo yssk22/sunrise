@@ -42,8 +42,11 @@ module.exports = {
 
   'test view rendering': function(){
     var test_app = app.createApp('test_app');
+    test_app.get('/test_template', function(req, res, next){
+      res.render('test.ejs', {layout: false});
+    });
     assert.response(test_app, {
-      url: "/test", method: 'GET'
+      url: "/test_template", method: 'GET'
     }, {
       body: "This is Test Application.\n"
     });

@@ -1,0 +1,34 @@
+#siteHeader {
+  margin-bottom: 10px;
+}
+#siteHeader h1.logo {
+  float: left;
+  margin-right: 10px;
+  width: 830px;
+}
+#accountNavigation ul li {
+  float: left;
+  margin-right: 10px;
+  width: 30px;
+}
+#siteNavigation ul li {
+  float: left;
+  margin-right: 10px;
+  width: 70px;
+}
+#siteFooter p.copyright {
+  text-align: center;
+}
+#main {
+  margin-bottom: 10px;
+}
+h1 span.subTitle {
+  font-size: small;
+}
+header nav ul {
+  list-style: none;
+}
+/** jquery ui **/
+div.ui-state-highlight, div.ui-state-error {
+  padding: 10px 10px 10px 10px;
+}

@@ -57,35 +57,16 @@ ddoc.views.by_tag = {
   }
 };
 
-ddoc.middleware = {
-  byUpdatedAt : function(opitons){
-    return function(req, res, next){
-      next();
-    };
-  },
-
-  countByTag: function(options){
-    return function(req, res, next){
-      next();
-    };
-  },
-
-  countByDate: function(options){
-    return function(req, res, next){
-      next();
-    };
-  }
-};
 
 ddoc.init = function(app){
   var parallel = require('sunrise').middleware.utils.parallel;
-  var m = app.middleware;
+  var m = merge(app.middleware, require('./middleware'));
   // -- public --
   // pages
   app.get('/',
           parallel(
             m.byUpdatedAt(),
-            feedOrHtml('index.ejs')));
+            m.feedOrHtml('index.ejs')));
 
   // apis
   app.get('/-/',

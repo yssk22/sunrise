@@ -1,106 +1,121 @@
-var assert = require('assert');
-var env  = require('../test_env');
-var conn = require('sunrise/db').connect("test_sunrise");
-var site = require('sunrise/site');
-var util = require('sunrise/middleware/util');
-var db  = require('sunrise/middleware/db');
-
-function createSite(){
-  return site.createSite(env.fixtureFile("test_site"), {
-    database: 'test_sunrise'
-  });
-};
-
+var assert = require('assert'),
+    path = require('path');
+var env = require(__dirname + '/../env');
+var createSite = require('site').createSite,
+    abspath = require('utils').abspath;
+var app = require('app');
+app.paths.push(abspath(path.join(__dirname, '/../fixtures/middleware/')));
 
 module.exports = {
-  "setup": function(fn){
-    conn.reset(function(err, res){
-      conn.get('/', function(err, res){
-        console.log(res);
-        fn();
+  "setup": function(done){
+    this.site = createSite(path.join(__dirname, '/../fixtures/site/test_site'));
+    this.db_app = site.install('db_app', '/db_app/');
+    this.db_app.deploy(function(){
+      db_app.db.save('foo', {
+        bar: "This is a test data"
+      }, function(err, data){
+        done();
       });
     });
   },
 
-  "test get": function(next){
-    var app = createSite();
-    app.get('/get',
-            db.bind('get', 'test_get', {
-              as: 'data'
-            }),
-            util.dumpBindings());
-    conn.save('test_get', {
-      title: "this is test"
-    }, function(err, res){
-      assert.response(app, {
-        url: '/get'
-      }, function(res){
-        assert.eql(JSON.parse(res.body).data.data.title, 'this is test');
-        next();
-      });
-    });
-  },
-
-  "test save": function(next){
-    var app = createSite();
-    app.post('/save',
-             db.bind('save', function(fn){
-               fn(undefined, this.request.query.id);
-             }, {
-               title: function(fn){
-                 fn(undefined, this.request.query.title);
+  "test db.bind": function(){
+    var site = this.site,
+        db_app = this.db_app,
+        bind = db_app.middleware.db.bind;
+    db_app.get('/bind/foo',
+               bind('get', 'foo', { as: 'result' }),
+               function(req, res, next){
+                 res.send(JSON.stringify(res.local('result')));
                }
-             },{
-               as: 'data'
-             }),
-             util.dumpBindings());
-
-    assert.response(app, {
-      method: "POST",
-      url: '/save?id=test_save&title=foo'
+              );
+    assert.response(site, {
+      url: "/db_app/bind/foo", method: "GET"
     }, function(res){
-      assert.eql(JSON.parse(res.body).data.data.id, 'test_save');
-      conn.get('test_save', function(err, doc){
-        assert.eql(doc.title, "foo");
-        next();
-      });
+      var obj = JSON.parse(res.body);
+      assert.isNull(obj.error);
+      assert.isNotNull(obj.data);
+      assert.eql(obj.data.bar, 'This is a test data');
+    });
+
+    db_app.get('/bind/foo/with_template',
+               bind('get', 'foo', { as: 'result', render: 'test_bind.ejs' }),
+               function(req, res, next){
+                 res.send(res.local('result').toString());
+               }
+              );
+    assert.response(site, {
+      url: "/db_app/bind/foo/with_template", method: "GET"
+    }, {
+      body: "This is a test data\n"
     });
   },
 
-  "test view": function(next){
-    var app = createSite();
-    app.get('/view',
-            db.bind('view', 'foo/all', {
-              limit: 5
-            },{
-              as: 'data'
-            }),
-            util.dumpBindings());
-    conn.save('_design/foo', {
-      all: {
-        map: function(doc){
-          if( doc.title == 'view_test'){
-            emit(null, doc);
-          }
-        }
-      }
-    }, function(err, res){
-      var count = 0;
-      var bulk = [];
-      for(var i=0; i<10; i++){
-        bulk.push({title: 'view_test'});
-      }
-      conn.save(bulk, function(err, res){
-        assert.ok(res);
-        assert.response(app, {
-          url: '/view'
-        }, function(res){
-          var result = JSON.parse(res.body).data.data;
-          assert.eql(result.total_rows, 10);
-          assert.eql(result.rows.length, 5);
-          next();
-        });
-      });
+  "test db.bind with success option": function(){
+    var site = this.site,
+        db_app = this.db_app,
+        bind = db_app.middleware.db.bind;
+
+    db_app.get('/bind/success',
+               bind('get', 'foo', {
+                 as: 'result',
+                 success: function(req, res, next){
+                   res.send(JSON.stringify(res.local('result')));
+                 }
+               }));
+    assert.response(site, {
+      url: "/db_app/bind/success", method: "GET"
+    }, function(res){
+      var obj = JSON.parse(res.body);
+      assert.isNull(obj.error);
+      assert.isNotNull(obj.data);
+      assert.eql(obj.data.bar, 'This is a test data');
+    });
+
+    db_app.get('/bind/success/with_template',
+               bind('get', 'foo', { as: 'result', success: 'test_bind.ejs' }),
+               function(req, res, next){
+                 res.send(res.local('result').toString());
+               });
+    assert.response(site, {
+      url: "/db_app/bind/success/with_template", method: "GET"
+    }, {
+      body: "This is a test data\n"
+    });
+  },
+
+  "test db.bind with failure option": function(){
+    var site = this.site,
+        db_app = this.db_app,
+        bind = db_app.middleware.db.bind;
+
+    db_app.get('/bind/failure',
+               bind('get', 'bar', {
+                 as: 'result',
+                 failure: function(req, res, next){
+                   res.send(JSON.stringify(res.local('result')));
+                 }
+               }));
+    assert.response(site, {
+      url: "/db_app/bind/failure", method: "GET"
+    }, function(res){
+      var obj = JSON.parse(res.body);
+      console.log(res.body);
+      assert.isNotNull(obj.error);
+      assert.eql(obj.error.error, 'not_found');
+      assert.isUndefined(obj.data);
+    });
+
+    db_app.get('/bind/failure/with_template',
+               bind('get', 'bar', { as: 'result', failure: 'test_bind.ejs' }),
+               function(req, res, next){
+                 res.send(res.local('result').toString());
+               });
+    assert.response(site, {
+      url: "/db_app/bind/failure/with_template", method: "GET"
+    }, {
+      body: "not_found\n"
     });
   }
+
 }

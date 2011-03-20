@@ -8,7 +8,7 @@ var ddoc = {
 
 module.exports = ddoc;
 
-ddoc.routes = function(app){
+ddoc.init = function(app){
   app.get('/', function(req, res, next){
     res.send('Hello World');
   });

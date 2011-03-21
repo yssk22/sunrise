@@ -8,5 +8,11 @@ module.exports = {
     return function(req, res, next){
       next();
     };
+  },
+
+  countByTag: function(options){
+    return function(req, res, next){
+      next();
+    };
   }
 };

@@ -21,7 +21,8 @@
         "node-markdown": "=0.1.0",
         "log4js": "=0.2.2",
         "optimist": "=0.1.5",
-        "less": "==1.0.41"
+        "less": "==1.0.41",
+        "couchapp": "==0.8.0"
     },
     "engines" : { "node" : "=0.4.2" },
     "licenses" : [{

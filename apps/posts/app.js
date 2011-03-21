@@ -1,6 +1,10 @@
+var path = require('path');
 var couchapp = require('couchapp');
+var merge = require('sunrise').utils.merge;
+var parallel = require('sunrise').middleware.utils.parallel;
+
 var ddoc = {
-  _id: "_desing/posts" ,
+  _id: "_design/posts" ,
   views: {},
   shows: {},
   lists: {},
@@ -59,7 +63,6 @@ ddoc.views.by_tag = {
 
 
 ddoc.init = function(app){
-  var parallel = require('sunrise').middleware.utils.parallel;
   var m = merge(app.middleware, require('./middleware'));
   // -- public --
   // pages
@@ -79,4 +82,4 @@ ddoc.init = function(app){
           m.countByTag());
 };
 
-couhapp.loadAttachments(ddoc, path.join(__dirname, '_attachments'));
+couchapp.loadAttachments(ddoc, path.join(__dirname, '_attachments'));

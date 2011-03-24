@@ -28,6 +28,7 @@ Reference
 
    ref/conf
    ref/i18n
+   ref/app
 
 Indices and tables
 ==================

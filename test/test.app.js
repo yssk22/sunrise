@@ -1,3 +1,9 @@
+/**
+ * Sunrise - Application server, CouchApp x Node.js Integration
+ *
+ * Copyright (c) Yohei Sasaki <yssk22@gmail.com>
+ * MIT Licensed
+ */
 var assert = require('assert'),
     path = require('path');
 var env = require('./env');
@@ -30,6 +36,7 @@ module.exports = {
 
   "test createApp": function(){
     var test_app = app.createApp('test_app');
+    test_app.init();
     assert.isNotNull(test_app);
     assert.eql(testAppPath, test_app.documentRoot);
     assert.eql(typeof(test_app.deploy), 'function');
@@ -56,23 +63,4 @@ module.exports = {
     var test_app = app.createApp('test_app', {rootUrl: '/foo'});
     assert.eql(test_app.set('home'), '/foo/');
   }
-
-  /*
-  "test createApp": function(){
-    var appPath = env.fixtureFile('test_app');
-    app.createApp(appPath, function(err, app){
-      assert.isNotNull(app.db);
-      assert.isNotNull(app.i18n);
-      assert.eql(app.namespace, '/test_app');
-      assert.eql(app.db.name, 'test_app');
-      assert.ok(typeof(app.db.foo) == 'function');
-      // i18n messages assersion
-      assert.eql(app.i18n.translate('foo', 'ja'), "ばー");
-      // couchapp exists
-      app.db.get('_design/test_app', function(err, doc){
-        assert.isNotNull(doc);
-        assert.eql(doc._id, '_design/test_app');
-      });
-    });
-  }*/
 };

@@ -9,7 +9,7 @@ var ddoc = {
 module.exports = ddoc;
 
 
-ddoc.init = function(app){
+ddoc.init = function(app, options){
   app.get('/', function(req, res, next){
     res.send('Hello World');
   });

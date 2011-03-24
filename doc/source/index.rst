@@ -8,6 +8,8 @@ Welcome to Sunrise's documentation!
 
 Sunrise is an application container framework on top of node.js. It is easy to extend and replicate applications.
 
+Application Development Guide
+-----------------------------------
 
 .. toctree::
    :maxdepth: 2
@@ -17,6 +19,14 @@ Sunrise is an application container framework on top of node.js. It is easy to e
    app
    site
    deployment
+
+Reference
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   ref/conf
    
 
 Indices and tables

@@ -1,10 +1,9 @@
-var assert = require('assert');
-/***
- * DO NOT use helper, which sets the test configuraton.
- * this test script just tests config function.
+/*!
+ * Sunrise - Configuration
+ * Copyright (c) 2011 Yohei Sasaki <yssk22@gmail.com>
+ * MIT Licensed
  */
-// var helper = require('./helper');
-
+var assert = require('assert');
 var merge = require('utils').merge;
 var config = require('config');
 

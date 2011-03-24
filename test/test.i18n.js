@@ -1,3 +1,9 @@
+/*!
+ * Sunrise - Internationalization
+ * Copyright (c) 2011 Yohei Sasaki <yssk22@gmail.com>
+ * MIT Licensed
+ */
+
 var assert = require('assert');
 var helper = require('./env');
 var i18n = require('i18n');
@@ -11,6 +17,7 @@ module.exports = {
     assert.eql(_i18n.translate('foo', 'ja'), "ばー");
     assert.eql(_i18n.translate('foo', 'zh'), "bar");
   },
+
   "test resolveLocales": function(){
     var req = {
       headers: {
@@ -18,7 +25,6 @@ module.exports = {
       }
     };
     var lc = i18n.resolveLocales(req);
-    console.log(lc);
     assert.eql(lc[0], 'da');
     assert.eql(lc[1], 'en-gb');
     assert.eql(lc[2], 'en');

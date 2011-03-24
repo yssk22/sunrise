@@ -9,7 +9,7 @@ exports.fixtureFile = function(name){
 }
 
 // config
-var config = require('sunrise').config;
+var config = require('config');
 
 // load default configuration for test environment
 config.load(exports.fixtureFile('conf'));

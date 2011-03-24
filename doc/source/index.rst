@@ -27,7 +27,7 @@ Reference
    :maxdepth: 2
 
    ref/conf
-   
+   ref/i18n
 
 Indices and tables
 ==================

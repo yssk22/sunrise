@@ -14,7 +14,13 @@ module.exports = ddoc;
 
 // site initialize script
 ddoc.init = function(site){
-  site.install('posts', '/posts/', {database: 'posts'});
+
+  site.get('/', function(req, res, next){
+    res.render('index');
+  });
+
+  // install applications as you like
+  // site.install('posts', '/posts/', {database: 'posts'});
 };
 
 //
@@ -33,5 +39,10 @@ ddoc.init = function(site){
 //
 
 if( !module.parent ){
+  var compiler = require('sunrise').middleware.compiler;
+  compiler.include(
+    __dirname + '/_attachments/vendor/blueprint/blueprint/screen.css',
+    __dirname + '/_attachments/vendor/blueprint/blueprint/print.css'
+  );
   require('sunrise').boot(__dirname);
 }

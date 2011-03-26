@@ -4,9 +4,9 @@ Architecture
 Goal for Sunrise
 ================================================================================
 
+- web application stack replacing LAMP
 - easy to add/remove site features (like a CMS)
-- easy to replicate server-side applications
-- easy to distribute node.js web applications
+- easy to replicate web applications
 
 Software Stack
 ================================================================================

@@ -30,6 +30,7 @@ Reference
    ref/i18n
    ref/app
    ref/middleware
+   ref/helper
 
 Indices and tables
 ==================

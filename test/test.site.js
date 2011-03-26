@@ -15,7 +15,6 @@ app.paths.push(abspath(path.join(__dirname, '/fixtures/app/')));
 module.exports = {
   "test createSite": function(){
     var site = createSite(path.join(__dirname, '/fixtures/site/test_site'));
-    site.init();
     assert.response(site, {
       url: '/', method: "GET"
     }, {

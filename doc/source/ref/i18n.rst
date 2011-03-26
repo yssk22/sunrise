@@ -6,20 +6,22 @@ Internationalization
 Detect User Locales
 -------------------------------------------------------------------------------
 
-You can get the user locale string detected by ``Accept`` header from the request object.
+You can get the user locale string detected by ``Accept-Language`` header from the request object.
 
 ::
 
     app.get('/', function(req, res, next){
-       // get the local string such as 'en', 'en-US', 'ja', 'ja-JP'
-       var locale = req.locale;
+       // get the local string list such as 'en', 'en-US', 'ja', 'ja-JP'
+       // ordered by priorities.
+       var locales = req.locales;
+       // -> ['ja-JP', 'ja'] (accept-language: 'ja-JP')
+       // -> ['ja-JP', 'ja', 'en'] (accept-language: 'ja-JP; en')
     });
 
 Localization
 -------------------------------------------------------------------------------
 
 .. warn:: Not implemented yet.
-
 
 Multilingualization
 -------------------------------------------------------------------------------

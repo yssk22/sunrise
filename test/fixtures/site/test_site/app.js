@@ -18,5 +18,10 @@ ddoc.init = function(app){
                {layout: false});
   });
 
+  app.get('/test_dynamicHelpers/:name', function(req, res, next){
+    res.render('test_dynamicHelpers/' + req.param('name') + '.ejs',
+               {layout: false});
+  });
+
   // all reoutes except above are defined in test script.
 };

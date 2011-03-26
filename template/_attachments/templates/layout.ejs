@@ -23,11 +23,11 @@
       </h1>
       <nav id="accountNavigation">
         <ul>
-          <% if( userCtx.userId ){ %>
-          <li class="user"><%= userCtx.userName %></li>
+          <% if( currentUser.userId ){ %>
+          <li class="user"><%= currentUser.userName %></li>
           <li class="user"><a href="/logout">Logout</a></li>
           <% }else{ %>
-          <li class="guest"><%= userCtx.userName %></li>
+          <li class="guest"><%= currentUser.userName %></li>
           <li class="guest"><a href="/login">Login</a></li>
           <% } %>
         </ul>

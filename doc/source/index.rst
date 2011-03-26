@@ -16,9 +16,6 @@ Application Development Guide
 
    getting_started
    architecture
-   app
-   site
-   deployment
 
 Reference
 -----------------------------------

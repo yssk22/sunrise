@@ -1,3 +1,8 @@
+/**
+ * CouchDB Integration as Node middleware.
+ * Copyright (c) Yohei Sasaki <yssk22@gmail.com>
+ * MIT Licensed
+ */
 var assert = require('assert'),
     path = require('path');
 var env = require(__dirname + '/../env');

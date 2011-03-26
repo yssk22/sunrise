@@ -4,7 +4,7 @@ Architecture
 Goal for Sunrise
 ================================================================================
 
-- web application stack replacing LAMP
+- web application stack replacing for LAMP
 - easy to add/remove site features (like a CMS)
 - easy to replicate web applications
 

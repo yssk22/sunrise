@@ -1,3 +1,9 @@
+/**
+ * Application Container module
+ *
+ * Copyright (c) Yohei Sasaki <yssk22@gmail.com>
+ * MIT Licensed
+ */
 var assert = require('assert'),
     path = require('path');
 var env = require('./env');
@@ -9,6 +15,7 @@ app.paths.push(abspath(path.join(__dirname, '/fixtures/app/')));
 module.exports = {
   "test createSite": function(){
     var site = createSite(path.join(__dirname, '/fixtures/site/test_site'));
+    site.init();
     assert.response(site, {
       url: '/', method: "GET"
     }, {

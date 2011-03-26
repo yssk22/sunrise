@@ -29,6 +29,7 @@ Reference
    ref/conf
    ref/i18n
    ref/app
+   ref/middleware
 
 Indices and tables
 ==================

@@ -6,36 +6,56 @@ var createSite = require('site').createSite,
 var utils = require('middleware/utils');
 
 var app = require('app');
-app.paths.push(abspath(path.join(__dirname, '/../fixtures/app/')));
+app.paths.push(abspath(path.join(__dirname, '/../fixtures/middleware/')));
 
 module.exports = {
   "test debug": function(){
     var site = createSite(path.join(__dirname, '/../fixtures/site/test_site'));
-    var debugs = [];
+    var app = site.install('utils_app', '/utils_app');
+    var debugs = { site: [], app: [] };
     site.get('/test_debug',
              function(req, res, next){
                req.app.logger.debug = function(msg){
-                 debugs.push(msg);
+                 debugs.site.push(msg);
                };
                next();
              },
              utils.debug('foo'),
              function(req, res, next){
                res.send("Hello World");
-             }
-            );
+             });
+    app.get('/test_debug',
+            function(req, res, next){
+              req.app.logger.debug = function(msg){
+                debugs.app.push(msg);
+              };
+              next();
+            },
+            utils.debug('foo'),
+            function(req, res, next){
+              res.send("Hello World");
+            });
+
     assert.response(site,  { url: '/test_debug', method: "GET" },
                     function(res){
-                      assert.eql(debugs[0], 'foo');
-                      assert.isNotNull(debugs[1]);
+                      assert.eql(debugs.site[0].substr(0,4), 'foo\n');
+                      assert.eql(res.body, "Hello World");
+                    });
+    assert.response(site,  { url: '/utils_app/test_debug', method: "GET" },
+                    function(res){
+                      assert.eql(debugs.app[0].substr(0,4), 'foo\n');
                       assert.eql(res.body, "Hello World");
                     });
   },
 
   "test dumpBindings": function(){
     var site = createSite(path.join(__dirname, '/../fixtures/site/test_site'));
-    var debugs = [];
+    var app = site.install('utils_app', '/utils_app');
     site.get('/test_dumpBindings', function(req, res, next){
+      res.local('foo', 'bar');
+      next();
+    }, utils.dumpBindings());
+    app.get('/test_dumpBindings', function(req, res, next){
       res.local('foo', 'bar');
       next();
     }, utils.dumpBindings());
@@ -45,11 +65,16 @@ module.exports = {
                       var obj = JSON.parse(res.body);
                       assert.eql(obj.foo, 'bar');
                     });
+    assert.response(site, { url: '/utils_app/test_dumpBindings', method: "GET" },
+                    function(res){
+                      var obj = JSON.parse(res.body);
+                      assert.eql(obj.foo, 'bar');
+                    });
   },
 
   "test redirect": function(){
     var site = createSite(path.join(__dirname, '/../fixtures/site/test_site'));
-    var app = site.install('test_app', '/test_app/');
+    var app = site.install('utils_app', '/utils_app/');
 
     site.get('/test_redirect', utils.redirect('foo'));
     app.get('/test_redirect', utils.redirect('bar'));
@@ -63,13 +88,13 @@ module.exports = {
       assert.eql(res.headers.location, 'http://example.com/foo');
     });
     assert.response(site, {
-      url: "/test_app/test_redirect", method: "GET",
+      url: "/utils_app/test_redirect", method: "GET",
       headers: {
         host: 'example.com'
       }
     }, function(res){
       assert.eql(res.statusCode, 302);
-      assert.eql(res.headers.location, 'http://example.com/test_app/bar');
+      assert.eql(res.headers.location, 'http://example.com/utils_app/bar');
     });
 
     // redirect with status code
@@ -87,6 +112,8 @@ module.exports = {
 
   "test parallel": function(){
     var site = createSite(path.join(__dirname, '/../fixtures/site/test_site'));
+    var app = site.install('utils_app', '/utils_app');
+
     var f = function(req, res, next){
       setTimeout(function(){
         if( res.local('count') == undefined ){
@@ -101,8 +128,18 @@ module.exports = {
     ), function(req, res, next){
       res.send('count = ' + res.local('count'));
     });
+    app.get('/test_parallel', utils.parallel(
+      f, f, f, f
+    ), function(req, res, next){
+      res.send('count = ' + res.local('count'));
+    });
     assert.response(site, {
       url: "/test_parallel", method: "GET"
+    }, {
+      body: "count = 4"
+    });
+    assert.response(site, {
+      url: "/utils_app/test_parallel", method: "GET"
     }, {
       body: "count = 4"
     });

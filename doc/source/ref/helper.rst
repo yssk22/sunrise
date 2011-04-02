@@ -177,3 +177,26 @@ This section lists view helpers (including dynamicHelpers) defined in sunrise. Y
 
    Returns the translated text for ``msgId``. See also :doc:`i18n`
 
+.. function:: title(msgId)
+
+   Set the page title. ``_()`` is applied automatically.
+
+.. function:: canonical(url)
+
+   Set the canonical URL for the page
+
+.. function:: feed(url)
+
+   Set the discovery link URL for the feed.
+
+.. function:: js(src1[, src2, ...])
+
+   Set the javascript link. 
+   The ``src`` should be the relative path from the application root, or the full url.
+
+.. function:: css(src1[, src2, ...])
+
+   Set the stylesheet link.
+   The ``src`` should be the relative path from the application root, or the full url.
+
+

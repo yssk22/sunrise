@@ -21,7 +21,7 @@ You can get the user locale string detected by ``Accept-Language`` header from t
 Localization
 -------------------------------------------------------------------------------
 
-.. warn:: Not implemented yet.
+.. warning:: Not implemented yet.
 
 Multilingualization
 -------------------------------------------------------------------------------

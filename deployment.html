@@ -1,0 +1,127 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Deployment Tips &mdash; Sunrise v0.0.1-prototype documentation</title>
+    <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.0.1-prototype',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="Sunrise v0.0.1-prototype documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Sunrise v0.0.1-prototype documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Deployment Tips</a><ul>
+<li><a class="reference internal" href="#configuration-file">Configuration File</a></li>
+<li><a class="reference internal" href="#use-forever">Use forever</a></li>
+<li><a class="reference internal" href="#application-logging">Application Logging</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="sources/deployment.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="deployment-tips">
+<h1>Deployment Tips<a class="headerlink" href="#deployment-tips" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="configuration-file">
+<h2>Configuration File<a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>Sunrise default configuration file is packaged on the <a class="reference external" href="https://github.com/yssk22/sunrise/tree/master/lib/sunrise/default/conf">sunrise itself</a> .</p>
+<p>This file is overwritten by -c option on booting.</p>
+<p>For example:</p>
+<div class="highlight-python"><pre>$ ls ../conf
+web.json
+
+$ cat ../conf/web.json
+{
+    "port": 8080
+}
+
+$ node boot.js -c ../conf</pre>
+</div>
+<p>In this boot operation, the sunrise server uses 8080 port instead of 8888. Other configuration options such as listen IP address are still by default.</p>
+</div>
+<div class="section" id="use-forever">
+<h2>Use forever<a class="headerlink" href="#use-forever" title="Permalink to this headline">¶</a></h2>
+<p>You can boot sunrise server with <tt class="docutils literal"><span class="pre">forever</span></tt>, which avoids unexpected server crashes.</p>
+<div class="highlight-python"><pre>$ npm install forever
+$ forever start boot.js -c ../conf</pre>
+</div>
+</div>
+<div class="section" id="application-logging">
+<h2>Application Logging<a class="headerlink" href="#application-logging" title="Permalink to this headline">¶</a></h2>
+<p>TBD</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html">Sunrise v0.0.1-prototype documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Yohei Sasaki.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

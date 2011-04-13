@@ -1,0 +1,135 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Application Development &mdash; Sunrise v0.0.1-prototype documentation</title>
+    <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.0.1-prototype',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="Sunrise v0.0.1-prototype documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Sunrise v0.0.1-prototype documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Application Development</a><ul>
+<li><a class="reference internal" href="#create-your-application-development-environment">Create your application development environment</a></li>
+<li><a class="reference internal" href="#develop-couchapp">Develop CouchApp</a></li>
+<li><a class="reference internal" href="#develop-a-node-handler-optional">Develop a node handler (Optional)</a></li>
+<li><a class="reference internal" href="#develop-a-node-model-optional">Develop a node model (Optional)</a></li>
+<li><a class="reference internal" href="#develop-a-node-view-plugin-optional">Develop a node view plugin (Optional)</a></li>
+<li><a class="reference internal" href="#view-resolution">View Resolution</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="sources/development.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="application-development">
+<h1>Application Development<a class="headerlink" href="#application-development" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This chapter is <em>underconstruction</em></p>
+</div>
+<p>This chapter shows you a tutorial for the development of a simple sunrise application.</p>
+<div class="section" id="create-your-application-development-environment">
+<h2>Create your application development environment<a class="headerlink" href="#create-your-application-development-environment" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">sunrise:app</span></tt> command (TBD)</p>
+</div>
+<div class="section" id="develop-couchapp">
+<h2>Develop CouchApp<a class="headerlink" href="#develop-couchapp" title="Permalink to this headline">¶</a></h2>
+<p>${APP_ROOT}/</p>
+<p>Sunrise App is a CouchApp application.</p>
+</div>
+<div class="section" id="develop-a-node-handler-optional">
+<h2>Develop a node handler (Optional)<a class="headerlink" href="#develop-a-node-handler-optional" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">${APP_ROOT}/node/handler.js</span></tt></p>
+<p>implement a routing.</p>
+</div>
+<div class="section" id="develop-a-node-model-optional">
+<h2>Develop a node model (Optional)<a class="headerlink" href="#develop-a-node-model-optional" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">${APP_ROOT}/node/model.js</span></tt></p>
+<p>implement a server side javascript logic which is difficult on CouchApp.</p>
+</div>
+<div class="section" id="develop-a-node-view-plugin-optional">
+<h2>Develop a node view plugin (Optional)<a class="headerlink" href="#develop-a-node-view-plugin-optional" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">${APP_ROOT}/node/helper.js</span></tt></p>
+</div>
+<div class="section" id="view-resolution">
+<h2>View Resolution<a class="headerlink" href="#view-resolution" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">${APP_ROOT}/_attachments/templates/</span></tt></p>
+<p>Important to design a scope of one view file for overwriting.x</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html">Sunrise v0.0.1-prototype documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Yohei Sasaki.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

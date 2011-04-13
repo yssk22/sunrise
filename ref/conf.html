@@ -1,0 +1,224 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Configuration Files &mdash; Sunrise v0.0.1-prototype documentation</title>
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1-prototype',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Sunrise v0.0.1-prototype documentation" href="../index.html" />
+    <link rel="next" title="Internationalization" href="i18n.html" />
+    <link rel="prev" title="Architecture" href="../architecture.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="i18n.html" title="Internationalization"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../architecture.html" title="Architecture"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sunrise v0.0.1-prototype documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Configuration Files</a><ul>
+<li><a class="reference internal" href="#db-json">db.json</a></li>
+<li><a class="reference internal" href="#web-json">web.json</a></li>
+<li><a class="reference internal" href="#auth-json">auth.json</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../architecture.html"
+                        title="previous chapter">Architecture</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="i18n.html"
+                        title="next chapter">Internationalization</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/ref/conf.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="configuration-files">
+<h1>Configuration Files<a class="headerlink" href="#configuration-files" title="Permalink to this headline">¶</a></h1>
+<p>You can specify several configuration by configuration files in one directory, which can set by <tt class="docutils literal"><span class="pre">-c</span></tt> option on boot. Each file must be a json formatted file as described in this section.</p>
+<div class="section" id="db-json">
+<h2>db.json<a class="headerlink" href="#db-json" title="Permalink to this headline">¶</a></h2>
+<p>Configuration for your CouchDB instance.</p>
+<p>The defaults are:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;host&quot;</span>     <span class="p">:</span> <span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+    <span class="s">&quot;port&quot;</span>     <span class="p">:</span> <span class="s">&quot;5984&quot;</span><span class="p">,</span>
+    <span class="s">&quot;database&quot;</span> <span class="p">:</span> <span class="s">&quot;sunrise&quot;</span><span class="p">,</span>
+    <span class="s">&quot;user&quot;</span>     <span class="p">:</span> <span class="s">&quot;admin&quot;</span><span class="p">,</span>
+    <span class="s">&quot;password&quot;</span> <span class="p">:</span> <span class="s">&quot;password&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">host:</th><td class="field-body">CouchDB hostname</td>
+</tr>
+<tr class="field"><th class="field-name">port:</th><td class="field-body">CouchDB port number</td>
+</tr>
+<tr class="field"><th class="field-name">database:</th><td class="field-body">the default database name (if your application set the database name, this setting is ignored)</td>
+</tr>
+<tr class="field"><th class="field-name">user:</th><td class="field-body">the user name for admin party.</td>
+</tr>
+<tr class="field"><th class="field-name">password:</th><td class="field-body">the user password for admin party.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="web-json">
+<h2>web.json<a class="headerlink" href="#web-json" title="Permalink to this headline">¶</a></h2>
+<p>Configuration for http server behaviors.</p>
+<p>The defaults are:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;listen&quot;</span><span class="p">:</span> <span class="s">&quot;0.0.0.0&quot;</span><span class="p">,</span>
+    <span class="s">&quot;port&quot;</span><span class="p">:</span> <span class="mi">8888</span><span class="p">,</span>
+    <span class="s">&quot;session&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&quot;store&quot;</span><span class="p">:</span> <span class="s">&quot;memory&quot;</span><span class="p">,</span>
+        <span class="s">&quot;options&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">&quot;reapInterval&quot;</span><span class="p">:</span> <span class="mi">600000</span><span class="p">,</span>
+            <span class="s">&quot;maxAge&quot;</span> <span class="p">:</span> <span class="mi">7776000000</span><span class="p">,</span>
+            <span class="s">&quot;cookie&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                <span class="s">&quot;path&quot;</span><span class="p">:</span> <span class="s">&quot;/&quot;</span><span class="p">,</span>
+                <span class="s">&quot;httpOnly&quot;</span><span class="p">:</span> <span class="n">true</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">listen:</th><td class="field-body"><p class="first">listen IP address.</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name">port:</th><td class="field-body"><p class="first">port number</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name">session.store:</th><td class="field-body"><p class="first">The name of session middleware. Currently the followings are supported.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><p class="first last">name</p>
+</td>
+<td><p class="first last">middleware</p>
+</td>
+</tr>
+<tr><td><p class="first last">memory</p>
+</td>
+<td><p class="first last">connect.middleware.MemoryStore</p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">session.options:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first last">The option parameter passed to the sesion middleware. This parameter is defined by each middleware.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="auth-json">
+<h2>auth.json<a class="headerlink" href="#auth-json" title="Permalink to this headline">¶</a></h2>
+<p>OAuth configuration specifies <tt class="docutils literal"><span class="pre">ConsumerKey</span></tt> and <tt class="docutils literal"><span class="pre">ConsumerSecret</span></tt>.</p>
+<p>The defaults are:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;oauthProviders&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&quot;twitter&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="s">&quot;consumerKey&quot;</span><span class="p">:</span> <span class="s">&quot;you need prepare consumerKey&quot;</span><span class="p">,</span>
+            <span class="s">&quot;consumerSecret&quot;</span><span class="p">:</span> <span class="s">&quot;you need prepare consumerSecret&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="i18n.html" title="Internationalization"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../architecture.html" title="Architecture"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sunrise v0.0.1-prototype documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Yohei Sasaki.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

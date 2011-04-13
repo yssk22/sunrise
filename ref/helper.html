@@ -1,0 +1,321 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>View Helpers &mdash; Sunrise v0.0.1-prototype documentation</title>
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1-prototype',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Sunrise v0.0.1-prototype documentation" href="../index.html" />
+    <link rel="prev" title="Middleware" href="middleware.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="middleware.html" title="Middleware"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sunrise v0.0.1-prototype documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="middleware.html"
+                        title="previous chapter">Middleware</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/ref/helper.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="view-helpers">
+<h1>View Helpers<a class="headerlink" href="#view-helpers" title="Permalink to this headline">¶</a></h1>
+<p>This section lists view helpers (including dynamicHelpers) defined in sunrise. You can use helper functions without any settings.</p>
+<dl class="attribute">
+<dt id="querystring">
+<tt class="descname">querystring</tt><a class="headerlink" href="#querystring" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets <tt class="docutils literal"><span class="pre">querystring</span></tt> module object</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="qs">
+<tt class="descname">qs</tt><a class="headerlink" href="#qs" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <tt class="docutils literal"><span class="pre">querystring</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="php">
+<tt class="descname">php</tt><a class="headerlink" href="#php" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the php object that enables php functions developed at <a class="reference external" href="http://phpjs.org/">phpjs.org</a>.</p>
+<div class="highlight-html"><pre>&lt;p&gt;&lt;%= php.trim('   trimed   ') %&gt;&lt;/p&gt;</pre>
+</div>
+<p>outputs:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;p&gt;</span>trimed<span class="nt">&lt;/p&gt;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">phpjs is not optimized for Node. In other words, there are several overheads for using phpjs. This module is provided for <strong>ease-of-use</strong>. You may have better to optimize your PHP functions.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sanitizer">
+<tt class="descname">sanitizer</tt><a class="headerlink" href="#sanitizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for <a class="reference external" href="http://code.google.com/p/google-caja/wiki/JsHtmlSanitizer">Caja&#8217;s JsHtmlSanitizer</a>, which is modified for sunrise (2 options, <tt class="docutils literal"><span class="pre">elements</span></tt>, <tt class="docutils literal"><span class="pre">sanitizeAttribs</span></tt>, are added).</p>
+<div class="highlight-html"><pre>&lt;%- sanitizer.html_sanitize(
+'&lt;h1&gt;This is an H1&lt;/h1&gt;\n' +
+'&lt;script type="text/javascript"&gt;alert("hoge");&lt;/script&gt;') %&gt;</pre>
+</div>
+<p>outputs:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>This is an H1<span class="nt">&lt;/h1&gt;</span>
+</pre></div>
+</div>
+<p>You can customize sanitized elements, url policy, token policy, and sanitize attributes funciton by using the second arguments as option.</p>
+<p>By default:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+   <span class="nx">elements</span><span class="o">:</span> <span class="p">{},</span>
+   <span class="nx">attribts</span><span class="o">:</span> <span class="p">{},</span>
+   <span class="nx">urlPolicy</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span> <span class="k">if</span><span class="p">(</span><span class="sr">/^https?:\/\//</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">url</span><span class="p">))</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">url</span> <span class="p">}},</span>
+   <span class="nx">nmTokenPolicy</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">){</span> <span class="k">return</span> <span class="nx">id</span><span class="p">;</span> <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>elements option</dt>
+<dd><p class="first">You can use <tt class="docutils literal"><span class="pre">elements</span></tt> options to define the level of tags. This option overrides <tt class="docutils literal"><span class="pre">html4.ELEMENTS</span></tt> definition in Caja.
+For example, you can allow <tt class="docutils literal"><span class="pre">object</span></tt> tag, which is defined as <tt class="docutils literal"><span class="pre">'UNSAFE</span> <span class="pre">(16)'</span></tt> and sanitized by default:</p>
+<div class="last highlight-javascript"><div class="highlight"><pre><span class="o">&lt;%-</span> <span class="nx">sanitize</span><span class="p">.</span><span class="nx">htmlSanitize</span><span class="p">(</span><span class="s1">&#39;&lt;object&gt;&lt;/object&gt;&#39;</span><span class="p">,</span>
+    <span class="p">{</span>
+      <span class="nx">elements</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">object</span><span class="o">:</span> <span class="mi">0</span>
+      <span class="p">},</span>
+    <span class="p">})</span> <span class="o">%&gt;</span>
+</pre></div>
+</div>
+</dd>
+<dt>attribs option</dt>
+<dd><p class="first">You can use <tt class="docutils literal"><span class="pre">attribs</span></tt> options to define the level of tags. This option overrides <tt class="docutils literal"><span class="pre">html4.ATTRIBS</span></tt> definition in Caja.
+For example, you can allow <tt class="docutils literal"><span class="pre">style</span></tt> attribute only in <tt class="docutils literal"><span class="pre">p</span></tt> tag, which is defined as <tt class="docutils literal"><span class="pre">'STYLE</span> <span class="pre">(3)'</span></tt> and sanitized by default,</p>
+<div class="last highlight-javascript"><div class="highlight"><pre><span class="o">&lt;%-</span> <span class="nx">sanitize</span><span class="p">.</span><span class="nx">htmlSanitize</span><span class="p">(</span><span class="s1">&#39;&lt;p style=&quot;float:left;&quot;&gt;&lt;/p&gt;&#39;</span><span class="p">,</span>
+    <span class="p">{</span>
+      <span class="nx">attribs</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;p::style&quot;</span><span class="o">:</span> <span class="mi">0</span>
+      <span class="p">},</span>
+    <span class="p">})</span> <span class="o">%&gt;</span>
+</pre></div>
+</div>
+</dd>
+<dt>uriPolicy option</dt>
+<dd>Same as opt_uriPolicy in <a class="reference external" href="http://code.google.com/p/google-caja/wiki/JsHtmlSanitizer">Caja</a>.</dd>
+<dt>nmTokenPolicy</dt>
+<dd>Same as opt_nmTokenPolicy in <a class="reference external" href="http://code.google.com/p/google-caja/wiki/JsHtmlSanitizer">Caja</a>.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Modify Default Optoins</p>
+<p>You can modify default value of above options as follows:</p>
+<div class="last highlight-javascript"><div class="highlight"><pre><span class="nx">ddoc</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">site</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">sanitizer</span> <span class="o">=</span> <span class="nx">site</span><span class="p">.</span><span class="nx">viewHelpers</span><span class="p">.</span><span class="nx">sanitizer</span><span class="p">;</span>
+  <span class="c1">// elements option</span>
+  <span class="nx">sanitizer</span><span class="p">.</span><span class="nx">html4</span><span class="p">.</span><span class="nx">ELEMENTS</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="c1">// attribs option</span>
+  <span class="nx">sanitizer</span><span class="p">.</span><span class="nx">html4</span><span class="p">.</span><span class="nx">ATTRIBS</span><span class="p">[</span><span class="s1">&#39;p::style&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="markdown">
+<tt class="descname">markdown</tt><big>(</big><em>string</em><big>)</big><a class="headerlink" href="#markdown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a markdown string to an html string.</p>
+<div class="highlight-html"><pre>&lt;%- markdown(
+'This is an H1\n' +
+'=============') %&gt;</pre>
+</div>
+<p>outputs:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>This is an H1<span class="nt">&lt;/h1&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="session">
+<tt class="descname">session</tt><a class="headerlink" href="#session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets session object.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="currentUser">
+<tt class="descname">currentUser</tt><a class="headerlink" href="#currentUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the user object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">Currentuser.username :</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">user name</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Currentuser.userid :</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">user identifier.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="isLogin">
+<tt class="descname">isLogin</tt><a class="headerlink" href="#isLogin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets true if the current user is logged in, otherwise false.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="url">
+<tt class="descname">url</tt><big>(</big><em>path</em><span class="optional">[</span>, <em>options</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns absolute url from the current application. If <tt class="docutils literal"><span class="pre">path</span></tt> is omitted</p>
+<p><tt class="docutils literal"><span class="pre">options</span></tt> are:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Fromapproot :</th><td class="field-body">if <tt class="docutils literal"><span class="pre">falase</span></tt>, the absolute path is from <tt class="docutils literal"><span class="pre">/</span></tt>, not app.set(&#8216;home&#8217;). (default: <tt class="docutils literal"><span class="pre">true</span></tt>)</td>
+</tr>
+<tr class="field"><th class="field-name">Onlypath :</th><td class="field-body">if <tt class="docutils literal"><span class="pre">false</span></tt>, full url starts with <tt class="docutils literal"><span class="pre">http(s)://</span></tt> will be returned.</td>
+</tr>
+</tbody>
+</table>
+<p>Here are examples, assuming that the host is <tt class="docutils literal"><span class="pre">example.com</span></tt>, the application root is <tt class="docutils literal"><span class="pre">/app</span></tt>, and the requested url is <tt class="docutils literal"><span class="pre">/app/test</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">url</span><span class="p">(</span><span class="s1">&#39;/foo&#39;</span><span class="p">)</span>
+<span class="c1">// -&gt; /app/foo</span>
+
+<span class="nx">url</span><span class="p">(</span><span class="s1">&#39;/foo&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">onlyPath</span><span class="o">:</span> <span class="kc">false</span><span class="p">})</span>
+<span class="c1">// -&gt; http://example.com/app/foo</span>
+
+<span class="nx">url</span><span class="p">(</span><span class="s1">&#39;/foo&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">onlyPath</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">fromAppRoot</span><span class="o">:</span> <span class="kc">false</span><span class="p">})</span>
+<span class="c1">// -&gt; http://example.com/foo</span>
+
+<span class="nx">url</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="c1">// -&gt; /app/test/bar</span>
+
+<span class="nx">url</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">onlyPath</span><span class="o">:</span> <span class="kc">false</span><span class="p">})</span>
+<span class="c1">// -&gt; http://example.com/app/test/bar</span>
+
+<span class="nx">url</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">onlyPath</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">fromAppRoot</span><span class="o">:</span> <span class="kc">false</span><span class="p">})</span>
+<span class="c1">// -&gt; http://example.com/app/test/bar</span>
+
+<span class="nx">url</span><span class="p">()</span>
+<span class="c1">// -&gt; /app/test</span>
+
+<span class="nx">url</span><span class="p">({</span><span class="nx">onlyPath</span><span class="o">:</span> <span class="kc">false</span><span class="p">})</span>
+<span class="c1">// -&gt; http://example.com/app/test</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="_">
+<tt class="descname">_</tt><big>(</big><em>msgId</em><big>)</big><a class="headerlink" href="#_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the translated text for <tt class="docutils literal"><span class="pre">msgId</span></tt>. See also <a class="reference internal" href="i18n.html"><em>Internationalization</em></a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="title">
+<tt class="descname">title</tt><big>(</big><em>msgId</em><big>)</big><a class="headerlink" href="#title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the page title. <tt class="docutils literal"><span class="pre">_()</span></tt> is applied automatically.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="canonical">
+<tt class="descname">canonical</tt><big>(</big><em>url</em><big>)</big><a class="headerlink" href="#canonical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the canonical URL for the page</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="feed">
+<tt class="descname">feed</tt><big>(</big><em>url</em><big>)</big><a class="headerlink" href="#feed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the discovery link URL for the feed.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="js">
+<tt class="descname">js</tt><big>(</big><em>src1</em><span class="optional">[</span>, <em>src2</em>, <em>...</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#js" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the javascript link.
+The <tt class="docutils literal"><span class="pre">src</span></tt> should be the relative path from the application root, or the full url.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="css">
+<tt class="descname">css</tt><big>(</big><em>src1</em><span class="optional">[</span>, <em>src2</em>, <em>...</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#css" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the stylesheet link.
+The <tt class="docutils literal"><span class="pre">src</span></tt> should be the relative path from the application root, or the full url.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="middleware.html" title="Middleware"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sunrise v0.0.1-prototype documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Yohei Sasaki.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,173 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Application &mdash; Sunrise v0.0.1-prototype documentation</title>
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1-prototype',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Sunrise v0.0.1-prototype documentation" href="../index.html" />
+    <link rel="next" title="Middleware" href="middleware.html" />
+    <link rel="prev" title="Internationalization" href="i18n.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="middleware.html" title="Middleware"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="i18n.html" title="Internationalization"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sunrise v0.0.1-prototype documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Application</a><ul>
+<li><a class="reference internal" href="#app-js">app.js</a><ul>
+<li><a class="reference internal" href="#ddoc-init">ddoc.init</a></li>
+<li><a class="reference internal" href="#ddoc-dirs">ddoc.dirs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="i18n.html"
+                        title="previous chapter">Internationalization</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="middleware.html"
+                        title="next chapter">Middleware</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/ref/app.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="application">
+<h1>Application<a class="headerlink" href="#application" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="app-js">
+<h2>app.js<a class="headerlink" href="#app-js" title="Permalink to this headline">¶</a></h2>
+<p>app.js is a design document pushed into CouchDB. There are properties reserverd by CouchDB, and several <strong>special</strong> properties defined by Sunrise.</p>
+<p>Common app.js file is as follows:</p>
+<div class="highlight-python"><pre>var couchapp = require('couchapp');
+var path = require('path');
+var ddoc = {
+  _id: "_design/sunrise" ,
+  // CouchApp funs
+  views: {},
+  shows: {},
+  lists: {},
+  // Sunrise Funs
+  dirs: {}
+};
+
+module.exports = ddoc;
+ddoc.init = function(app, options){
+  //
+}
+
+// ddoc.dirs.templates = '_attachments/templates';
+// ddoc.dirs.errors = '_attachments/errors';
+// ddoc.dirs.m10n = '_attachments/messages'
+// ddoc.dirs.static = '_attachments'</pre>
+</div>
+<div class="section" id="ddoc-init">
+<h3>ddoc.init<a class="headerlink" href="#ddoc-init" title="Permalink to this headline">¶</a></h3>
+<p>This property is a function called on installed to the site. Generally your routing definitions are configured here. The first argument is applicatoin instance (HTTPServer instance defined by Sunrise, extended from Express HTTPServer), and the second argument is the option hash passed from <tt class="docutils literal"><span class="pre">site.install</span></tt> function.</p>
+</div>
+<div class="section" id="ddoc-dirs">
+<h3>ddoc.dirs<a class="headerlink" href="#ddoc-dirs" title="Permalink to this headline">¶</a></h3>
+<p>Directory definition that contains resource files.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">ddoc.dirs.templates:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">The root of EJS template files</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">ddoc.dirs.errors:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">The error document directory. The directory should have {HttpStatusCode}.ejs, such as 404.ejs, 500.ejs, ... etc.</td>
+</tr>
+<tr class="field"><th class="field-name">ddoc.dirs.m10n:</th><td class="field-body">The message files directory. see <a class="reference internal" href="i18n.html"><em>Internationalization</em></a> section.</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">ddoc.dirs.static:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">The root of static files, a.k.a attachments in CouchDB.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="middleware.html" title="Middleware"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="i18n.html" title="Internationalization"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sunrise v0.0.1-prototype documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Yohei Sasaki.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

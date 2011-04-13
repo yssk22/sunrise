@@ -1,0 +1,158 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Architecture &mdash; Sunrise v0.0.1-prototype documentation</title>
+    <link rel="stylesheet" href="static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.0.1-prototype',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="Sunrise v0.0.1-prototype documentation" href="index.html" />
+    <link rel="next" title="Configuration Files" href="ref/conf.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ref/conf.html" title="Configuration Files"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="getting_started.html" title="Getting Started"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Sunrise v0.0.1-prototype documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Architecture</a><ul>
+<li><a class="reference internal" href="#goal-for-sunrise">Goal for Sunrise</a></li>
+<li><a class="reference internal" href="#software-stack">Software Stack</a><ul>
+<li><a class="reference internal" href="#sunrise-app">Sunrise App</a></li>
+<li><a class="reference internal" href="#sunrise-site">Sunrise Site</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="getting_started.html"
+                        title="previous chapter">Getting Started</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ref/conf.html"
+                        title="next chapter">Configuration Files</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="sources/architecture.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="architecture">
+<h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="goal-for-sunrise">
+<h2>Goal for Sunrise<a class="headerlink" href="#goal-for-sunrise" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>web application stack replacing for LAMP</li>
+<li>easy to add/remove site features (like a CMS)</li>
+<li>easy to replicate web applications</li>
+</ul>
+</div>
+<div class="section" id="software-stack">
+<h2>Software Stack<a class="headerlink" href="#software-stack" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="#figure1"><em>Figure 1. Sunrise software stack</em></a> shows software stack of a sunrise site.</p>
+<div class="figure" id="figure1">
+<img alt="Sunrise Architecture" src="https://cacoo.com/diagrams/7WWVyd3qvxpS53e7-1A2DC.png" />
+<p class="caption">Figure 1. Sunrise software stack</p>
+</div>
+<p>A site powered by sunrise is hosted on a CouchDB instances with multiple databases per a application.</p>
+<div class="section" id="sunrise-app">
+<h3>Sunrise App<a class="headerlink" href="#sunrise-app" title="Permalink to this headline">¶</a></h3>
+<p><strong>Sunrise App</strong> is an CouchApp application which can be extended by the power of node.js. It provides basic functions such as views, lists, shows, and attachments hosted on CouchDB. And it also provides more enhanced server side application features hosted on Connect/Express middleware infrastructure by node.js such as view aggregations, third-party authenticated(oauth) identity models, scheduled jobs, WebSocket proxy for CouchDb&#8217;s _changes feeds, and so on.</p>
+<p>Whole of application source code is stored on a dedicated database on a shared CouchDB server instance. A url path is assigned to an application (as a namespace),</p>
+<p>An application example is on <a class="reference external" href="http://github.com/yssk22/sunrise/tree/master/lib/sunrise/apps/posts">github</a> , which adds a &#8216;posts&#8217; function on a sunrise site.</p>
+<p>When a application is <strong>installed</strong> on a sunrise site, a namespace is assigned to it, and URLs udner</p>
+<p>See <a class="reference internal" href="app.html"><em>Application Development</em></a> for more details about how to implement Sunrise App.</p>
+</div>
+<div class="section" id="sunrise-site">
+<h3>Sunrise Site<a class="headerlink" href="#sunrise-site" title="Permalink to this headline">¶</a></h3>
+<p><strong>Sunrise Site</strong> is an special sunrise application which manages sunrise applications hosted on it&#8217;s site. In addition to normal sunrise application features and also provides container features such as:</p>
+<ul class="simple">
+<li>Sunrise App installation.</li>
+<li>Authentication/Authorization functions.</li>
+<li>Site-level error handling.</li>
+<li>...</li>
+</ul>
+<p>See <a class="reference internal" href="site.html"><em>Customize your site</em></a> for more details about how to customise your sunrise site.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ref/conf.html" title="Configuration Files"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="getting_started.html" title="Getting Started"
+             >previous</a> |</li>
+        <li><a href="index.html">Sunrise v0.0.1-prototype documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Yohei Sasaki.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

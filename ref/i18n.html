@@ -1,0 +1,170 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Internationalization &mdash; Sunrise v0.0.1-prototype documentation</title>
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1-prototype',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Sunrise v0.0.1-prototype documentation" href="../index.html" />
+    <link rel="next" title="Application" href="app.html" />
+    <link rel="prev" title="Configuration Files" href="conf.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="app.html" title="Application"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="conf.html" title="Configuration Files"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sunrise v0.0.1-prototype documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Internationalization</a><ul>
+<li><a class="reference internal" href="#detect-user-locales">Detect User Locales</a></li>
+<li><a class="reference internal" href="#localization">Localization</a></li>
+<li><a class="reference internal" href="#multilingualization">Multilingualization</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="conf.html"
+                        title="previous chapter">Configuration Files</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="app.html"
+                        title="next chapter">Application</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/ref/i18n.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="internationalization">
+<h1>Internationalization<a class="headerlink" href="#internationalization" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="detect-user-locales">
+<h2>Detect User Locales<a class="headerlink" href="#detect-user-locales" title="Permalink to this headline">¶</a></h2>
+<p>You can get the user locale string detected by <tt class="docutils literal"><span class="pre">Accept-Language</span></tt> header from the request object.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">){</span>
+   <span class="c1">// get the local string list such as &#39;en&#39;, &#39;en-US&#39;, &#39;ja&#39;, &#39;ja-JP&#39;</span>
+   <span class="c1">// ordered by priorities.</span>
+   <span class="kd">var</span> <span class="nx">locales</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">locales</span><span class="p">;</span>
+   <span class="c1">// -&gt; [&#39;ja-JP&#39;, &#39;ja&#39;] (accept-language: &#39;ja-JP&#39;)</span>
+   <span class="c1">// -&gt; [&#39;ja-JP&#39;, &#39;ja&#39;, &#39;en&#39;] (accept-language: &#39;ja-JP; en&#39;)</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="localization">
+<h2>Localization<a class="headerlink" href="#localization" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Not implemented yet.</p>
+</div>
+</div>
+<div class="section" id="multilingualization">
+<h2>Multilingualization<a class="headerlink" href="#multilingualization" title="Permalink to this headline">¶</a></h2>
+<p>At first, you specify the message bundle directory path by <tt class="docutils literal"><span class="pre">ddoc.m10n</span></tt> property.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c1">// app.js</span>
+<span class="nx">ddoc</span><span class="p">.</span><span class="nx">m10n</span> <span class="o">=</span> <span class="s1">&#39;_attachments/messages/&#39;</span>
+</pre></div>
+</div>
+<p>In this case, <tt class="docutils literal"><span class="pre">'dirname(app.js)/_attachments/messagse'</span></tt> is a directory that contains message bundle files for each locale.</p>
+<p>Then prepare <tt class="docutils literal"><span class="pre">'dirname(app.js)/_attachments/messagse/{locale}.json</span></tt> you use for localization.</p>
+<p>For example, <tt class="docutils literal"><span class="pre">en.json</span></tt>, used for users whose locale is &#8216;en&#8217;, is as follows:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c1">// en.json</span>
+<span class="p">{</span>
+    <span class="s2">&quot;msgId1&quot;</span> <span class="o">:</span> <span class="s2">&quot;Your Message 1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;msgId2&quot;</span> <span class="o">:</span> <span class="s2">&quot;Your Message 2&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and <tt class="docutils literal"><span class="pre">ja.json</span></tt> is as follows:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c1">// ja.json</span>
+<span class="p">{</span>
+    <span class="s2">&quot;msgId1&quot;</span> <span class="o">:</span> <span class="s2">&quot;メッセージ1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;msgId2&quot;</span> <span class="o">:</span> <span class="s2">&quot;メッセージ2&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now you can <tt class="docutils literal"><span class="pre">'msgId1'</span></tt> and <tt class="docutils literal"><span class="pre">'msgId2'</span></tt> on your view file with the <tt class="docutils literal"><span class="pre">_</span></tt> helper.</p>
+<div class="highlight-html"><pre>// view.ejs
+&lt;p&gt;&lt;%= _('msgId1') %&gt;&lt;/p&gt;</pre>
+</div>
+<p>If the user locale is resolved as <tt class="docutils literal"><span class="pre">'en'</span></tt>, then the output response is <tt class="docutils literal"><span class="pre">&lt;p&gt;Your</span> <span class="pre">Message</span> <span class="pre">1&lt;/p&gt;</span></tt>. If it is resolved as <tt class="docutils literal"><span class="pre">'ja'</span></tt>, then the output is <tt class="docutils literal"><span class="pre">&lt;p&gt;メッセージ1&lt;/p&gt;</span></tt>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="app.html" title="Application"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="conf.html" title="Configuration Files"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sunrise v0.0.1-prototype documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Yohei Sasaki.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

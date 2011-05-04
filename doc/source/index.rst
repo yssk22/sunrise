@@ -17,6 +17,14 @@ Application Development Guide
    getting_started
    architecture
 
+Development Tips
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   tips/error
+
 Reference
 -----------------------------------
 

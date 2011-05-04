@@ -1,0 +1,152 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Error Handling &mdash; Sunrise v0.1.0 documentation</title>
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Sunrise v0.1.0 documentation" href="../index.html" />
+    <link rel="next" title="Configuration Files" href="../ref/conf.html" />
+    <link rel="prev" title="Architecture" href="../architecture.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../ref/conf.html" title="Configuration Files"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../architecture.html" title="Architecture"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sunrise v0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Error Handling</a><ul>
+<li><a class="reference internal" href="#error-page">Error Page</a></li>
+<li><a class="reference internal" href="#raise-an-error-in-your-application">Raise an error in your application</a><ul>
+<li><a class="reference internal" href="#raise-an-error-object">Raise an Error object</a></li>
+<li><a class="reference internal" href="#use-raiseerror-statuscode">use <tt class="docutils literal"><span class="pre">raiseError(statusCode)</span></tt></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../architecture.html"
+                        title="previous chapter">Architecture</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../ref/conf.html"
+                        title="next chapter">Configuration Files</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/tips/error.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="error-handling">
+<h1>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="error-page">
+<h2>Error Page<a class="headerlink" href="#error-page" title="Permalink to this headline">¶</a></h2>
+<p>Your site can set cutome error pages in the directory, <tt class="docutils literal"><span class="pre">YOUR_SITE_DIR/_attachments/errors</span></tt>, where <tt class="docutils literal"><span class="pre">{status}.ejs</span></tt> file is used as a template. e.g. If your application fails in the 404 status, <tt class="docutils literal"><span class="pre">404.ejs</span></tt> is used.</p>
+<p>If no error template file is found, then the default page defined by Express is used, and warnings are output in the log:</p>
+<div class="highlight-javascript"><pre>[2011-05-05 01:35:01.560] [WARN] sunrise - Cannot response error pages - expected path: /Users/yssk22/sample_site/_attachmenets/errors/404.ejs</pre>
+</div>
+</div>
+<div class="section" id="raise-an-error-in-your-application">
+<h2>Raise an error in your application<a class="headerlink" href="#raise-an-error-in-your-application" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="raise-an-error-object">
+<h3>Raise an Error object<a class="headerlink" href="#raise-an-error-object" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">raise</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;This is an error&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the error object has a property, <tt class="docutils literal"><span class="pre">statusCode</span></tt>, then the value of the property is used. And if not, the status code is 500. So the above case fails in 500 error, and the following case will fails in 403.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">err</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;This is an error&quot;</span><span class="p">);</span>
+<span class="nx">err</span><span class="p">.</span><span class="nx">statusCode</span> <span class="o">=</span> <span class="mi">403</span><span class="p">;</span>
+<span class="nx">raise</span> <span class="nx">err</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="use-raiseerror-statuscode">
+<h3>use <tt class="docutils literal"><span class="pre">raiseError(statusCode)</span></tt><a class="headerlink" href="#use-raiseerror-statuscode" title="Permalink to this headline">¶</a></h3>
+<p>You can use the function <tt class="docutils literal"><span class="pre">raiseError(statusCode)</span></tt> to respond the page with the given status code.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">raiseError</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;sunrise&#39;</span><span class="p">).</span><span class="nx">raiseError</span><span class="p">;</span>
+<span class="nx">raiseError</span><span class="p">(</span><span class="mi">404</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../ref/conf.html" title="Configuration Files"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../architecture.html" title="Architecture"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sunrise v0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Yohei Sasaki.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

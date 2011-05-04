@@ -23,12 +23,12 @@
       </h1>
       <nav id="accountNavigation">
         <ul>
-          <% if( currentUser.userId ){ %>
+          <% if( isLogin ){ %>
           <li class="user"><%= currentUser.userName %></li>
-          <li class="user"><a href="/logout">Logout</a></li>
+          <li class="user"><a href="/sunrise/logout">Logout</a></li>
           <% }else{ %>
           <li class="guest"><%= currentUser.userName %></li>
-          <li class="guest"><a href="/login">Login</a></li>
+          <li class="guest"><a href="/sunrise/login/twitter">Login</a></li>
           <% } %>
         </ul>
       </nav>

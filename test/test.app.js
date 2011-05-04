@@ -61,6 +61,8 @@ module.exports = {
 
   'test createApp in a context': function(){
     var test_app = app.createApp('test_app', {rootUrl: '/foo'});
-    assert.eql(test_app.set('home'), '/foo/');
+    // if test_app is installed on /foo/, then the home is '/foo/'
+    // before that, the home remains '/'.
+    assert.eql(test_app.set('home'), '/');
   }
 };

@@ -3,4 +3,5 @@
 *.log
 lib-cov
 misc
+conf.debug
 node_modules

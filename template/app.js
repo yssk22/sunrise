@@ -1,7 +1,7 @@
 var couchapp = require('couchapp');
 var path = require('path');
 var ddoc = {
-  _id: "_design/sunrise" ,
+  _id: "_design/site" ,
   // CouchApp funs
   views: {},
   shows: {},
@@ -18,6 +18,10 @@ ddoc.init = function(site){
   site.get('/', function(req, res, next){
     res.render('index');
   });
+
+
+  // install system application
+  site.install('sunrise', '/sunrise/');
 
   // install applications as you like
   // site.install('posts', '/posts/', {database: 'posts'});

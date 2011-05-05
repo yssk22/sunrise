@@ -45,5 +45,18 @@ module.exports = {
     },  {
       body: "<html><body>This is Test Application.\n</body></html>\n"
     });
+  },
+
+  "test helper chain": function(){
+    var site = createSite(path.join(__dirname, '/fixtures/site/test_site'));
+    var test_app = site.install('test_app', '/test_app/');
+    test_app.get('/test_helper', function(req, res, next){
+      res.render('test_helper.ejs');
+    });
+    assert.response(site, {
+      url: '/test_app/test_helper', method: "GET"
+    },  {
+      body: "<html><body>false\n</body></html>\n"
+    });
   }
 }

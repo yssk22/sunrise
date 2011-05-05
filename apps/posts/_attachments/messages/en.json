@@ -1,0 +1,18 @@
+{
+    "posts.mainTitle": "Latest Posts",
+    "posts.sidebar.menu.title": "Menu",
+
+    "posts.admin.managePosts"  : "Manage posts",
+    "posts.admin.createPost"      : "New post",
+
+    
+    "posts.title": "Title",
+    "posts.tags": "Tags",
+    "posts.content": "Content",
+    "posts.is_draft": "Draft",
+
+    "posts.submit": "Submit",
+    "posts.cancel": "Cancel",
+
+    "_____" : "EOF"
+}

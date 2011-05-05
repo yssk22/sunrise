@@ -1,0 +1,23 @@
+<form id="postEditor" action="<%= url('/p/') %>" method="POST">
+  <input id="_id" name="_id" type="hidden" />
+  <input id="_rev" name="_rev" type="hidden" />
+  <div class="fieldRow">
+    <label for="title"><%= _("posts.title") %></label>
+    <input id="title" type="text" name="title" />
+  </div>
+  <div class="fieldRow">
+    <label for="tags"><%= _("posts.tags") %></label>
+    <input id="tags" type="text" name="tags" />
+  </div>
+  <div class="fieldRow">
+    <textarea id="content" name="content" rows="20" cols="80"></textarea>
+  </div>
+  <div class="fieldRow">
+    <label for="is_draft"><%= _("posts.is_draft") %></label>
+    <input id="is_draft" name="is_draft" type="checkbox"></input>
+  </div>
+  <div class="fieldRow buttons">
+    <button id="submit" name="submit" type="submit"><%= _("posts.submit") %></button>
+    <button id="cancel" name="cancel" type="button"><%= _("posts.cancel") %></button>
+  </div>
+</form>

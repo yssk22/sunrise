@@ -9,8 +9,6 @@ var assert = require('assert'),
 var env = require('./env');
 var createSite = require('site').createSite,
     abspath = require('utils').abspath;
-var app = require('app');
-app.paths.push(abspath(path.join(__dirname, '/fixtures/app/')));
 
 module.exports = {
   "test createSite": function(){
@@ -66,24 +64,6 @@ module.exports = {
       }, {
         body: 'test_session = 2'
       });
-    });
-  },
-
-  "test installed application": function(){
-    var site = createSite(path.join(__dirname, '/fixtures/site/test_site'));
-    var test_app = site.install('test_app', '/test_app/');
-    test_app.get('/test_template', function(req, res, next){
-      res.render('test.ejs', {layout: false});
-    });
-    assert.response(site, {
-      url: '/test_app/', method: "GET"
-    }, {
-      body: "Hello World"
-    });
-    assert.response(site, {
-      url: '/test_app/test_template', method: "GET"
-    }, {
-      body: "This is Test Application.\n"
     });
   }
 };

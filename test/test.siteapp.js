@@ -43,11 +43,14 @@ module.exports = {
     assert.response(site, {
       url: '/test_app/test_layout', method: "GET"
     },  {
-      body: "<html><body>This is Test Application.\n</body></html>\n"
+      body: ["<html><body>",
+             "This is Test Application.",
+             "",
+             "</body></html>\n"].join('\n')
     });
   },
 
-  "test helper chain": function(){
+  "test helper": function(){
     var site = createSite(path.join(__dirname, '/fixtures/site/test_site'));
     var test_app = site.install('test_app', '/test_app/');
     test_app.get('/test_helper', function(req, res, next){
@@ -55,8 +58,11 @@ module.exports = {
     });
     assert.response(site, {
       url: '/test_app/test_helper', method: "GET"
-    },  {
-      body: "<html><body>false\n</body></html>\n"
+    },  function(res){
+      var lines = res.body.split('\n');
+      var i = 0;
+      assert.eql("isLogin: false", lines[++i]);
+      assert.eql("url: /test_app/foo", lines[++i]);
     });
   }
 }

@@ -6,6 +6,7 @@
     "posts.admin.createPost"      : "New post",
 
 
+    "posts.no_posts_found": "No posts found.",
     "posts.permalink": "Permalink",
 
     "---- fields" : "",

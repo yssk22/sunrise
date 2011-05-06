@@ -1,7 +1,11 @@
 <div class="posts">
   <h2><%= _("posts.mainTitle") %></h2>
   <div class="main">
-    <h3>No</h3>
+    <% if( posts.data.length > 0 ){ %>
+    <%- partial('parts/posts', {object: posts.data, as: this}) %>
+    <% }else{ %>
+    <p><%= _('posts.no_posts_found') %></p>
+    <% } %>
   </div>
   <aside class="sidebar">
     <%- partial('parts/menu') %>

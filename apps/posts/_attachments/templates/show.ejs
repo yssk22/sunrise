@@ -1,18 +1,7 @@
 <div class="posts">
   <h2 style="display:none"><%= _("posts.permalink") %></h2>
   <div class="main">
-    <header>
-      <h3><%= post.data.title %></h3>
-    </header>
-    <div class="content">
-      <%- markdown(post.data.content) %>
-    </div>
-    <footer>
-      <a class="permalink" title="<%= post.data.title %>"
-         href="<%= url('/p/' + post.data._id) %>"><%= _("posts.permalink") %></a>
-      <span class="updated_by"><%= post.data.updated_by.user_name %></span>
-      <span class="updated_at"><%= post.data.updated_at %></span>
-    </footer>
+    <%- partial('parts/post', {object: post.data, as: this}) %>
   </div>
   <aside class="sidebar">
     <%- partial('parts/menu') %>

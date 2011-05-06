@@ -1,0 +1,16 @@
+<article class="post" title="<%= this.title %>">
+  <header>
+    <h3><%= this.title %></h3>
+  </header>
+  <div class="content">
+    <%- markdown(this.content) %>
+  </div>
+  <footer>
+    <a class="permalink" title="<%= this.title %>"
+       href="<%= url('/p/' + this._id) %>"><%= _("posts.permalink") %></a>
+    <span class="updated_by"><%= this.updated_by.user_name %></span>
+    <time datetime="<%= this.updated_at %>" class="updated_at">
+      <%= this.updated_at %>
+    </time>
+  </footer>
+</article>

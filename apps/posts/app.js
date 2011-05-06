@@ -4,6 +4,7 @@ var merge = require('sunrise').utils.merge;
 var parallel = require('sunrise').middleware.utils.parallel,
     js = require('sunrise').middleware.utils.js,
     css = require('sunrise').middleware.utils.css;
+var raiseError = require('sunrise').raiseError;
 
 var ddoc = {
   _id: "_design/posts" ,
@@ -64,12 +65,15 @@ ddoc.views.by_tag = {
 };
 
 
-ddoc.init = function(app){
+ddoc.init = function(app, config){
+  config = merge({
+    postsPerPage: 10
+  }, config);
   function makeDoc(req, _new){
     var now = new Date();
     var doc = merge({}, ddoc.docTemplates.posts, req.body,
                     {
-                      update_at: now,
+                      updated_at: now,
                       updated_by: req.currentUser
                     });
     // document normalization
@@ -97,7 +101,7 @@ ddoc.init = function(app){
 
   var m = merge(app.middleware, require('./middleware'));
   var db = app.middleware.db;
-
+  var logger = app.logger;
   // common client side application
   app.get('*',
           js('js/posts.js'),
@@ -107,7 +111,13 @@ ddoc.init = function(app){
   // pages
   app.get('/',
           parallel(
-            m.feedOrHtml('index.ejs')));
+            db.bind('view', 'posts/by_updated_at', {
+              limit:config.postsPerPage,
+              descending: true
+            }, {
+              as: 'posts'
+            })),
+          m.feedOrHtml('index.ejs'));
 
   app.get('/admin/',
           function(req, res, next){
@@ -126,10 +136,14 @@ ddoc.init = function(app){
   // permalink for post entries.
   app.get('/p/:id',  // get an entry
           function(req, res, next){
-            console.log(req.params.id);
-            db.bind('get', req.params.id, {as: 'post'})(req, res, next);
+            db.bind('get', req.params.id, {
+              as: 'post'
+            })(req, res, next);
           },
           function(req, res, next){
+            if( res.locals().post.error ){
+              raiseError(404);
+            };
             res.render('show.ejs');
           }
          );
@@ -137,7 +151,10 @@ ddoc.init = function(app){
   app.del('/p/:id'); // delete an entry
   app.post('/p/', // save a new entry
            function(req, res, next){
-             var doc = makeDoc(req);
+             logger.debug('Creating a new post');
+             logger.debug(JSON.stringify(req.headers));
+             logger.debug(JSON.stringify(req.body));
+             var doc = makeDoc(req, true);
              req.app.db.save(doc, function(err, result){
                // TODO: content negotiated response
                if( err ){

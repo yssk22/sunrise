@@ -111,12 +111,8 @@ ddoc.init = function(app, config){
   // pages
   app.get('/',
           parallel(
-            db.bind('view', 'posts/by_updated_at', {
-              limit:config.postsPerPage,
-              descending: true
-            }, {
-              as: 'posts'
-            })),
+            m.byUpdatedAt(config)
+          ),
           m.feedOrHtml('index.ejs'));
 
   app.get('/admin/',
@@ -172,7 +168,14 @@ ddoc.init = function(app, config){
 
   // apis
   app.get('/-/',
-          m.byUpdatedAt());
+          m.byUpdatedAt(config),
+          function(req, res, next){
+            // TODO: content negotiation
+            res.partial('parts/posts', {
+              object: res.locals().posts.data,
+              as: this
+            });
+          });
 
   app.get('/-/count/tag',
           m.countByTag());

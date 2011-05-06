@@ -24,12 +24,11 @@ function genString(str, n){
 
 function run(){
   var now = new Date();
-  var signature = now.toString();
   for(var i=0; i<NUM; i++){
     var ts = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i)
     var doc = {
-      title: "Dummy Title (" + signature + ")",
-      content: genString("dummy", 30) + "\n" + signature,
+      title: i + ": Dummy Title (" + ts + ")",
+      content: genString("dummy", 30) + "\n" + ts,
       type: 'post',
       tags: ["dummy"],
       created_by: USER,

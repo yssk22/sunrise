@@ -1,4 +1,8 @@
-<article class="post" title="<%= this.title %>">
+<article class="post" 
+         data-key="<%= this._key %>"
+         data-docid="<%= this._id %>"
+         data-docrev="<%= this._rev %>"
+         title="<%= this.title %>">
   <header>
     <h3><%= this.title %></h3>
   </header>

@@ -1,8 +1,18 @@
+<% title(_("posts.mainTitle")) %>
 <div class="posts">
   <h2><%= _("posts.mainTitle") %></h2>
   <div class="main">
     <% if( posts.data.length > 0 ){ %>
-    <%- partial('parts/posts', {object: posts.data, as: this}) %>
+    <div class="list">
+      <%- partial('parts/posts', {object: posts.data, as: this}) %>
+      <div class="readmore" data-apipath="<%= url('/-/') %>">
+        <%= _('posts.read_more') %>
+      </div>
+    </div>
+    <script type="text/javascript">
+      $(function(){ $('div.posts. div.main div.list').bindList() });
+    </script>
+
     <% }else{ %>
     <p><%= _('posts.no_posts_found') %></p>
     <% } %>

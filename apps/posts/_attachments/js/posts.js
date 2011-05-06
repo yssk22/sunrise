@@ -1,9 +1,30 @@
 /* posts.js */
 (function($){
-  $.fn.bindForm = function(e){
+  $.fn.bindList = function(){
+    var target = this;
+    var link = target.find('.readmore');
+    link.bind('click', function(e){
+      var last = link.prev();
+      var path = link.attr('data-apipath');
+      var param = {
+        startkey: last.attr('data-key'),
+        startkey_docid: last.attr('data-docid'),
+        skip: 1
+      };
+      $.get(path, param, function(data){
+        link.before(data);
+        var newlast = link.prev();
+        if( last.attr('data-docid') === newlast.attr('data-docid') ){
+          link.hide();
+        }
+      });
+    });
+  },
+
+  $.fn.bindForm = function(){
     var target = this;
     // Event Handlers
-    function onSubmit(){
+    function onSubmit(e){
       var action = target.attr('action');
       var type = "POST";
       var doc = {};

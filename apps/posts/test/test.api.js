@@ -5,11 +5,21 @@ var test = require('sunrise').test,
 require('sunrise').appPaths.push(abspath(path.join(__dirname, '../')));
 
 module.exports = {
+  "setup": function(done){
+    var self = this;
+    this.site = test.createSite();
+    this.app = this.site.install('posts', '/posts/', {database: "posts"});
+    this.app.db.reset(function(err, res){
+      self.site.deployAll(function(){
+        console.log('Ready to test');
+        done();
+      });
+    });
+  },
+
   "test create a post": function(){
-    var site = test.createSite();
-    site.install('posts', '/posts/');
-
-
+    var site = this.site;
+    var app = this.app;
     var input = {
       title: "Title1", content: "Content1", tags: ['foo', 'bar']
     };
@@ -26,10 +36,10 @@ module.exports = {
       assert.isNotNull(obj._id);
       assert.isNotNull(obj._rev);
       assert.eql(res.headers.location, 'http://www.example.com/posts/p/' + obj._id);
-
       assert.eql(obj.title, input.title);
       assert.eql(obj.content, input.content);
       assert.eql(obj.tags, input.tags);
     });
   }
+
 }

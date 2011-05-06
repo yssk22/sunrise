@@ -4,7 +4,7 @@ module.exports = {
       res.render(filename);
     };
   },
-  
+
   byUpdatedAt: function(options){
     return function(req, res, next){
       next();

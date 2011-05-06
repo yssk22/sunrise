@@ -5,12 +5,17 @@
     "posts.admin.managePosts"  : "Manage posts",
     "posts.admin.createPost"      : "New post",
 
-    
+
+    "posts.permalink": "Permalink",
+
+    "---- fields" : "",
     "posts.title": "Title",
     "posts.tags": "Tags",
     "posts.content": "Content",
     "posts.is_draft": "Draft",
 
+
+    "---- form elements" : "",
     "posts.submit": "Submit",
     "posts.cancel": "Cancel",
 

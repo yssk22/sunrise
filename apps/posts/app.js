@@ -16,7 +16,7 @@ var ddoc = {
       title: '*Untitled*',
       content: '',
       tags: [],
-      isDraft: false
+      is_draft: false
     }
   }
 };
@@ -96,6 +96,7 @@ ddoc.init = function(app){
   }
 
   var m = merge(app.middleware, require('./middleware'));
+  var db = app.middleware.db;
 
   // common client side application
   app.get('*',
@@ -106,7 +107,6 @@ ddoc.init = function(app){
   // pages
   app.get('/',
           parallel(
-            m.byUpdatedAt(),
             m.feedOrHtml('index.ejs')));
 
   app.get('/admin/',
@@ -124,7 +124,15 @@ ddoc.init = function(app){
           });
 
   // permalink for post entries.
-  app.get('/p/:id'); // get an entry
+  app.get('/p/:id',  // get an entry
+          function(req, res, next){
+            console.log(req.params.id);
+            db.bind('get', req.params.id, {as: 'post'})(req, res, next);
+          },
+          function(req, res, next){
+            res.render('show.ejs');
+          }
+         );
   app.put('/p/:id'); // update an entry
   app.del('/p/:id'); // delete an entry
   app.post('/p/', // save a new entry

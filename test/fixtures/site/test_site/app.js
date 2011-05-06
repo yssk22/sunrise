@@ -1,6 +1,6 @@
 var couchapp = require('couchapp');
 var ddoc = {
-  _id: "_desing/test_app" ,
+  _id: "_design/test_app" ,
   views: {},
   shows: {},
   lists: {}

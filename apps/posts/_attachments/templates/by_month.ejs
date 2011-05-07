@@ -1,13 +1,10 @@
-<% title(_("posts.top.title")) %>
+<% title(sprintf(_("posts.archives.title"), request.params.year, request.params.month)) %>
 <div class="posts">
-  <h2><%= _("posts.top.title") %></h2>
+  <h2><%= sprintf(_("posts.archives.title"), request.params.year, request.params.month) %></h2>
   <div class="main">
     <% if( posts.data.length > 0 ){ %>
     <div class="list">
       <%- partial('parts/posts', {object: posts.data, as: this}) %>
-      <div class="readmore" data-apipath="<%= url('/-/') %>">
-        <%= _('posts.read_more') %>
-      </div>
     </div>
     <script type="text/javascript">
       $(function(){ $('div.posts. div.main div.list').bindList(); });
@@ -19,6 +16,5 @@
   <aside class="sidebar">
     <%- partial('parts/menu') %>
     <%- partial('parts/archives', {object: archives.data, as: this}) %>
-    
   </aside>
 </div>

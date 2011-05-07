@@ -1,0 +1,17 @@
+<div class="menu">
+  <h3><%= _("posts.sidebar.archives.title") %></h3>
+  <% if( this.length > 0 ){ %>
+  <ul>
+    <% for(var i in this){ %>
+    <% var k = this[i].key,
+           v = this[i].value,
+           t = sprintf(_("posts.archives.title"), k[0], k[1]) %>
+    <li><a href="<%= url(sprintf('/a/%d/%02d/', k[0], k[1])) %>" 
+           class="archive-link"
+           title="<%= t %>"><%= t %> (<%= v %>)</a></li>
+    <% }; %>
+  </ul>
+  <% }else{ %>
+  <% } %>
+</div>
+

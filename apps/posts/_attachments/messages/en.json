@@ -1,6 +1,8 @@
 {
-    "posts.mainTitle": "Latest Posts",
+    "posts.top.title": "Latest Posts",
     "posts.sidebar.menu.title": "Menu",
+    "posts.sidebar.archives.title": "Archives",
+    "posts.archives.title": "%d/%02d",
 
     "posts.admin.managePosts"  : "Manage posts",
     "posts.admin.createPost"   : "New post",

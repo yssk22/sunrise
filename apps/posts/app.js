@@ -25,47 +25,7 @@ var ddoc = {
 module.exports = ddoc;
 
 ddoc.middleware = require('./middleware');
-
-ddoc.views.all_by_updated_at = {
-  map: function(doc){
-    if( doc.type == 'post' ){
-      emit(doc.updated_at, doc);
-    }
-  }
-};
-
-ddoc.views.by_updated_at = {
-  map: function(doc){
-    if( doc.type == 'post' && doc.is_draft != true ){
-      emit(doc.updated_at, doc);
-    }
-  }
-}
-
-ddoc.views.all_by_tag = {
-  map: function(doc){
-    if( doc.type == 'post' ){
-      if( doc.tags && typeof(doc.tags) === 'object'){
-        for(var i in doc.tags){
-          emit([doc.tags[i], doc.updated_at], doc);
-        }
-      }
-    }
-  }
-}
-
-ddoc.views.by_tag = {
-  map: function(){
-    if( doc.type == 'post' && doc.is_draft != true ){
-      if( doc.tags && typeof(doc.tags) === 'object'){
-        for(var i in doc.tags){
-          emit([doc.tags[i], doc.updated_at], doc);
-        }
-      }
-    }
-  }
-};
-
+ddoc.views = require('./views');
 
 ddoc.init = function(app, config){
   config = merge({
@@ -130,9 +90,30 @@ ddoc.init = function(app, config){
   // Public URIs
   app.get('/',
           parallel(
-            m.byUpdatedAt({perPage: config.postsPerPage})
+            m.byUpdatedAt({perPage: config.postsPerPage}),
+            m.countByDate()
           ),
           m.feedOrHtml('index.ejs'));
+
+  app.get('/a/:year/:month/',
+          function(req, res, next){
+            try{
+              var y = parseInt(req.params.year);
+              var m = parseInt(req.params.month[0] == '0' ? req.params.month[1] : req.params.month);
+            }catch(e){
+              res.redirect('/');
+            }
+            req.query.startkey = (new Date(y, m - 1, 1)).toJSON();
+            req.query.endkey = (new Date(y, m , 1)).toJSON();
+            req.query.descending = false;
+            next();
+          },
+          parallel(
+            m.byUpdatedAt({perPage: 'unlimited'}),
+            m.countByDate()
+          ),
+          m.feedOrHtml('by_month.ejs'));
+
 
   app.get('/p/:id',  // get an entry
           m.byId('id'),

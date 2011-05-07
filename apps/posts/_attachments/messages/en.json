@@ -2,6 +2,7 @@
     "posts.top.title": "Latest Posts",
     "posts.sidebar.menu.title": "Menu",
     "posts.sidebar.archives.title": "Archives",
+    "posts.sidebar.tags.title": "Tags",
     "posts.archives.title": "%d/%02d",
 
     "posts.admin.managePosts"  : "Manage posts",

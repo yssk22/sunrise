@@ -91,7 +91,8 @@ ddoc.init = function(app, config){
   app.get('/',
           parallel(
             m.byUpdatedAt({perPage: config.postsPerPage}),
-            m.countByDate()
+            m.countByDate(),
+            m.countByTag()
           ),
           m.feedOrHtml('index.ejs'));
 
@@ -114,13 +115,32 @@ ddoc.init = function(app, config){
           },
           parallel(
             m.byUpdatedAt({perPage: 'unlimited'}),
-            m.countByDate()
+            m.countByDate(),
+            m.countByTag()
           ),
           m.feedOrHtml('by_month.ejs'));
 
+  app.get('/t/:tag/',
+          function(req, res, next){
+            var t = req.params.tag;
+            req.query.startkey = [t, "\uff00"];
+            req.query.endkey = [t];
+            req.query.descending = true;
+            next();
+          },
+          parallel(
+            m.byTag({perPage: config.postsPerPage}),
+            m.countByDate(),
+            m.countByTag()
+          ),
+          m.feedOrHtml('by_tag.ejs'));
+
 
   app.get('/p/:id',  // get an entry
-          m.byId('id'),
+          parallel(
+            m.countByDate(),
+            m.countByTag()
+          ),
           function(req, res, next){
             // TODO; content negotiated response
             if( res.local('post').error ){
@@ -183,29 +203,46 @@ ddoc.init = function(app, config){
           m.byUpdatedAt({perPage: config.postsPerPage}),
           renderList);
 
-  app.get('/-/count/tag',
-          m.countByTag());
-
-  app.get('/-/count/date',
-          m.countByTag());
-
+  app.get('/-/t/:tag/',
+          function(req, res, next){
+            var t = req.params.tag;
+            req.query.startkey = [t, req.query.startkey || "\uff00"];
+            req.query.endkey = [t];
+            req.query.descending = true;
+            next();
+          },
+          m.byTag({perPage: config.postsPerPage}),
+          renderList);
 
   // Admin URIs
   app.get('/admin/',
-          m.byUpdatedAt({
-            perPage: config.postsPerPage,
-            includeDraft: true
-          }),
+          parallel(
+            m.byUpdatedAt({
+              perPage: config.postsPerPage,
+              includeDraft: true
+            }),
+            m.countByDate(),
+            m.countByTag()
+          ),
           function(req, res, next){
             res.render('admin/index.ejs');
           });
+
   app.get('/admin/new',
+          parallel(
+            m.countByDate(),
+            m.countByTag()
+          ),
           function(req, res, next){
             res.local('post', ddoc.docTemplates.post);
             res.render('admin/new.ejs');
           });
 
   app.get('/admin/edit/:id',
+          parallel(
+            m.countByDate(),
+            m.countByTag()
+          ),
           function(req, res, next){
             res.render('admin/edit.ejs');
           });

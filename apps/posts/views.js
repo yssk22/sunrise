@@ -28,14 +28,31 @@ module.exports = {
   },
 
   by_tag : {
-    map: function(){
+    map: function(doc){
       if( doc.type == 'post' && doc.is_draft != true ){
-        if( doc.tags && typeof(doc.tags) === 'object'){
-          for(var i in doc.tags){
-            emit([doc.tags[i], doc.updated_at], doc);
-          }
-        }
+        var tags = doc.tags || [];
+        tags.filter(function(t){
+          return (t && t != '');
+        }).forEach(function(t){
+          emit([t, doc.updated_at], doc);
+        });
       }
+    }
+  },
+
+  count_by_tag: {
+    map: function(doc){
+      if( doc.type == 'post' ){
+        var tags = doc.tags || [];
+        tags.filter(function(t){
+          return (t && t != '');
+        }).forEach(function(t){
+          emit(t, 1);
+        });
+      }
+    },
+    reduce: function(keys, values, rereduce){
+      return sum(values);
     }
   },
 
@@ -55,5 +72,7 @@ module.exports = {
     reduce: function(keys, values, rereduce){
       return sum(values);
     }
-  }
+  },
+
+
 };

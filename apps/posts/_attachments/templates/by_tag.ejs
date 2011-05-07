@@ -1,11 +1,11 @@
-<% title(_("posts.admin.managePosts")) %>
-<div class="posts admin">
-  <h2><%= _("posts.admin.managePosts") %></h2>
+<% title(request.params.tag) %>
+<div class="posts">
+  <h2><%= request.params.tag %></h2>
   <div class="main">
     <% if( posts.data.length > 0 ){ %>
     <div class="list">
       <%- partial('parts/posts', {object: posts.data, as: this}) %>
-      <div class="readmore" data-apipath="<%= url('/admin/-/') %>">
+      <div class="readmore" data-apipath="<%= url('/-/t/' + encodeURIComponent(request.params.tag) + '/') %>">
         <%= _('posts.read_more') %>
       </div>
     </div>

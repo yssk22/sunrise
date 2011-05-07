@@ -1,10 +1,10 @@
 <% title( _("posts.admin.createPost")) %>
-<div class="posts 2columns">
+<div class="posts">
+  <h2><%= _("posts.admin.createPost") %></h2>
   <div class="main">
-    <h3><%= _("posts.admin.createPost") %></h3>
     <%- partial('parts/post_editor', {object: post, as: this}) %>
   </div>
   <aside class="sidebar">
-    <%- partial('parts/menu') %>
+    <%- partial('parts/sidebar') %>
   </aside>
 </div>

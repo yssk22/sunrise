@@ -16,7 +16,6 @@
         startkey_docid: last.attr('data-docid'),
         skip: 1
       };
-
       $.get(path, param, function(data){
         link.before(data);
         var newlast = link.prev();

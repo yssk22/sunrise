@@ -7,6 +7,11 @@
   <header>
     <h3><%= this.title %></h3>
   </header>
+  <ul class="tags">
+    <% (this.tags || []).filter(function(t){return (t && t != ''); }).forEach(function(t){ %>
+    <li><a class="tag-link" href="/posts/t/<%= encodeURIComponent(t) %>/"><%= t %></a></li>
+    <% }) %>
+  </ul>
   <div class="content">
     <%- markdown(this.content) %>
   </div>
@@ -18,9 +23,7 @@
     <a class="delete" title="<%= _('posts.delete') %>: <%= this.title %>"
        href="<%= url('/p/' + this._id) %>"><%= _("posts.delete") %></a>
     <span class="updated_by"><%= this.updated_by.user_name %></span>
-    <time datetime="<%= this.updated_at %>" class="updated_at">
-      <%= this.updated_at %>
-    </time>
+    <time datetime="<%= this.updated_at %>" class="updated_at"><%= this.updated_at %></time>
   </footer>
   <script type="text/javascript">
     $(function(){$('article.post[data-docid="<%= this._id %>"]').bindDelete();});

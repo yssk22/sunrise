@@ -71,6 +71,7 @@ ddoc.init = function(app, config){
   config = merge({
     postsPerPage: 10
   }, config);
+
   function makeDoc(req, oldDoc){
     var now = new Date();
     var doc = merge({}, ddoc.docTemplates.post, req.body,
@@ -82,6 +83,7 @@ ddoc.init = function(app, config){
     doc.type = 'post';
     doc.title = doc.title.toString();
     doc.content = doc.content.toString();
+    doc.is_draft = doc.is_draft == 'true';
     if( doc.tags ){
       if( !Array.isArray(doc.tags) ){
         doc.tags = doc.tags.toString().split(',');
@@ -106,6 +108,14 @@ ddoc.init = function(app, config){
     return doc;
   };
 
+  function renderList(req, res, next){
+    // TODO: content negotiation
+    res.partial('parts/posts', {
+      object: res.local('posts').data,
+      as: this
+    });
+  }
+
   var m = merge(app.middleware, ddoc.middleware);
   var db = app.middleware.db;
   var logger = app.logger;
@@ -117,30 +127,13 @@ ddoc.init = function(app, config){
   // ':id' param precondition
   app.param('id', m.byId('id'));
 
-  // -- public --
-  // pages
+  // Public URIs
   app.get('/',
           parallel(
             m.byUpdatedAt({perPage: config.postsPerPage})
           ),
           m.feedOrHtml('index.ejs'));
 
-  app.get('/admin/',
-          function(req, res, next){
-            res.render('admin/index.ejs');
-          });
-  app.get('/admin/new',
-          function(req, res, next){
-            res.local('post', ddoc.docTemplates.post);
-            res.render('admin/new.ejs');
-          });
-
-  app.get('/admin/edit/:id',
-          function(req, res, next){
-            res.render('admin/edit.ejs');
-          });
-
-  // permalink for post entries.
   app.get('/p/:id',  // get an entry
           m.byId('id'),
           function(req, res, next){
@@ -199,22 +192,48 @@ ddoc.init = function(app, config){
                }
             });
           });
-  // apis
+
+  // Public APIs
   app.get('/-/',
-          m.byUpdatedAt(config),
-          function(req, res, next){
-            // TODO: content negotiation
-            res.partial('parts/posts', {
-              object: res.local('posts').data,
-              as: this
-            });
-          });
+          m.byUpdatedAt({perPage: config.postsPerPage}),
+          renderList);
 
   app.get('/-/count/tag',
           m.countByTag());
 
   app.get('/-/count/date',
           m.countByTag());
+
+
+  // Admin URIs
+  app.get('/admin/',
+          m.byUpdatedAt({
+            perPage: config.postsPerPage,
+            includeDraft: true
+          }),
+          function(req, res, next){
+            res.render('admin/index.ejs');
+          });
+  app.get('/admin/new',
+          function(req, res, next){
+            res.local('post', ddoc.docTemplates.post);
+            res.render('admin/new.ejs');
+          });
+
+  app.get('/admin/edit/:id',
+          function(req, res, next){
+            res.render('admin/edit.ejs');
+          });
+
+
+  // Admin APIs
+  app.get('/admin/-/',
+          m.byUpdatedAt({
+            perPage: config.postsPerPage,
+            includeDraft: true
+          }),
+          renderList);
+
 };
 
 couchapp.loadAttachments(ddoc, path.join(__dirname, '_attachments'));

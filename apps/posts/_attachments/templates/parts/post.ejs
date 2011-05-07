@@ -1,4 +1,4 @@
-<article class="post" 
+<article class="post <%= this.is_draft ? 'draft' : 'published' %>"  
          data-key="<%= this._key %>"
          data-docid="<%= this._id %>"
          data-docrev="<%= this._rev %>"
@@ -22,7 +22,7 @@
       <%= this.updated_at %>
     </time>
   </footer>
+  <script type="text/javascript">
+    $(function(){$('article.post[data-docid="<%= this._id %>"]').bindDelete();});
+  </script>
 </article>
-<script type="text/javascript">
-$(function(){$('article.post[data-docid="<%= this._id %>"]').bindDelete();});
-</script>

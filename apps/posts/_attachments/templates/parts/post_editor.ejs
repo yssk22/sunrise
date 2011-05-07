@@ -16,7 +16,8 @@
   </div>
   <div class="fieldRow">
     <label for="is_draft"><%= _("posts.is_draft") %></label>
-    <input id="is_draft" name="is_draft" type="checkbox" <%= this.is_draft ? 'checked="checked"' : '' %></input>
+    <input id="is_draft" name="is_draft" type="checkbox" value="true"
+           <%= this.is_draft ? 'checked="checked"' : '' %></input>
   </div>
   <div class="fieldRow buttons">
     <button id="submit" name="submit" type="submit"><%= _("posts.submit") %></button>

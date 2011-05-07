@@ -5,6 +5,7 @@ var allowed_names = [
   'limit', 'decending', 'skip'
 ];
 
+
 module.exports = {
   feedOrHtml: function(filename){
     return function(req, res, next){
@@ -29,9 +30,12 @@ module.exports = {
   byUpdatedAt: function(options){
     options = merge({
       perPage: 10,
-      bindAs: 'posts'
+      bindAs: 'posts',
+      includeDraft: false
     }, options);
     var db = this.db;
+    var viewName = 'posts/' + (options.includeDraft === true ?
+                               'all_by_updated_at' : 'by_updated_at');
     return function(req, res, next){
       var params = {
         limit:options.perPage,
@@ -42,7 +46,7 @@ module.exports = {
           params[name] = req.query[name];
         }
       });
-      (db.bind('view', 'posts/by_updated_at', params, {
+      (db.bind('view', viewName, params, {
         success: function(req, res, next){
           var rows = res.locals().posts.data;
           for(var i in rows){

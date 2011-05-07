@@ -7,6 +7,7 @@
   $.fn.bindList = function(){
     var target = this;
     var link = target.find('.readmore');
+    console.log(link.prev().html());
     link.bind('click', function(e){
       var last = link.prev();
       var path = link.attr('data-apipath');
@@ -15,6 +16,7 @@
         startkey_docid: last.attr('data-docid'),
         skip: 1
       };
+
       $.get(path, param, function(data){
         link.before(data);
         var newlast = link.prev();

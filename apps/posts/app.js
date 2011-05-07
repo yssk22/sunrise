@@ -8,6 +8,10 @@ var raiseError = require('sunrise').raiseError;
 
 var ddoc = {
   _id: "_design/posts" ,
+  name: 'Posts',
+  version: '0.1.0',
+  description: 'A simple blog application for sunrise',
+  author: 'Yohei Sasaki',
   views: {},
   shows: {},
   lists: {},

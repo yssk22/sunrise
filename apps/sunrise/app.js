@@ -6,6 +6,10 @@ var auth = require('sunrise').middleware.auth;
 
 var ddoc = {
   _id: "_design/sunrise" ,
+  version: require('sunrise').version,
+  name: 'System',
+  description: 'Sunrise system application',
+  author: 'Yohei Sasaki',
   views: {},
   shows: {},
   lists: {}

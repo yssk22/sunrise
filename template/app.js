@@ -20,11 +20,13 @@ ddoc.init = function(site){
   });
 
 
+  // install applications as you like
+  // site.install('posts', '/posts/', {database: 'posts'});
+  site.install('posts', '/posts/', {database: 'posts'});
+
   // install system application
   site.install('sunrise', '/sunrise/');
 
-  // install applications as you like
-  // site.install('posts', '/posts/', {database: 'posts'});
 };
 
 //

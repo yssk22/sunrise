@@ -25,7 +25,7 @@ function genString(str, n){
 function run(){
   var now = new Date();
   for(var i=0; i<NUM; i++){
-    var ts = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i)
+    var ts = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i)
     var doc = {
       title: i + ": Dummy Title (" + ts + ")",
       content: genString("dummy", 30) + "\n" + ts,

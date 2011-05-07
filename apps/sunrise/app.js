@@ -18,6 +18,25 @@ var ddoc = {
 module.exports = ddoc;
 
 ddoc.init = function(app){
+  var version = {
+    node: process.version,
+    coucdb: '',
+    sunrise: require('sunrise').version
+  };
+  var stats = {
+    serverBootTime: new Date()
+  };
+
+  app.db.connection.info(function(err, v){
+    version.couchdb = v.version;
+  });
+
+  app.get('/', function(req, res, next){
+    res.local('version', version);
+    res.local('stats', merge({}, stats, process.memoryUsage()));
+    res.render('index.ejs');
+  });
+
   // TODO: Response login selector
   // app.get('/login', function(req, res, nex){
   //

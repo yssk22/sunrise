@@ -1,1 +1,57 @@
-<h1>Posts</h1>
+<% title('System') %>
+<div class="system">
+  <h2>System Info</h2>
+  <article>
+    <h3>Installed Applications</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Version</th>
+          <th>Author</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% installedApps.forEach(function(appInfo){ %>
+        <tr>
+          <td><%= appInfo.name %></td>
+          <td><%= appInfo.description %></td>
+          <td><%= appInfo.version %></td>
+          <td><%= appInfo.author %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </article>
+  <article>
+    <h3>Runtime Info</h3>
+    <section>
+      <h4>Platform Version</h4>
+      <dl>
+        <dt>Sunrise</dt>
+        <dd><%= version.sunrise %></dd>
+        <dt>Node</dt>
+        <dd><%= version.node %></dd>
+        <dt>CoucDB</dt>
+        <dd><%= version.couchdb %></dd>
+      </dl>
+    </section>
+    <section>
+      <h4>Current Statistics</h4>
+      <dl>
+        <dt>Server boot time</dt>
+        <dd><time datetime="<%= stats.serverBootTime %>"><%= stats.serverBootTime %></time></dd>
+        <dt>Memory Usage</dt>
+        <dd>
+          <dl>
+            <dt>RSS</dt><dd><%= stats.rss %></dd>
+            <dt>VSIZE</dt><dd><%= stats.vsize %></dd>
+            <dt>Heap Total</dt><dd><%= stats.heapTotal %></dd>
+            <dt>Heap Used</dt><dd><%= stats.heapUsed %> (<%= sprintf("%.2f", (stats.heapUsed / stats.heapTotal) * 100) %>%)</dd>
+          </dl>
+        </dd>
+      </dl>
+    </section>
+  </article>
+</div>

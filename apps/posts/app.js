@@ -99,9 +99,13 @@ ddoc.init = function(app, config){
           function(req, res, next){
             try{
               var y = parseInt(req.params.year);
-              var m = parseInt(req.params.month[0] == '0' ? req.params.month[1] : req.params.month);
+              var m = parseInt(req.params.month[0] == '0' ? req.params.month.substr(1) : req.params.month);
+              if( m <= 0 || m > 12 ){
+                throw new Error("invalid month parameter");
+              }
             }catch(e){
-              res.redirect('/');
+              logger.warn('Invalid parameter request - ' + e + ' (' + req.url + ')');
+              return res.redirect('/');
             }
             req.query.startkey = (new Date(y, m - 1, 1)).toJSON();
             req.query.endkey = (new Date(y, m , 1)).toJSON();

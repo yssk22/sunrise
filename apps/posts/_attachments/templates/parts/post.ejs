@@ -2,6 +2,7 @@
          data-key="<%= this._key %>"
          data-docid="<%= this._id %>"
          data-docrev="<%= this._rev %>"
+         data-permalink="<%= url('/p/' + this._id) %>"
          title="<%= this.title %>">
   <header>
     <h3><%= this.title %></h3>
@@ -12,11 +13,16 @@
   <footer>
     <a class="permalink" title="<%= this.title %>"
        href="<%= url('/p/' + this._id) %>"><%= _("posts.permalink") %></a>
-    <a class="edit" title="Edit: <%= this.title %>"
+    <a class="edit" title="<%= _('posts.edit') %>: <%= this.title %>"
        href="<%= url('/admin/edit/' + this._id) %>"><%= _("posts.edit") %></a>
+    <a class="delete" title="<%= _('posts.delete') %>: <%= this.title %>"
+       href="<%= url('/p/' + this._id) %>"><%= _("posts.delete") %></a>
     <span class="updated_by"><%= this.updated_by.user_name %></span>
     <time datetime="<%= this.updated_at %>" class="updated_at">
       <%= this.updated_at %>
     </time>
   </footer>
 </article>
+<script type="text/javascript">
+$(function(){$('article.post[data-docid="<%= this._id %>"]').bindDelete();});
+</script>

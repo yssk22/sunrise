@@ -144,6 +144,7 @@ ddoc.init = function(app, config){
   app.get('/p/:id',  // get an entry
           m.byId('id'),
           function(req, res, next){
+            // TODO; content negotiated response
             if( res.local('post').error ){
               raiseError(404);
             };
@@ -171,6 +172,7 @@ ddoc.init = function(app, config){
                }
              });
            });
+
   app.put('/p/:id',  // update an entry
           function(req, res, next){
             var doc = makeDoc(req, res.local('post').data);
@@ -185,8 +187,18 @@ ddoc.init = function(app, config){
                }
             });
           });
-  app.del('/p/:id'); // delete an entry
 
+  app.del('/p/:id', // delete an entry
+          function(req, res, next){
+            var doc = res.local('post').data;
+            app.db.remove(doc._id, doc._rev, function(err, result){
+               if( err ){
+                 res.send(JSON.stringify(err), 400);
+               }else{
+                 res.send(JSON.stringify(result), 200);
+               }
+            });
+          });
   // apis
   app.get('/-/',
           m.byUpdatedAt(config),

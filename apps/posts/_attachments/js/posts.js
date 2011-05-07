@@ -1,5 +1,9 @@
 /* posts.js */
 (function($){
+  function somethingWrong(){
+    alert('something is wrong. try later ...');
+  }
+
   $.fn.bindList = function(){
     var target = this;
     var link = target.find('.readmore');
@@ -47,7 +51,7 @@
           }
         },
         failure: function(){
-          alert('something is wrong. try later ...');
+          somethingWrong();
         }
       });
       return false;
@@ -60,7 +64,33 @@
     }
 
     target.unbind('submit', onSubmit);
-    target.submit(onSubmit);
+    target.bind('submit', onSubmit);
     $('#cancel').click(onCancel);
   };
+
+  $.fn.bindDelete = function(){
+    var target = this;
+    var button = target.find('a.delete');
+    function onClick(e){
+      // TODO: i18n message
+      if( confirm('Are you sure') ){
+        var link = target.attr('data-permalink');
+        $.ajax({
+          type: "DELETE", url: link,
+          success: function(data, status, xhr){
+            target.effect('drop', function(){
+              target.trigger('deleted');
+            });
+          },
+          failure: function(data, status, xhr){
+            somethingWrong();
+          }
+        });
+      }
+      return false;
+    };
+    button.unbind('click', onClick);
+    button.bind('click', onClick);
+  };
+
 })(jQuery);

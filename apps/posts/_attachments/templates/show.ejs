@@ -8,3 +8,11 @@
     <%- partial('parts/menu') %>
   </aside>
 </div>
+<script type="text/javascript">
+  $(function(){
+  $('article.post[data-docid="<%= post.data._id %>"]')
+  .bind('deleted', function(){
+     window.location.href = "<%= url('/') %>";
+  });
+  });
+</script>

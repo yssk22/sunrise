@@ -12,6 +12,8 @@
   <footer>
     <a class="permalink" title="<%= this.title %>"
        href="<%= url('/p/' + this._id) %>"><%= _("posts.permalink") %></a>
+    <a class="edit" title="Edit: <%= this.title %>"
+       href="<%= url('/admin/edit/' + this._id) %>"><%= _("posts.edit") %></a>
     <span class="updated_by"><%= this.updated_by.user_name %></span>
     <time datetime="<%= this.updated_at %>" class="updated_at">
       <%= this.updated_at %>

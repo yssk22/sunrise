@@ -3,11 +3,11 @@
     "posts.sidebar.menu.title": "Menu",
 
     "posts.admin.managePosts"  : "Manage posts",
-    "posts.admin.createPost"      : "New post",
-
+    "posts.admin.createPost"   : "New post",
 
     "posts.read_more": "Read more",
     "posts.no_posts_found": "No posts found.",
+    "posts.edit": "Edit",
     "posts.permalink": "Permalink",
 
     "---- fields" : "",

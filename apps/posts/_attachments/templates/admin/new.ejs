@@ -1,12 +1,10 @@
+<% title( _("posts.admin.createPost")) %>
 <div class="posts 2columns">
   <div class="main">
     <h3><%= _("posts.admin.createPost") %></h3>
-    <%- partial('parts/post_editor') %>
+    <%- partial('parts/post_editor', {object: post, as: this}) %>
   </div>
   <aside class="sidebar">
     <%- partial('parts/menu') %>
   </aside>
 </div>
-<script type="text/javascript">
-$(function(){ $('#postEditor').bindForm() });
-</script>

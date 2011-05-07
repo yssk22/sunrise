@@ -26,16 +26,13 @@
     // Event Handlers
     function onSubmit(e){
       var action = target.attr('action');
-      var type = "POST";
+      var type = target.attr('method');
       var doc = {};
       $(target.serializeArray()).each(function(i, v){
         doc[v.name] = v.value;
       });
       if( doc._id == '' ){
         delete(doc._id); delete(doc._rev);
-      }else{
-        action = action + doc._id;
-        type = 'PUT';
       }
       $.ajax({
         type: type, url: action,
@@ -43,10 +40,13 @@
         processData: false,
         data: JSON.stringify(doc),
         success: function(data, status, xhr){
-          return location.href = xhr.getResponseHeader('Location');
+          if( type == 'PUT' ){
+            return location.href = action;
+          }else{
+            return location.href = xhr.getResponseHeader('Location');
+          }
         },
         failure: function(){
-          // TODO error handling
           alert('something is wrong. try later ...');
         }
       });

@@ -1,23 +1,26 @@
-<form id="postEditor" action="<%= url('/p/') %>" method="POST">
-  <input id="_id" name="_id" type="hidden" />
-  <input id="_rev" name="_rev" type="hidden" />
+<% var action = url('/p/' + (this._id || '')) %>
+<% var method = this._id ? "PUT" : "POST" %>
+<form id="postEditor" action="<%= action %>" method="<%= method %>">
+  <input id="_id" name="_id" type="hidden"   value="<%= this._id  || '' %>" />
+  <input id="_rev" name="_rev" type="hidden" value="<%= this._rev || '' %>" />
   <div class="fieldRow">
     <label for="title"><%= _("posts.title") %></label>
-    <input id="title" type="text" name="title" />
+    <input id="title" type="text" name="title" value="<%= this.title %>" />
   </div>
   <div class="fieldRow">
     <label for="tags"><%= _("posts.tags") %></label>
-    <input id="tags" type="text" name="tags" />
+    <input id="tags" type="text" name="tags" value="<%= this.tags.join(', ') %> "/>
   </div>
   <div class="fieldRow">
-    <textarea id="content" name="content" rows="20" cols="80"></textarea>
+    <textarea id="content" name="content" rows="20" cols="80"><%- this.content %></textarea>
   </div>
   <div class="fieldRow">
     <label for="is_draft"><%= _("posts.is_draft") %></label>
-    <input id="is_draft" name="is_draft" type="checkbox"></input>
+    <input id="is_draft" name="is_draft" type="checkbox" <%= this.is_draft ? 'checked="checked"' : '' %></input>
   </div>
   <div class="fieldRow buttons">
     <button id="submit" name="submit" type="submit"><%= _("posts.submit") %></button>
     <button id="cancel" name="cancel" type="button"><%= _("posts.cancel") %></button>
   </div>
 </form>
+<script type="text/javascript">$(function(){ $('#postEditor').bindForm() });</script>

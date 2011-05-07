@@ -1,0 +1,10 @@
+<% title(post.data.title) %>
+<div class="posts">
+  <h2 style="display:none"><%= _("posts.permalink") %></h2>
+  <div class="main">
+    <%- partial('parts/post_editor', {object: post.data, as: this}) %>
+  </div>
+  <aside class="sidebar">
+    <%- partial('parts/menu') %>
+  </aside>
+</div>

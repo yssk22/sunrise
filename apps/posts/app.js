@@ -24,6 +24,8 @@ var ddoc = {
 
 module.exports = ddoc;
 
+ddoc.middleware = require('./middleware');
+
 ddoc.views.all_by_updated_at = {
   map: function(doc){
     if( doc.type == 'post' ){
@@ -99,7 +101,7 @@ ddoc.init = function(app, config){
     return doc;
   }
 
-  var m = merge(app.middleware, require('./middleware'));
+  var m = merge(app.middleware, ddoc.middleware);
   var db = app.middleware.db;
   var logger = app.logger;
   // common client side application
@@ -107,11 +109,14 @@ ddoc.init = function(app, config){
           js('js/posts.js'),
           css('css/posts.css'));
 
+  // ':id' param precondition
+  app.param('id', m.byId('id'));
+
   // -- public --
   // pages
   app.get('/',
           parallel(
-            m.byUpdatedAt(config)
+            m.byUpdatedAt({perPage: config.postsPerPage})
           ),
           m.feedOrHtml('index.ejs'));
 
@@ -131,11 +136,7 @@ ddoc.init = function(app, config){
 
   // permalink for post entries.
   app.get('/p/:id',  // get an entry
-          function(req, res, next){
-            db.bind('get', req.params.id, {
-              as: 'post'
-            })(req, res, next);
-          },
+          m.byId('id'),
           function(req, res, next){
             if( res.locals().post.error ){
               raiseError(404);

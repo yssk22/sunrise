@@ -1,7 +1,10 @@
+var merge = require('sunrise').utils.merge;
+
 var allowed_names = [
   'startkey', 'startkey_docid', 'endkey', 'endkey_docid',
   'limit', 'decending', 'skip'
 ];
+
 module.exports = {
   feedOrHtml: function(filename){
     return function(req, res, next){
@@ -9,11 +12,29 @@ module.exports = {
     };
   },
 
+  byId: function(options){
+    options = merge({
+      paramName: 'id',
+      bindAs: 'post'
+    }, options);
+    var db = this.db;
+    return function(req, res, next){
+      db.bind('get', req.params[options.paramName], {
+        as: options.bindAs
+      })(req, res, next);
+    };
+  },
+
+
   byUpdatedAt: function(options){
+    options = merge({
+      perPage: 10,
+      bindAs: 'posts'
+    }, options);
     var db = this.db;
     return function(req, res, next){
       var params = {
-        limit:options.postsPerPage,
+        limit:options.perPage,
         descending: true
       };
       allowed_names.forEach(function(name){
@@ -29,7 +50,7 @@ module.exports = {
           }
           next();
         },
-        as: 'posts'
+        as: options.bindAs
       }))(req, res, next);
     };
   },

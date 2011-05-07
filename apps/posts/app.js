@@ -110,7 +110,7 @@ ddoc.init = function(app, config){
             req.query.startkey = (new Date(y, m - 1, 1)).toJSON();
             req.query.endkey = (new Date(y, m , 1)).toJSON();
             req.query.descending = false;
-            next();
+            return next();
           },
           parallel(
             m.byUpdatedAt({perPage: 'unlimited'}),

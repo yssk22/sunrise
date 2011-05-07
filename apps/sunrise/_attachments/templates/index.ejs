@@ -45,10 +45,10 @@
         <dt>Memory Usage</dt>
         <dd>
           <dl>
-            <dt>RSS</dt><dd><%= stats.rss %></dd>
-            <dt>VSIZE</dt><dd><%= stats.vsize %></dd>
-            <dt>Heap Total</dt><dd><%= stats.heapTotal %></dd>
-            <dt>Heap Used</dt><dd><%= stats.heapUsed %> (<%= sprintf("%.2f", (stats.heapUsed / stats.heapTotal) * 100) %>%)</dd>
+            <dt>RSS</dt><dd><%= sprintf("%.2f", (stats.rss / 1024 / 1024)) %>MB</dd>
+            <dt>VSIZE</dt><dd><%= sprintf("%.2f", (stats.vsize / 1024 / 1024)) %>MB</dd>
+            <dt>Heap Total</dt><dd><%= sprintf("%.2f", stats.heapTotal / 1024 / 1024) %>MB</dd>
+            <dt>Heap Used</dt><dd><%= sprintf("%.2f", stats.heapUsed / 1024 / 1024) %>MB (<%= sprintf("%.2f", (stats.heapUsed / stats.heapTotal) * 100) %>%)</dd>
           </dl>
         </dd>
       </dl>

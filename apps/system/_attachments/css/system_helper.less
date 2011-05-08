@@ -1,0 +1,26 @@
+.icon (@file){
+    background-image: url(@file);
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    padding-bottom: 5px;
+}
+
+a.system.login.twitter {
+    .icon('./images/login-twitter.png');
+}
+
+a.system.user.twitter {
+    border: none;
+    text-decoration: none;
+    img {
+        padding-right: 3px;
+        vertical-align: middle;
+    }
+    span {
+        padding-left: 3px;
+    }
+}
+
+a.system.user.undefined {
+    .icon('./images/user-undefined.png');
+}

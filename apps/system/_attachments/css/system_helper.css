@@ -1,0 +1,23 @@
+a.system.login.twitter {
+  background-image: url('./images/login-twitter.png');
+  background-repeat: no-repeat;
+  padding-left: 20px;
+  padding-bottom: 5px;
+}
+a.system.user.twitter {
+  border: none;
+  text-decoration: none;
+}
+a.system.user.twitter img {
+  padding-right: 3px;
+  vertical-align: middle;
+}
+a.system.user.twitter span {
+  padding-left: 3px;
+}
+a.system.user.undefined {
+  background-image: url('./images/user-undefined.png');
+  background-repeat: no-repeat;
+  padding-left: 20px;
+  padding-bottom: 5px;
+}

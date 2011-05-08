@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<% $system.required() /* to add static resources required by $system helper */ %>
 <html>
   <head>
     <meta charset="utf-8">
     <title><%= page.title %> - sunrise</title>
     <% if( page.feed ){ %><link rel="alternate" type="application/rss+xml" title="<%= page.title %>" href="<%= page.feed %>" /><% } %>
     <% if( page.canonical ){ %><link rel="canonical" href="<%= page.canonical %>" /><% } %>
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/blitzer/jquery-ui.css" type="text/css" />
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/themes/blitzer/jquery-ui.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/blueprint/blueprint/screen.css" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="/vendor/blueprint/blueprint/print.css" type="text/css" media="print">	
     <!--[if lt IE 8]><link rel="stylesheet" href="/vendor/blueprint/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
@@ -13,7 +14,7 @@
     <% for(var i in page.stylesheets){ %>
     <link rel="stylesheet" href="<%= page.stylesheets[i] %>" type="text/css" />
     <% } %>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
   </head>
   <body>
     <header id="siteHeader" class="container">
@@ -24,11 +25,11 @@
       <nav id="accountNavigation">
         <ul>
           <% if( isLogin ){ %>
-          <li class="user"><%= currentUser.user_name %></li>
-          <li class="user"><a href="/sunrise/logout">Logout</a></li>
+          <li class="user"><%- $system.linkToUser(currentUser) %></li>
+          <li class="user"><%- $system.linkToLogout("Logout") %></li>
           <% }else{ %>
-          <li class="guest"><%= currentUser.user_name %></li>
-          <li class="guest"><a href="/sunrise/login/twitter">Login</a></li>
+          <li class="guest"><%- $system.linkToUser(currentUser) %></li>
+          <li class="guest"><%- $system.linkToLogin('twitter', "Login") %></li>
           <% } %>
         </ul>
       </nav>
@@ -49,11 +50,11 @@
     <footer id="siteFooter" class="container">
       <p class="copyright">
         &copy; 2010 - 2011
-        <a href="https://github.com/yssk22/sunrise">sunrise</a>
+        <a href="https://github.com/yssk22/sunrise">Sunrise Project</a>
       </p>
     </footer>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/vendor/json2.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
     <% for(var i in page.javascripts){ %>
     <script type="text/javascript" src="<%= page.javascripts[i] %>"></script>
     <% } %>

@@ -18,12 +18,13 @@
   <footer>
     <a class="permalink" title="<%= this.title %>"
        href="<%= url('/p/' + this._id) %>"><%= _("posts.permalink") %></a>
-    <a class="edit" title="<%= _('posts.edit') %>: <%= this.title %>"
+    <a class="posts-edit" title="<%= _('posts.edit') %>: <%= this.title %>"
        href="<%= url('/admin/edit/' + this._id) %>"><%= _("posts.edit") %></a>
-    <a class="delete" title="<%= _('posts.delete') %>: <%= this.title %>"
+    <a class="posts-delete" title="<%= _('posts.delete') %>: <%= this.title %>"
        href="<%= url('/p/' + this._id) %>"><%= _("posts.delete") %></a>
-    <span class="updated_by"><%= this.updated_by.user_name %></span>
     <time datetime="<%= this.updated_at %>" class="updated_at"><%= this.updated_at %></time>
+    <time datetime="<%= this.created_at %>" class="created_at"><%= this.updated_at %></time>
+    <%- $system.linkToUser(this.updated_by) %>
   </footer>
   <script type="text/javascript">
     $(function(){$('article.post[data-docid="<%= this._id %>"]').bindDelete();});

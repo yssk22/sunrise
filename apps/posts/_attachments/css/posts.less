@@ -4,23 +4,6 @@
     .main {
         .span-19;
         .append-1;
-        ul.tag-cloud {
-            margin-top: -20px;
-            li {
-                display: inline;
-                padding-left: 10px;
-            }
-            a.rank-10 { font-size: 250%; }
-            a.rank-9  { font-size: 210%; }
-            a.rank-8  { font-size: 170%; }
-            a.rank-7  { font-size: 130%; }
-            a.rank-6  { font-size: 90%; }
-            a.rank-5  { font-size: 90%; }
-            a.rank-4  { font-size: 90%; }
-            a.rank-3  { font-size: 90%; }
-            a.rank-2  { font-size: 90%; }
-            a.rank-1  { font-size: 90%; }
-        }
     }
 
     .sidebar {
@@ -31,7 +14,7 @@
         }
     }
     
-    .main article.entry {
+    .main article.post {
         margin-bottom: 10px;
         header {
             div.sns {
@@ -67,49 +50,9 @@
             vertical-align: top;
             margin-bottom: 30px;
         }
-    }
 
-    .main article.list {
-    }
-
-    .main article.permalink {
-    }
-
-
-    .main .pagination {
-        .span-19;
-        .prev {
-            .span-2;
-            .append-15;
-            text-align: left;
-        }
-        .next {
-            .span-2;
-            .last;
-            text-align: right;
-        }
-    }
-
-    .main #admin_list {
-        .span-19;
-    }
-
-    #admin_list {
-        th.title, td.title {
-            text-align: left;
-        }
-        th.datetime, td.datetime {
-            width: 15em;
-        }
-        th.menu, td.menu {
-            text-align: center;
-            width: 5em;
-        }
-        tr.draft {
-            td.title {
-                font-style : italic;
-            }
-            background-color: #ececec;
+        footer time.created_at {
+            display:none;
         }
     }
 
@@ -122,11 +65,15 @@
 
     /** icons **/
     a.posts-new    { .icon('./images/posts-new.png'); }
+    a.posts-edit   { .icon('./images/posts-edit.png'); }
+    a.posts-delete { .icon('./images/posts-delete.png'); }
     a.posts-admin  { .icon('./images/posts-admin.png'); }
     a.archive-link { .icon('./images/archive-link.png')}
     a.tag-link     { .icon('./images/tag-link.png')}
     a.permalink    { .icon('./images/permalink.png') }
-    tr.draft a.permalink { .icon('./images/draft.png') }
+    time.updated_at { .icon('./images/time.png') }
+
+
 
     /* editor */
     #postEditor {

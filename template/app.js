@@ -25,7 +25,7 @@ ddoc.init = function(site){
   site.install('posts', '/posts/', {database: 'posts'});
 
   // install system application
-  site.install('sunrise', '/sunrise/');
+  site.install('system', '/system/');
 
 };
 

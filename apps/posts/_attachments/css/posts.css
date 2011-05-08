@@ -10,43 +10,6 @@
   width: 750px;
   padding-right: 40px;
 }
-.posts .main ul.tag-cloud {
-  margin-top: -20px;
-}
-.posts .main ul.tag-cloud li {
-  display: inline;
-  padding-left: 10px;
-}
-.posts .main ul.tag-cloud a.rank-10 {
-  font-size: 250%;
-}
-.posts .main ul.tag-cloud a.rank-9 {
-  font-size: 210%;
-}
-.posts .main ul.tag-cloud a.rank-8 {
-  font-size: 170%;
-}
-.posts .main ul.tag-cloud a.rank-7 {
-  font-size: 130%;
-}
-.posts .main ul.tag-cloud a.rank-6 {
-  font-size: 90%;
-}
-.posts .main ul.tag-cloud a.rank-5 {
-  font-size: 90%;
-}
-.posts .main ul.tag-cloud a.rank-4 {
-  font-size: 90%;
-}
-.posts .main ul.tag-cloud a.rank-3 {
-  font-size: 90%;
-}
-.posts .main ul.tag-cloud a.rank-2 {
-  font-size: 90%;
-}
-.posts .main ul.tag-cloud a.rank-1 {
-  font-size: 90%;
-}
 .posts .sidebar {
   float: left;
   margin-right: 10px;
@@ -58,84 +21,57 @@
 .posts .sidebar ul li {
   list-style: none;
 }
-.posts .main article.entry {
+.posts .main article.post {
   margin-bottom: 10px;
 }
-.posts .main article.entry header div.sns {
+.posts .main article.post header div.sns {
   float: right;
   padding-top: 5px;
 }
-.posts .main article.entry header h3 {
+.posts .main article.post header h3 {
   border-top: 1px solid #dddddd;
   padding-top: 5px;
   border-bottom: 3px double #dddddd;
   padding-bottom: 5px;
   margin-bottom: 0px;
 }
-.posts .main article.entry ul.tags {
+.posts .main article.post ul.tags {
   margin: 0;
   list-style: none;
   text-align: right;
   min-height: 1em;
 }
-.posts .main article.entry ul.tags li {
+.posts .main article.post ul.tags li {
   display: inline;
 }
-.posts .main article.entry div.content {
+.posts .main article.post div.content {
   clear: both;
   padding-left: 40px;
 }
-.posts .main article.entry footer {
+.posts .main article.post footer {
   border-top: 1px solid #dddddd;
   padding-top: 5px;
   text-align: right;
   vertical-align: top;
   margin-bottom: 30px;
 }
-.posts .main .pagination {
-  float: left;
-  margin-right: 10px;
-  width: 750px;
-}
-.posts .main .pagination .prev {
-  float: left;
-  margin-right: 10px;
-  width: 70px;
-  padding-right: 600px;
-  text-align: left;
-}
-.posts .main .pagination .next {
-  float: left;
-  margin-right: 10px;
-  width: 70px;
-  margin-right: 0;
-  padding-right: 0;
-  margin-right: 0;
-  text-align: right;
-}
-.posts .main #admin_list {
-  float: left;
-  margin-right: 10px;
-  width: 750px;
-}
-.posts #admin_list th.title, .posts #admin_list td.title {
-  text-align: left;
-}
-.posts #admin_list th.datetime, .posts #admin_list td.datetime {
-  width: 15em;
-}
-.posts #admin_list th.menu, .posts #admin_list td.menu {
-  text-align: center;
-  width: 5em;
-}
-.posts #admin_list tr.draft {
-  background-color: #ececec;
-}
-.posts #admin_list tr.draft td.title {
-  font-style: italic;
+.posts .main article.post footer time.created_at {
+  display: none;
 }
 .posts a.posts-new {
   background-image: url('./images/posts-new.png');
+  background-repeat: no-repeat;
+  padding-left: 20px;
+  padding-bottom: 5px;
+}
+.posts a.posts-edit {
+  background-image: url('./images/posts-edit.png');
+  background-repeat: no-repeat;
+  padding-left: 20px;
+  padding-bottom: 5px;
+}
+.posts a.posts-delete {
+  background-image: url('./images/posts-delete.png');
   background-repeat: no-repeat;
   padding-left: 20px;
   padding-bottom: 5px;
@@ -164,8 +100,8 @@
   padding-left: 20px;
   padding-bottom: 5px;
 }
-.posts tr.draft a.permalink {
-  background-image: url('./images/draft.png');
+.posts time.updated_at {
+  background-image: url('./images/time.png');
   background-repeat: no-repeat;
   padding-left: 20px;
   padding-bottom: 5px;

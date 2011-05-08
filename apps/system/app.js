@@ -5,7 +5,7 @@ var merge = require('sunrise').utils.merge;
 var auth = require('sunrise').middleware.auth;
 
 var ddoc = {
-  _id: "_design/sunrise" ,
+  _id: "_design/system" ,
   version: require('sunrise').version,
   name: 'System',
   description: 'Sunrise system application',
@@ -17,6 +17,8 @@ var ddoc = {
 
 module.exports = ddoc;
 
+ddoc.helpers = require('./helpers');
+ddoc.dynamicHelpers = require('./dynamicHelpers');
 ddoc.init = function(app){
   var version = {
     node: process.version,
@@ -61,6 +63,44 @@ ddoc.init = function(app){
 
   // Logout endpoint.
   app.get('/logout', auth.logout({redirect: '../'}));
+
+
+  app.dynamicHelpers(ddoc.dynamicHelpers);
+  app.helpers(ddoc.helpers);
+
+
+  app.helpers({
+    required: function(){
+      // saying that the layout uses $system helpers;
+      this.css(app.set('home') + 'css/system_helper.css');
+    },
+
+    linkToLogin: function(provider, label){
+      this.css(app.set('home') + 'css/system_helper.css');
+      var url = app.set('home') + 'login/' + provider;
+      return '<a href="' + url + '" class="system login ' + provider + '">' + label + '</a>';
+    },
+
+    linkToLogout: function(label){
+      this.css(app.set('home') + 'css/system_helper.css');
+      var url = app.set('home') + 'logout';
+      return '<a href="' + url + '" class="system logout">' + label + '</a>';
+    },
+
+    linkToUser: function(userObj){
+      this.css(app.set('home') + 'css/system_helper.css');
+      var url = app.set('home') + 'profiles/' + encodeURIComponent(userObj.user_id);
+      var klass = this.htmlescape(userObj.provider) || 'undefined';
+      var label;
+      if( klass == 'twitter' ){
+        // http://tweetimag.es/
+        label = this.sprintf('<img width="18" height="18" src="http://img.tweetimag.es/i/%s_m" /><span>%s</span>', userObj.user_name, this.htmlescape(userObj.user_name));
+      }else{
+        label = this.htmlescape(userObj.user_name);
+      }
+      return '<a href="' + url + '" class="system user ' + klass + '">' + label + '</a>';
+    }
+  });
 };
 
 couchapp.loadAttachments(ddoc, path.join(__dirname, '_attachments'));

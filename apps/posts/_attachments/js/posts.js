@@ -95,3 +95,21 @@
   };
 
 })(jQuery);
+
+$(function(){
+  function f(s){
+    if( s > 10 ){
+      return s;
+    }else{
+      return '0' + s;
+    }
+  }
+
+  $('time').each(function(){
+    var self = $(this);
+    var t = new Date(self.attr('datetime'))
+    var date = [f(t.getFullYear()), f(t.getMonth() + 1), f(t.getDate())].join('-');
+    var time = [f(t.getHours()), f(t.getMinutes() + 1), f(t.getSeconds())].join(':');
+    self.html(date + ' ' + time);
+  });
+});

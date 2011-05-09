@@ -16,15 +16,17 @@
     <%- markdown(this.content) %>
   </div>
   <footer>
-    <a class="permalink" title="<%= this.title %>"
-       href="<%= url('/p/' + this._id) %>"><%= _("posts.permalink") %></a>
-    <a class="posts-edit" title="<%= _('posts.edit') %>: <%= this.title %>"
-       href="<%= url('/admin/edit/' + this._id) %>"><%= _("posts.edit") %></a>
-    <a class="posts-delete" title="<%= _('posts.delete') %>: <%= this.title %>"
-       href="<%= url('/p/' + this._id) %>"><%= _("posts.delete") %></a>
     <time datetime="<%= this.updated_at %>" class="updated_at"><%= this.updated_at %></time>
-    <time datetime="<%= this.created_at %>" class="created_at"><%= this.updated_at %></time>
+    <time datetime="<%= this.created_at %>" class="created_at" pubdate="pubdate"><%= this.updated_at %></time>
     <%- $system.linkToUser(this.updated_by) %>
+    <div class="actions">
+      <a class="permalink" title="<%= this.title %>"
+         href="<%= url('/p/' + this._id) %>"><%= _("posts.permalink") %></a>
+      <a class="posts-edit" title="<%= _('posts.edit') %>: <%= this.title %>"
+         href="<%= url('/admin/edit/' + this._id) %>"><%= _("posts.edit") %></a>
+      <a class="posts-delete" title="<%= _('posts.delete') %>: <%= this.title %>"
+         href="<%= url('/p/' + this._id) %>"><%= _("posts.delete") %></a>
+    </div>
   </footer>
   <script type="text/javascript">
     $(function(){$('article.post[data-docid="<%= this._id %>"]').bindDelete();});

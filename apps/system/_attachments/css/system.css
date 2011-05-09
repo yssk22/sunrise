@@ -1,0 +1,17 @@
+div.system article.runtime_info section.platform {
+  float: left;
+  margin-right: 10px;
+  float: left;
+  margin-right: 10px;
+  width: 230px;
+}
+div.system article.runtime_info section.stats {
+  float: left;
+  margin-right: 10px;
+  float: left;
+  margin-right: 10px;
+  width: 390px;
+  margin-right: 0;
+  padding-right: 0;
+  margin-right: 0;
+}

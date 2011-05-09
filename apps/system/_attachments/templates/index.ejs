@@ -1,8 +1,8 @@
 <% title('System') %>
 <div class="system">
   <h2>System Info</h2>
-  <article>
-    <h3>Installed Applications</h3>
+  <article class="app_info">
+    <h3>Application Info</h3>
     <table>
       <thead>
         <tr>
@@ -24,9 +24,9 @@
       </tbody>
     </table>
   </article>
-  <article>
+  <article class="runtime_info">
     <h3>Runtime Info</h3>
-    <section>
+    <section class="platform">
       <h4>Platform Version</h4>
       <dl>
         <dt>Sunrise</dt>
@@ -37,7 +37,7 @@
         <dd><%= version.couchdb %></dd>
       </dl>
     </section>
-    <section>
+    <section class="stats">
       <h4>Current Statistics</h4>
       <dl>
         <dt>Server boot time</dt>

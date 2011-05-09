@@ -1,9 +1,5 @@
 var path = require('path');
 var couchapp = require('couchapp');
-var raiseError = require('sunrise').raiseError;
-var merge = require('sunrise').utils.merge;
-var auth = require('sunrise').middleware.auth;
-
 var ddoc = {
   _id: "_design/system" ,
   version: require('sunrise').version,
@@ -20,6 +16,13 @@ module.exports = ddoc;
 ddoc.helpers = require('./helpers');
 ddoc.dynamicHelpers = require('./dynamicHelpers');
 ddoc.init = function(app){
+  var merge = require('sunrise').utils.merge;
+  var parallel = require('sunrise').middleware.utils.parallel,
+      js = require('sunrise').middleware.utils.js,
+      css = require('sunrise').middleware.utils.css,
+      auth = require('sunrise').middleware.auth;
+  var raiseError = require('sunrise').raiseError;
+
   var version = {
     node: process.version,
     coucdb: '',
@@ -33,11 +36,14 @@ ddoc.init = function(app){
     version.couchdb = v.version;
   });
 
-  app.get('/', function(req, res, next){
-    res.local('version', version);
-    res.local('stats', merge({}, stats, process.memoryUsage()));
-    res.render('index.ejs');
-  });
+
+  app.get('/',
+          css('css/system.css'),
+          function(req, res, next){
+            res.local('version', version);
+            res.local('stats', merge({}, stats, process.memoryUsage()));
+            res.render('index.ejs');
+          });
 
   // TODO: Response login selector
   // app.get('/login', function(req, res, nex){

@@ -1,10 +1,5 @@
 var path = require('path');
 var couchapp = require('couchapp');
-var merge = require('sunrise').utils.merge;
-var parallel = require('sunrise').middleware.utils.parallel,
-    js = require('sunrise').middleware.utils.js,
-    css = require('sunrise').middleware.utils.css;
-var raiseError = require('sunrise').raiseError;
 
 var ddoc = {
   _id: "_design/posts" ,
@@ -32,6 +27,13 @@ ddoc.middleware = require('./middleware');
 ddoc.views = require('./views');
 
 ddoc.init = function(app, config){
+  var merge = require('sunrise').utils.merge;
+  var parallel = require('sunrise').middleware.utils.parallel,
+      js = require('sunrise').middleware.utils.js,
+      css = require('sunrise').middleware.utils.css;
+  var raiseError = require('sunrise').raiseError;
+
+
   config = merge({
     postsPerPage: 10
   }, config);

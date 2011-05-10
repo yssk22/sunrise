@@ -14,6 +14,10 @@
         }
     }
     
+    .main .list .readmore {
+        width: 99%;
+    }
+
     .main article.post {
         margin-bottom: 10px;
         header {
@@ -45,10 +49,13 @@
         }
         footer {
             border-top: 1px solid @border-color;
-            padding-top: 5px;
+            padding-top: 3px;
             text-align: right;
             vertical-align: top;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            .actions {
+                margin-top: 2px;
+            }
         }
 
         footer time.created_at {
@@ -91,5 +98,44 @@
             padding: 5px; 
             font-size: 10.5pt;
         }
+    }
+}
+
+
+.posts.admin {
+    .main article.post {
+        header {
+            .span-7;
+            padding-top: 3px;
+            padding-left: 10px;
+            h3 {
+                display:inline;
+                font-size: 10pt;
+                border: none;
+            }
+        }
+        ul.tags {
+            .span-4;
+            padding-top: 3px;
+            text-align: left;
+            li {
+                display:inline;
+            }
+        }
+        footer {
+            .last;
+            border: 1px solid @border-color;
+            padding-right: 10px;
+            padding-bottom: 3px;
+            margin-bottom: 3px;
+        }
+        footer:nth-of-type(odd){
+            background-color: @border-color;
+        }
+        footer:nth-of-type(even){
+            background-color: #ffffff;
+        }
+
+        .content { display: none; }
     }
 }

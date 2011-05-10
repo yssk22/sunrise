@@ -18,29 +18,9 @@
   </head>
   <body>
     <header id="siteHeader" class="container">
-      <h1 class="logo">
-        <a href="/">Sunrise</a>
-        <span class="subTitle">Application container framework powered by node.js</span>
-      </h1>
-      <nav id="accountNavigation">
-        <ul>
-          <% if( isLogin ){ %>
-          <li class="user"><%- $system.linkToUser(currentUser) %></li>
-          <li class="user"><%- $system.linkToLogout("Logout") %></li>
-          <% }else{ %>
-          <li class="guest"><%- $system.linkToUser(currentUser) %></li>
-          <li class="guest"><%- $system.linkToLogin('twitter', "Login") %></li>
-          <% } %>
-        </ul>
-      </nav>
-      <nav id="siteNavigation" class="clear">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <% installedApps.forEach(function(appInfo){ %>
-          <li><a href="<%= appInfo.home %>"><%= appInfo.menuName %></a></li>
-          <% }) %>
-        </ul>
-      </nav>
+      <%- $system.logo() %>
+      <%- $system.accountNavigation('twitter') %>
+      <%- $system.siteNavigation() %>
     </header>
     <hr />
     <div id="main" class="container">

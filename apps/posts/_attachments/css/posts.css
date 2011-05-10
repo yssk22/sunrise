@@ -21,6 +21,9 @@
 .posts .sidebar ul li {
   list-style: none;
 }
+.posts .main .list .readmore {
+  width: 99%;
+}
 .posts .main article.post {
   margin-bottom: 10px;
 }
@@ -50,10 +53,13 @@
 }
 .posts .main article.post footer {
   border-top: 1px solid #dddddd;
-  padding-top: 5px;
+  padding-top: 3px;
   text-align: right;
   vertical-align: top;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+}
+.posts .main article.post footer .actions {
+  margin-top: 2px;
 }
 .posts .main article.post footer time.created_at {
   display: none;
@@ -119,4 +125,44 @@
   width: 99%;
   padding: 5px;
   font-size: 10.5pt;
+}
+.posts.admin .main article.post header {
+  float: left;
+  margin-right: 10px;
+  width: 270px;
+  padding-top: 3px;
+  padding-left: 10px;
+}
+.posts.admin .main article.post header h3 {
+  display: inline;
+  font-size: 10pt;
+  border: none;
+}
+.posts.admin .main article.post ul.tags {
+  float: left;
+  margin-right: 10px;
+  width: 150px;
+  padding-top: 3px;
+  text-align: left;
+}
+.posts.admin .main article.post ul.tags li {
+  display: inline;
+}
+.posts.admin .main article.post footer {
+  margin-right: 0;
+  padding-right: 0;
+  margin-right: 0;
+  border: 1px solid #dddddd;
+  padding-right: 10px;
+  padding-bottom: 3px;
+  margin-bottom: 3px;
+}
+.posts.admin .main article.post footer:nth-of-type(odd) {
+  background-color: #dddddd;
+}
+.posts.admin .main article.post footer:nth-of-type(even) {
+  background-color: #ffffff;
+}
+.posts.admin .main article.post .content {
+  display: none;
 }

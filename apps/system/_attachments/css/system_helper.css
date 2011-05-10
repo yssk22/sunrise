@@ -1,3 +1,29 @@
+h1.system.logo {
+  float: left;
+  margin-right: 10px;
+  width: 550px;
+}
+nav.system.accountNavigation ul {
+  float: left;
+  margin-right: 10px;
+  width: 230px;
+  margin-right: 0;
+  padding-right: 0;
+  margin-right: 0;
+  text-align: right;
+}
+nav.system.accountNavigation ul li {
+  display: inline;
+  padding-left: 10px;
+}
+nav.system.siteNavigation {
+  clear: both;
+}
+nav.system.siteNavigation ul li {
+  float: left;
+  margin-right: 10px;
+  width: 70px;
+}
 a.system.login.twitter {
   background-image: url('./images/login-twitter.png');
   background-repeat: no-repeat;

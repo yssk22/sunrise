@@ -126,6 +126,12 @@
   padding: 5px;
   font-size: 10.5pt;
 }
+.posts.admin .main div.list.onlyDraft article.post {
+  display: none;
+}
+.posts.admin .main div.list.onlyDraft article.post.draft {
+  display: block;
+}
 .posts.admin .main article.post header {
   float: left;
   margin-right: 10px;
@@ -157,12 +163,12 @@
   padding-bottom: 3px;
   margin-bottom: 3px;
 }
-.posts.admin .main article.post footer:nth-of-type(odd) {
-  background-color: #dddddd;
-}
-.posts.admin .main article.post footer:nth-of-type(even) {
-  background-color: #ffffff;
-}
 .posts.admin .main article.post .content {
   display: none;
+}
+.posts.admin .main article.post.draft {
+  background-color: #dddddd;
+}
+.posts.admin .main article.post.draft h3:before {
+  content: '[Draft]';
 }

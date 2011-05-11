@@ -103,39 +103,50 @@
 
 
 .posts.admin {
-    .main article.post {
-        header {
-            .span-7;
-            padding-top: 3px;
-            padding-left: 10px;
-            h3 {
-                display:inline;
-                font-size: 10pt;
-                border: none;
+    .main {
+        div.list.onlyDraft {
+            article.post {
+                display: none;
+            }
+            article.post.draft {
+                display: block;
             }
         }
-        ul.tags {
-            .span-4;
-            padding-top: 3px;
-            text-align: left;
-            li {
-                display:inline;
+        
+        article.post {
+            header {
+                .span-7;
+                padding-top: 3px;
+                padding-left: 10px;
+                h3 {
+                    display:inline;
+                    font-size: 10pt;
+                    border: none;
+                }
             }
-        }
-        footer {
-            .last;
-            border: 1px solid @border-color;
-            padding-right: 10px;
-            padding-bottom: 3px;
-            margin-bottom: 3px;
-        }
-        footer:nth-of-type(odd){
-            background-color: @border-color;
-        }
-        footer:nth-of-type(even){
-            background-color: #ffffff;
+            ul.tags {
+                .span-4;
+                padding-top: 3px;
+                text-align: left;
+                li {
+                    display:inline;
+                }
+            }
+            footer {
+                .last;
+                border: 1px solid @border-color;
+                padding-right: 10px;
+                padding-bottom: 3px;
+                margin-bottom: 3px;
+            }
+            .content { display: none; }
         }
 
-        .content { display: none; }
+        article.post.draft {
+            h3:before {
+                content: '[Draft]';
+            }
+            background-color: @border-color;
+        }
     }
 }

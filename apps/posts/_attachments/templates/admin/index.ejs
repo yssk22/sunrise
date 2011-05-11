@@ -1,9 +1,14 @@
 <% title(_("posts.admin.managePosts")) %>
+<% js(url('js/admin.js')) %>
 <div class="posts admin">
   <h2><%= _("posts.admin.managePosts") %></h2>
   <div class="main">
     <% if( posts.data.length > 0 ){ %>
     <div class="list">
+      <form>
+        <input type="checkbox" id="onlyDraft" name="onlyDraft" />
+        <label for="onlyDraft"><%= _("posts.displayOnlyDraft") %></label>
+      </form>
       <%- partial('parts/posts', {object: posts.data, as: this}) %>
       <div class="readmore" data-apipath="<%= url('/admin/-/') %>">
         <%= _('posts.read_more') %>

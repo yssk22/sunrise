@@ -24,6 +24,7 @@
     "---- form elements" : "",
     "posts.submit": "Submit",
     "posts.cancel": "Cancel",
+    "posts.displayOnlyDraft": "Display only draft posts",
 
     "_____" : "EOF"
 }

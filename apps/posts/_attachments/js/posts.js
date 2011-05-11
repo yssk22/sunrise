@@ -67,6 +67,15 @@
     target.unbind('submit', onSubmit);
     target.bind('submit', onSubmit);
     $('#cancel').click(onCancel);
+
+    target.find('input').keypress(function(e){
+      if( e.which === 13 || e.keyCode === 13 ){
+        return false;
+      }else{
+        return true;
+      }
+    });
+
   };
 
   $.fn.bindDelete = function(){

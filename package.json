@@ -1,6 +1,6 @@
 {
     "name": "sunrise",
-    "main": "index.js",
+    "main": "./lib/sunrise.js",
     "version": "0.1.0",
     "description": "A application middleware set using CouchApp and node.js/Express",
     "tags": ["cms", "web", "framework", "couchdb"],

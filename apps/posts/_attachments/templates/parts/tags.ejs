@@ -7,6 +7,7 @@
            v = this[i].value; %>
     <li><a href="<%= url('/t/' + encodeURIComponent(k) + '/') %>" 
            class="tag-link"
+           data-name="<%= k %>" data-count="<%= v %>"
            title="<%= k %>"><%= k %> (<%= v %>)</a></li>
     <% }; %>
   </ul>

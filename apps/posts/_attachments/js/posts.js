@@ -28,6 +28,31 @@
 
   $.fn.bindForm = function(){
     var target = this;
+
+    // autocomplete
+    var tags = target.find('input[name="tags"]');
+    if( tags.autocomplete ){
+      var a = [];
+      $("a.tag-link").each(function(e){
+        var t = $(this);
+        a.push([t.attr('data-name').replace(/&(?!\w+;)/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/\"/g, '&quot;')
+                .replace(/\'/g, '&#39;'), t.attr('data-count')]);
+      });
+      tags.autocomplete(a, {
+        multiple: true, mustMatch: false,
+        scroll: true, scrollHeight: 300,
+        formatItem: function(data, i, n, value){
+          return data[0] + " (" + data[1] + ")";
+        },
+        formatResult: function(data, i, n, value){
+          return data[0];
+        }
+      });
+    }
+
     // Event Handlers
     function onSubmit(e){
       var action = target.attr('action');

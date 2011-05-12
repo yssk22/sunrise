@@ -1,3 +1,7 @@
+<% js('js/vendor/jquery-autocomplete/jquery.autocomplete.min.js') %>
+<% css('js/vendor/jquery-autocomplete/jquery.autocomplete.css') %>
+<script type="text/javascript">$(function(){ $('#postEditor').bindForm() });</script>
+
 <% var action = url('/p/' + (this._id || '')) %>
 <% var method = this._id ? "PUT" : "POST" %>
 <form id="postEditor" action="<%= action %>" method="<%= method %>">
@@ -9,7 +13,7 @@
   </div>
   <div class="fieldRow">
     <label for="tags"><%= _("posts.tags") %></label>
-    <input id="tags" type="text" name="tags" value="<%= this.tags.join(', ') %> "/>
+    <input id="tags" type="text" name="tags" value="<%= this.tags.join(', ') %>"/>
   </div>
   <div class="fieldRow">
     <textarea id="content" name="content" rows="20" cols="80"><%- this.content %></textarea>
@@ -24,4 +28,3 @@
     <button id="cancel" name="cancel" type="button"><%= _("posts.cancel") %></button>
   </div>
 </form>
-<script type="text/javascript">$(function(){ $('#postEditor').bindForm() });</script>

@@ -30,5 +30,17 @@ module.exports = {
 
   "test reset": function(){
     // TODO
+  },
+
+  "test server": function(){
+    var server = db.server;
+    assert.isNotNull(server);
+  },
+
+  "test userDB": function(){
+    setTimeout(function(){
+      assert.isNotNull(db.userDB);
+      assert.eql('_users', db.userDB.name);
+    }, 1000);
   }
 };

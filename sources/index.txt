@@ -15,27 +15,10 @@ Application Development Guide
    :maxdepth: 2
 
    getting_started
-   architecture
-
-Development Tips
------------------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-   tips/error
-
-Reference
------------------------------------
-
-.. toctree::
-   :maxdepth: 2
-
-   ref/conf
-   ref/i18n
-   ref/app
-   ref/middleware
-   ref/helper
+   architecture 
+   tips/index
+   ref/index
+   
 
 Indices and tables
 ==================

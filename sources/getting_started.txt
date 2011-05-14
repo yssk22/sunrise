@@ -4,16 +4,19 @@ Getting Started
 Requirements
 ================================================================================
 
-- node.js v0.3.x or later
-- npm 
-- couchapp v0.7.x or later
+- node.js v0.4.X or later
+- npm 1.0.X or later
+- Apache CouchDB 1.0.2 or later
+
 
 Install
 ================================================================================
 
+Just 
+
 ::
 
-   $ npm install sunrise
+   $ npm install -g sunrise
 
 
 Craete a new site

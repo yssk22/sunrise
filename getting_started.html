@@ -49,7 +49,17 @@
 <li><a class="reference internal" href="#">Getting Started</a><ul>
 <li><a class="reference internal" href="#requirements">Requirements</a></li>
 <li><a class="reference internal" href="#install">Install</a></li>
-<li><a class="reference internal" href="#craete-a-new-site">Craete a new site</a></li>
+<li><a class="reference internal" href="#testing-a-template-site">Testing a template site</a><ul>
+<li><a class="reference internal" href="#configure-your-couchdb-administrator">Configure your CouchDB administrator</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#craete-a-new-site">Craete a new site</a><ul>
+<li><a class="reference internal" href="#copy-a-new-site-from-template">Copy a new site from template</a></li>
+<li><a class="reference internal" href="#configure-settings">Configure settings</a></li>
+<li><a class="reference internal" href="#configure-bootstrap">Configure bootstrap</a></li>
+<li><a class="reference internal" href="#boot-your-site">Boot your site</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -98,15 +108,67 @@
 </div>
 <div class="section" id="install">
 <h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
-<p>Just</p>
+<p>Just install by npm.</p>
 <div class="highlight-python"><pre>$ npm install -g sunrise</pre>
+</div>
+</div>
+<div class="section" id="testing-a-template-site">
+<h2>Testing a template site<a class="headerlink" href="#testing-a-template-site" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="configure-your-couchdb-administrator">
+<h3>Configure your CouchDB administrator<a class="headerlink" href="#configure-your-couchdb-administrator" title="Permalink to this headline">¶</a></h3>
+<p>You must configure the administrator account on your CouchDB located on <a class="reference external" href="http://localhost:5984/">http://localhost:5984/</a> before checking the template.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">name:</th><td class="field-body">admin</td>
+</tr>
+<tr class="field"><th class="field-name">password:</th><td class="field-body">password</td>
+</tr>
+</tbody>
+</table>
+<p>To start up the template site, launch the boot command:</p>
+<div class="highlight-python"><pre>$ sunrise:template
+...
+[2011-05-14 22:09:54.915] [INFO] sunrise - Listening on 8888</pre>
+</div>
+<p>And you can visit <a class="reference external" href="http://localhost:8888/">http://localhost:8888/</a> to check sunrise is working.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><tt class="docutils literal"><span class="pre">login</span></tt> function does not work correctly because you have not configure oauth settings.</p>
+</div>
 </div>
 </div>
 <div class="section" id="craete-a-new-site">
 <h2>Craete a new site<a class="headerlink" href="#craete-a-new-site" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><pre>$ sunrise:create my_site
-$ cd my_site
-$ sunrise:start .</pre>
+<div class="section" id="copy-a-new-site-from-template">
+<h3>Copy a new site from template<a class="headerlink" href="#copy-a-new-site-from-template" title="Permalink to this headline">¶</a></h3>
+<p>The template site cannot be modified. You can copy the template site in your directory to start to build your site.</p>
+<div class="highlight-python"><pre>$ sunrise\:create -s sunrise-site
+[2011-05-14 22:54:49.445] [INFO] console - /Users/yssk22/tmp/sunrise-site has been created successfully
+[2011-05-14 22:54:49.630] [INFO] console - Your site has been successfully created.
+[2011-05-14 22:54:49.631] [INFO] console - To start up your site:
+[2011-05-14 22:54:49.631] [INFO] console -
+[2011-05-14 22:54:49.631] [INFO] console -    $ node /Users/yssk22/tmp/sunrise-site/app.js
+[2011-05-14 22:54:49.631] [INFO] console -</pre>
+</div>
+<p>After <tt class="docutils literal"><span class="pre">sunrise:create</span></tt> command is executed, you can modify your site in the newly craeted directory.</p>
+</div>
+<div class="section" id="configure-settings">
+<h3>Configure settings<a class="headerlink" href="#configure-settings" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">${YOUR_SITE_DIR}/conf</span></tt> contains default configurations. You can configure settings such as OAuth provides, CouchDB admin account, Cookie settings, ... and so on.</p>
+<p>Configuration details are described at <a href="#id1"><span class="problematic" id="id2">:doc:`ref/conf`_</span></a></p>
+</div>
+<div class="section" id="configure-bootstrap">
+<h3>Configure bootstrap<a class="headerlink" href="#configure-bootstrap" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">${YOUR_SITE_DIR}/app.js</span></tt> is a bootstrap script for your site. You can modify applications, URLs, ... on this script.</p>
+</div>
+<div class="section" id="boot-your-site">
+<h3>Boot your site<a class="headerlink" href="#boot-your-site" title="Permalink to this headline">¶</a></h3>
+<p>just kick <tt class="docutils literal"><span class="pre">app.js</span></tt> with <tt class="docutils literal"><span class="pre">-c</span> <span class="pre">conf</span></tt> option to apply your configurations.</p>
+<div class="highlight-python"><pre>$ cd ${YOUR_SITE_DIR}
+$ node app.js -c conf/</pre>
+</div>
 </div>
 </div>
 </div>

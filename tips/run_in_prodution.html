@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Reference &mdash; Sunrise v0.1.0 documentation</title>
+    <title>Run in production environment &mdash; Sunrise v0.1.0 documentation</title>
     <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -23,8 +23,9 @@
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
     <link rel="top" title="Sunrise v0.1.0 documentation" href="../index.html" />
-    <link rel="next" title="Configuration Files" href="conf.html" />
-    <link rel="prev" title="Error Handling" href="../tips/error.html" /> 
+    <link rel="up" title="Development Tips" href="index.html" />
+    <link rel="next" title="Error Handling" href="error.html" />
+    <link rel="prev" title="Development Tips" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -34,25 +35,26 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="conf.html" title="Configuration Files"
+          <a href="error.html" title="Error Handling"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../tips/error.html" title="Error Handling"
+          <a href="index.html" title="Development Tips"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Sunrise v0.1.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Sunrise v0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Development Tips</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../tips/error.html"
-                        title="previous chapter">Error Handling</a></p>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Development Tips</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="conf.html"
-                        title="next chapter">Configuration Files</a></p>
+  <p class="topless"><a href="error.html"
+                        title="next chapter">Error Handling</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../sources/ref/index.txt"
+    <li><a href="../sources/tips/run_in_prodution.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -76,33 +78,19 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="reference">
-<h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="conf.html">Configuration Files</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="conf.html#db-json">db.json</a></li>
-<li class="toctree-l2"><a class="reference internal" href="conf.html#web-json">web.json</a></li>
-<li class="toctree-l2"><a class="reference internal" href="conf.html#auth-json">auth.json</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="i18n.html">Internationalization</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="i18n.html#detect-user-locales">Detect User Locales</a></li>
-<li class="toctree-l2"><a class="reference internal" href="i18n.html#localization">Localization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="i18n.html#multilingualization">Multilingualization</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="app.html">Application</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="app.html#app-js">app.js</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="middleware.html">Middleware</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="middleware.html#sunrise-middleware-utils">sunrise.middleware.utils</a></li>
-<li class="toctree-l2"><a class="reference internal" href="middleware.html#sunrise-middleware-db">sunrise.middleware.db</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="helper.html">View Helpers</a></li>
-</ul>
+  <div class="section" id="run-in-production-environment">
+<h1>Run in production environment<a class="headerlink" href="#run-in-production-environment" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This section is underconstruction.</p>
+</div>
+<p>Before running your site in the production environment, you should install <tt class="docutils literal"><span class="pre">forever</span></tt> package using npm.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span> <span class="nx">npm</span> <span class="nx">install</span> <span class="o">-</span><span class="nx">g</span> <span class="nx">forever</span>
+</pre></div>
+</div>
+<p>And then start <tt class="docutils literal"><span class="pre">app.js</span></tt> with <tt class="docutils literal"><span class="pre">forever</span></tt> command to enable auto-restart on failure.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span> <span class="nx">NODE_ENV</span><span class="o">=</span><span class="nx">production</span> <span class="nx">forever</span> <span class="p">.</span><span class="o">/</span><span class="nx">app</span><span class="p">.</span><span class="nx">js</span> <span class="o">-</span><span class="nx">c</span> <span class="nx">conf</span>
+</pre></div>
 </div>
 </div>
 
@@ -119,12 +107,13 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="conf.html" title="Configuration Files"
+          <a href="error.html" title="Error Handling"
              >next</a> |</li>
         <li class="right" >
-          <a href="../tips/error.html" title="Error Handling"
+          <a href="index.html" title="Development Tips"
              >previous</a> |</li>
-        <li><a href="../index.html">Sunrise v0.1.0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Sunrise v0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Development Tips</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

@@ -1,6 +1,7 @@
 module.exports = function(newDoc, oldDoc, userCtx, secObj){
   var v = (eval(this.lib.validator))(newDoc, oldDoc, userCtx, secObj);
 
+  // document structure check
   if( newDoc._deleted ){
     // on deleted
   }else{
@@ -17,4 +18,13 @@ module.exports = function(newDoc, oldDoc, userCtx, secObj){
      v.required('title', 'content');
      v.unchanged('created_by');
    }
+
+  // security check
+  if( !v.hasRoles('_admin') ){
+    // replication validation
+    // only owner can be updated
+    if( userCtx.name != newDoc.created_by.name ){
+      v.forbidden('You are not the owner of document');
+    }
+  }
 };

@@ -8,7 +8,7 @@ var cradle = require('cradle');
 var db = new (cradle.Connection)().database('posts');
 var NUM = 30;
 var USER = {
-  user_id: 'guest', user_name: 'Generator'
+  _id: 'guest', display_name: 'Generator'
 };
 
 function genString(str, n){

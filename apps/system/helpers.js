@@ -41,14 +41,14 @@ module.exports = function(app){
 
     linkToUser: function(userObj){
       this.css(app.set('home') + 'css/system_helper.css');
-      var url = app.set('home') + 'profiles/' + encodeURIComponent(userObj.user_id);
+      var url = app.set('home') + 'profiles/' + encodeURIComponent(userObj._id);
       var klass = this.htmlescape(userObj.provider) || 'undefined';
       var label;
       if( klass == 'twitter' ){
         // http://tweetimag.es/
-        label = this.sprintf('<img width="18" height="18" src="http://img.tweetimag.es/i/%s_m" /><span>%s</span>', userObj.user_name, this.htmlescape(userObj.user_name));
+        label = this.sprintf('<img width="18" height="18" src="http://img.tweetimag.es/i/%s_m" /><span>%s</span>', userObj.display_name, this.htmlescape(userObj.display_name));
       }else{
-        label = this.htmlescape(userObj.user_name);
+        label = this.htmlescape(userObj.display_name);
       }
       return '<a href="' + url + '" class="system user ' + klass + '">' + label + '</a>';
     }

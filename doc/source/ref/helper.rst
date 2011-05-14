@@ -127,8 +127,13 @@ This section lists view helpers (including dynamicHelpers) defined in sunrise. Y
 
    Gets the user object. 
 
-   :currentUser.user_name: user name
-   :currentUser.user_id: user identifier.
+   :currentUser.display_name: user display name.
+   :currentUser._id: user identifier.
+   :currentUser.name: same as ``_id``.
+   :currentUser.provider: authentication provider name(such as ``'twitter'``)
+   :currentUser.roles: an array of String for user roles.
+   :currentUser.lastLogin: last login time (Date object).
+   
 
 .. attribute:: isLogin
 

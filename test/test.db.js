@@ -38,9 +38,9 @@ module.exports = {
   },
 
   "test userDB": function(){
-    setTimeout(function(){
-      assert.isNotNull(db.userDB);
-      assert.eql('_users', db.userDB.name);
-    }, 1000);
+    db.userDB(function(userDB){
+      assert.isNotNull(userDB);
+      assert.eql('_users', userDB.name);
+    });
   }
 };

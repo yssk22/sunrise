@@ -6,7 +6,8 @@
     "tags": ["cms", "web", "framework", "couchdb"],
     "author": "Yohei Sasaki",
     "bin": {
-        "sunrise:create" : "./bin/create.js"
+        "sunrise:create" : "./bin/create.js",
+        "sunrise:template"   : "./bin/template.js"
     },
     "directories": {
         "deps": "./deps"

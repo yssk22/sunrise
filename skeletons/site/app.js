@@ -1,4 +1,4 @@
-var couchapp = require('couchapp');
+var couchapp = require('sunrise').couchapp;
 var path = require('path');
 var ddoc = {
   _id: "_design/site" ,

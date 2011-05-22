@@ -1,0 +1,7 @@
+/**
+ * myapp.less
+ * 
+ * When myapp.css is requested via HTTP, this file is compiled to pure css style, which 
+ * is responded to the client.
+ *
+ */

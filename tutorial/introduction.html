@@ -1,0 +1,212 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction &mdash; Sunrise v0.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Sunrise v0.1.0 documentation" href="../index.html" />
+    <link rel="up" title="Application Development Tutorial" href="index.html" />
+    <link rel="next" title="Development Tips" href="../tips/index.html" />
+    <link rel="prev" title="Application Development Tutorial" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../tips/index.html" title="Development Tips"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Application Development Tutorial"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Sunrise v0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Application Development Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#what-is-an-application">What is an application?</a></li>
+<li><a class="reference internal" href="#overview-of-application-development">Overview of application development</a><ul>
+<li><a class="reference internal" href="#create-a-template-site">Create a template site.</a></li>
+<li><a class="reference internal" href="#create-a-template-application">Create a template application</a></li>
+<li><a class="reference internal" href="#install-the-template-application">Install the template application</a></li>
+<li><a class="reference internal" href="#launch-the-site-to-confirm-the-template-application">Launch the site to confirm the template application</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Application Development Tutorial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../tips/index.html"
+                        title="next chapter">Development Tips</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/tutorial/introduction.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-an-application">
+<h2>What is an application?<a class="headerlink" href="#what-is-an-application" title="Permalink to this headline">¶</a></h2>
+<p>An <strong>application</strong> in Sunrise is:</p>
+<ul class="simple">
+<li>A design document for CouchDB<ul>
+<li>a static file collection attached on the design document.</li>
+</ul>
+</li>
+<li>A middleware for Express/Connect</li>
+</ul>
+<p>And an application is installed on a specified path in the site. It provides http based services and it can also provides helper functions for other applications.</p>
+</div>
+<div class="section" id="overview-of-application-development">
+<h2>Overview of application development<a class="headerlink" href="#overview-of-application-development" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Create a template site (for application testing)</li>
+<li>Create your application from the template</li>
+<li>Modify scripts</li>
+<li>Test with installing on the site.</li>
+<li>Publish your application.</li>
+</ol>
+<p>This chapter shows brief introduction for these steps.</p>
+<div class="section" id="create-a-template-site">
+<h3>Create a template site.<a class="headerlink" href="#create-a-template-site" title="Permalink to this headline">¶</a></h3>
+<p>At first, you need to a container site for your application to be installed for testing. As described at <a class="reference internal" href="../getting_started.html"><em>Getting Started</em></a>, use <tt class="docutils literal"><span class="pre">sunrise:create</span></tt> command.</p>
+<div class="highlight-python"><pre>$ sunrise\:create -s sunrise-site
+$ cd sunrise-site</pre>
+</div>
+<p>Then your site directory is as follows.</p>
+<div class="highlight-python"><pre>$ tree -L 1
+.
+├── _attachments
+├── app.js
+├── apps
+├── conf
+└── node_modules</pre>
+</div>
+<p>Now we call this root directory as <tt class="docutils literal"><span class="pre">SITE_ROOT</span></tt>. <tt class="docutils literal"><span class="pre">{SITE_ROOT}/apps</span></tt> directory is the directory that contains your original applications.</p>
+</div>
+<div class="section" id="create-a-template-application">
+<h3>Create a template application<a class="headerlink" href="#create-a-template-application" title="Permalink to this headline">¶</a></h3>
+<p>To make a applicatin, use <tt class="docutils literal"><span class="pre">sunrise:create</span></tt> command with <tt class="docutils literal"><span class="pre">-a</span></tt> option, that generate a template application on the given path.</p>
+<div class="highlight-python"><pre>$ sunrise\:create -a apps/myapp
+/Users/yssk22/tmp/sunrise-site/apps/myapp has been created successfully</pre>
+</div>
+</div>
+<div class="section" id="install-the-template-application">
+<h3>Install the template application<a class="headerlink" href="#install-the-template-application" title="Permalink to this headline">¶</a></h3>
+<p>And you need to install your <tt class="docutils literal"><span class="pre">myapp</span></tt> in your site. To do this, modify <tt class="docutils literal"><span class="pre">init</span></tt> function in <tt class="docutils literal"><span class="pre">{SITE_ROOT}/app.js</span></tt> (NOT <tt class="docutils literal"><span class="pre">{SITE_ROOT}/apps/myapp/app.js</span></tt>), adding <tt class="docutils literal"><span class="pre">site.install('myapp',</span> <span class="pre">'/myapp/')</span></tt>.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">ddoc</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">site</span><span class="p">){</span>
+  <span class="c1">// ...</span>
+  <span class="c1">// install system application</span>
+  <span class="nx">site</span><span class="p">.</span><span class="nx">install</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;/system/&#39;</span><span class="p">);</span>
+
+  <span class="c1">// install my application from local apps directory</span>
+  <span class="nx">site</span><span class="p">.</span><span class="nx">install</span><span class="p">(</span><span class="s1">&#39;myapp&#39;</span><span class="p">,</span> <span class="s1">&#39;/myapp/&#39;</span><span class="p">);</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">site.install('app',</span> <span class="pre">'/approot/',</span> <span class="pre">options)</span></tt> is a function that install a sunrise application in to the site. On installing the application, <tt class="docutils literal"><span class="pre">init</span></tt> function in <tt class="docutils literal"><span class="pre">{SITE_ROOT}/apps/myapp/app.js</span></tt> is also invoked by sunrise.</p>
+<p>In the default template,</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">ddoc</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">app</span><span class="p">){</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span>
+          <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">){</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;index.ejs&#39;</span><span class="p">);</span>
+          <span class="p">});</span>
+
+  <span class="nx">app</span><span class="p">.</span><span class="nx">helpers</span><span class="p">(</span><span class="nx">ddoc</span><span class="p">.</span><span class="nx">helpers</span><span class="p">(</span><span class="nx">app</span><span class="p">));</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">dynamicHelpers</span><span class="p">(</span><span class="nx">ddoc</span><span class="p">.</span><span class="nx">dynamicHelpers</span><span class="p">(</span><span class="nx">app</span><span class="p">));</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="launch-the-site-to-confirm-the-template-application">
+<h3>Launch the site to confirm the template application<a class="headerlink" href="#launch-the-site-to-confirm-the-template-application" title="Permalink to this headline">¶</a></h3>
+<p>Then launch your site, visit go to <a class="reference external" href="http://localhost:8888/">http://localhost:8888/</a>, you can see the link to myapp in the menu bar. And you can visit the application root URL, <a class="reference external" href="http://localhost:8888/myapp/">http://localhost:8888/myapp/</a>.</p>
+<p><tt class="docutils literal"><span class="pre">init</span></tt> function in your <tt class="docutils literal"><span class="pre">{SITE_ROOT}/apps/myapp/app.js</span></tt> is a entry point for your application. You can add some paths for your web services, booting scripts for setup your database, ... etc, acorrding to the manner of sunrise.</p>
+<p>And <tt class="docutils literal"><span class="pre">app.js</span></tt> is a design document on CouchDB. You can define MapReduce views, list, show functions, and also add attachements for static file hosting.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The feature of static file hosting is provided by Node engine, not by CouchDB currently. So you can define attachments for future use.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../tips/index.html" title="Development Tips"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Application Development Tutorial"
+             >previous</a> |</li>
+        <li><a href="../index.html">Sunrise v0.1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Application Development Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Yohei Sasaki.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

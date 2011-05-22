@@ -1,5 +1,5 @@
 var path = require('path');
-var couchapp = require('couchapp');
+var couchapp = require('sunrise').couchapp;
 var ddoc = {
   _id: "_design/myapp" ,
   version: require('sunrise').version,

@@ -14,6 +14,8 @@ module.exports = ddoc;
 
 // site initialize script
 ddoc.init = function(site){
+  var utils = require('sunrise').utils;
+  require('sunrise').appPaths.push(utils.abspath('./apps'));
 
   site.get('/', function(req, res, next){
     res.render('index');

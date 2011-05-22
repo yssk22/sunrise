@@ -1,6 +1,5 @@
 var path = require('path');
 var couchapp = require('sunrise').couchapp;
-
 var ddoc = {
   _id: "_design/posts" ,
   name: 'Posts',

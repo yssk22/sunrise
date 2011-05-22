@@ -16,6 +16,7 @@ Application Development Guide
 
    getting_started
    architecture 
+   tutorial/index
    tips/index
    ref/index
    

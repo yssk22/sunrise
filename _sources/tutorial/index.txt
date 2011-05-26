@@ -7,7 +7,8 @@ This capter shows you how to develop your application running on sunrise step by
    :maxdepth: 2
 
    introduction
-   helloworld
+   view
+   controller
    db_access
    design_doc
    helper

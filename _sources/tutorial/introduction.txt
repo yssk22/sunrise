@@ -41,7 +41,6 @@ Then your site directory is as follows.
 
 ::
 
-   $ tree -L 1
    .
    ├── _attachments
    ├── app.js
@@ -62,10 +61,12 @@ To make a applicatin, use ``sunrise:create`` command with ``-a`` option, that ge
    $ sunrise\:create -a apps/myapp
    /Users/yssk22/tmp/sunrise-site/apps/myapp has been created successfully
 
+Now we call ``myapp`` directory as ``APP_ROOT``.
+
 Install the template application
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-And you need to install your ``myapp`` in your site. To do this, modify ``init`` function in ``{SITE_ROOT}/app.js`` (NOT ``{SITE_ROOT}/apps/myapp/app.js``), adding ``site.install('myapp', '/myapp/')``.
+And you need to install your ``myapp`` in your site. To do this, modify ``init`` function in ``{SITE_ROOT}/app.js`` (NOT ``{APP_ROOT}/app.js``), adding ``site.install('myapp', '/myapp/')``.
 
 .. code-block:: javascript
 
@@ -79,7 +80,7 @@ And you need to install your ``myapp`` in your site. To do this, modify ``init``
 
    }
 
-``site.install('app', '/approot/', options)`` is a function that install a sunrise application in to the site. On installing the application, ``init`` function in ``{SITE_ROOT}/apps/myapp/app.js`` is also invoked by sunrise.
+``site.install('app', '/approot/', options)`` is a function that install a sunrise application in to the site. On installing the application, ``init`` function in ``{APP_ROOT}/app.js`` is also invoked by sunrise.
 
 In the default template, 
 
@@ -101,9 +102,10 @@ Launch the site to confirm the template application
 
 Then launch your site, visit go to http://localhost:8888/, you can see the link to myapp in the menu bar. And you can visit the application root URL, http://localhost:8888/myapp/.
 
-``init`` function in your ``{SITE_ROOT}/apps/myapp/app.js`` is a entry point for your application. You can add some paths for your web services, booting scripts for setup your database, ... etc, acorrding to the manner of sunrise.
+``init`` function in your ``{APP_ROOT}/app.js`` is a entry point for your application. You can add some paths for your web services, booting scripts for setup your database, ... etc, acorrding to the manner of sunrise.
 
 And ``app.js`` is a design document on CouchDB. You can define MapReduce views, list, show functions, and also add attachements for static file hosting.
 
 .. warning:: The feature of static file hosting is provided by Node engine, not by CouchDB currently. So you can define attachments for future use.
 
+Next step, we will describe the view feature of the sunrise.

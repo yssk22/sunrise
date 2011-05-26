@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Sunrise v0.1.0 documentation" href="../index.html" />
     <link rel="up" title="Application Development Tutorial" href="index.html" />
-    <link rel="next" title="Development Tips" href="../tips/index.html" />
+    <link rel="next" title="View development" href="view.html" />
     <link rel="prev" title="Application Development Tutorial" href="index.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../tips/index.html" title="Development Tips"
+          <a href="view.html" title="View development"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Application Development Tutorial"
@@ -65,8 +65,8 @@
   <p class="topless"><a href="index.html"
                         title="previous chapter">Application Development Tutorial</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../tips/index.html"
-                        title="next chapter">Development Tips</a></p>
+  <p class="topless"><a href="view.html"
+                        title="next chapter">View development</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/tutorial/introduction.txt"
@@ -124,8 +124,7 @@
 $ cd sunrise-site</pre>
 </div>
 <p>Then your site directory is as follows.</p>
-<div class="highlight-python"><pre>$ tree -L 1
-.
+<div class="highlight-python"><pre>.
 ├── _attachments
 ├── app.js
 ├── apps
@@ -140,10 +139,11 @@ $ cd sunrise-site</pre>
 <div class="highlight-python"><pre>$ sunrise\:create -a apps/myapp
 /Users/yssk22/tmp/sunrise-site/apps/myapp has been created successfully</pre>
 </div>
+<p>Now we call <tt class="docutils literal"><span class="pre">myapp</span></tt> directory as <tt class="docutils literal"><span class="pre">APP_ROOT</span></tt>.</p>
 </div>
 <div class="section" id="install-the-template-application">
 <h3>Install the template application<a class="headerlink" href="#install-the-template-application" title="Permalink to this headline">¶</a></h3>
-<p>And you need to install your <tt class="docutils literal"><span class="pre">myapp</span></tt> in your site. To do this, modify <tt class="docutils literal"><span class="pre">init</span></tt> function in <tt class="docutils literal"><span class="pre">{SITE_ROOT}/app.js</span></tt> (NOT <tt class="docutils literal"><span class="pre">{SITE_ROOT}/apps/myapp/app.js</span></tt>), adding <tt class="docutils literal"><span class="pre">site.install('myapp',</span> <span class="pre">'/myapp/')</span></tt>.</p>
+<p>And you need to install your <tt class="docutils literal"><span class="pre">myapp</span></tt> in your site. To do this, modify <tt class="docutils literal"><span class="pre">init</span></tt> function in <tt class="docutils literal"><span class="pre">{SITE_ROOT}/app.js</span></tt> (NOT <tt class="docutils literal"><span class="pre">{APP_ROOT}/app.js</span></tt>), adding <tt class="docutils literal"><span class="pre">site.install('myapp',</span> <span class="pre">'/myapp/')</span></tt>.</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="nx">ddoc</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">site</span><span class="p">){</span>
   <span class="c1">// ...</span>
   <span class="c1">// install system application</span>
@@ -155,7 +155,7 @@ $ cd sunrise-site</pre>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">site.install('app',</span> <span class="pre">'/approot/',</span> <span class="pre">options)</span></tt> is a function that install a sunrise application in to the site. On installing the application, <tt class="docutils literal"><span class="pre">init</span></tt> function in <tt class="docutils literal"><span class="pre">{SITE_ROOT}/apps/myapp/app.js</span></tt> is also invoked by sunrise.</p>
+<p><tt class="docutils literal"><span class="pre">site.install('app',</span> <span class="pre">'/approot/',</span> <span class="pre">options)</span></tt> is a function that install a sunrise application in to the site. On installing the application, <tt class="docutils literal"><span class="pre">init</span></tt> function in <tt class="docutils literal"><span class="pre">{APP_ROOT}/app.js</span></tt> is also invoked by sunrise.</p>
 <p>In the default template,</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="nx">ddoc</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">app</span><span class="p">){</span>
   <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span>
@@ -172,12 +172,13 @@ $ cd sunrise-site</pre>
 <div class="section" id="launch-the-site-to-confirm-the-template-application">
 <h3>Launch the site to confirm the template application<a class="headerlink" href="#launch-the-site-to-confirm-the-template-application" title="Permalink to this headline">¶</a></h3>
 <p>Then launch your site, visit go to <a class="reference external" href="http://localhost:8888/">http://localhost:8888/</a>, you can see the link to myapp in the menu bar. And you can visit the application root URL, <a class="reference external" href="http://localhost:8888/myapp/">http://localhost:8888/myapp/</a>.</p>
-<p><tt class="docutils literal"><span class="pre">init</span></tt> function in your <tt class="docutils literal"><span class="pre">{SITE_ROOT}/apps/myapp/app.js</span></tt> is a entry point for your application. You can add some paths for your web services, booting scripts for setup your database, ... etc, acorrding to the manner of sunrise.</p>
+<p><tt class="docutils literal"><span class="pre">init</span></tt> function in your <tt class="docutils literal"><span class="pre">{APP_ROOT}/app.js</span></tt> is a entry point for your application. You can add some paths for your web services, booting scripts for setup your database, ... etc, acorrding to the manner of sunrise.</p>
 <p>And <tt class="docutils literal"><span class="pre">app.js</span></tt> is a design document on CouchDB. You can define MapReduce views, list, show functions, and also add attachements for static file hosting.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">The feature of static file hosting is provided by Node engine, not by CouchDB currently. So you can define attachments for future use.</p>
 </div>
+<p>Next step, we will describe the view feature of the sunrise.</p>
 </div>
 </div>
 </div>
@@ -195,7 +196,7 @@ $ cd sunrise-site</pre>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../tips/index.html" title="Development Tips"
+          <a href="view.html" title="View development"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Application Development Tutorial"

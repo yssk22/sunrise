@@ -8,8 +8,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>View development &mdash; Sunrise v0.1.0 documentation</title>
-    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
@@ -19,12 +19,12 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
     <link rel="top" title="Sunrise v0.1.0 documentation" href="../index.html" />
     <link rel="up" title="Application Development Tutorial" href="index.html" />
-    <link rel="next" title="Helper function development" href="helper.html" />
+    <link rel="next" title="Handler Development" href="handler.html" />
     <link rel="prev" title="Introduction" href="introduction.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="helper.html" title="Helper function development"
+          <a href="handler.html" title="Handler Development"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="introduction.html" title="Introduction"
@@ -64,11 +64,11 @@
   <p class="topless"><a href="introduction.html"
                         title="previous chapter">Introduction</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="helper.html"
-                        title="next chapter">Helper function development</a></p>
+  <p class="topless"><a href="handler.html"
+                        title="next chapter">Handler Development</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../_sources/tutorial/view.txt"
+    <li><a href="../sources/tutorial/view.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -213,12 +213,16 @@ All of files are pused into CouchDB as attachement files of the design document 
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">.span-19</span></tt> and <tt class="docutils literal"><span class="pre">.append-1</span></tt> is defined in blueprint and sunrise compile this style definition into:</p>
+<p>CSS macro, <tt class="docutils literal"><span class="pre">.span-19</span></tt> and <tt class="docutils literal"><span class="pre">.append-1</span></tt>, is defined in blueprint and sunrise compile this style definition into:</p>
 <div class="highlight-css"><div class="highlight"><pre><span class="nt">div</span><span class="nc">.something</span> <span class="p">{</span>
      <span class="k">width</span><span class="o">:</span><span class="m">750px</span><span class="p">;</span>
      <span class="k">padding-right</span><span class="o">:</span><span class="m">40px</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">We may change css framework in the future and define the css macro strictly.</p>
 </div>
 <table class="docutils footnote" frame="void" id="f1" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
@@ -242,7 +246,7 @@ All of files are pused into CouchDB as attachement files of the design document 
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="helper.html" title="Helper function development"
+          <a href="handler.html" title="Handler Development"
              >next</a> |</li>
         <li class="right" >
           <a href="introduction.html" title="Introduction"

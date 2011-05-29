@@ -23,6 +23,8 @@ Localization
 
 .. warning:: Not implemented yet.
 
+.. _i18n-m10n:
+
 Multilingualization
 -------------------------------------------------------------------------------
 

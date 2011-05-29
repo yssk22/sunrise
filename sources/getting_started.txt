@@ -67,7 +67,7 @@ Configure settings
 
 ``${YOUR_SITE_DIR}/conf`` contains default configurations. You can configure settings such as OAuth provides, CouchDB admin account, Cookie settings, ... and so on.
 
-Configuration details are described at :doc:`ref/conf`_
+Configuration details are described at :doc:`ref/conf`.
 
 
 Configure bootstrap

@@ -143,7 +143,7 @@ Sunrise compiles your ``.less`` files with integrating blueprint so that you can
         .append-1;
     }
 
-``.span-19`` and ``.append-1`` is defined in blueprint and sunrise compile this style definition into:
+CSS macro, ``.span-19`` and ``.append-1``, is defined in blueprint and sunrise compile this style definition into:
 
 .. code-block:: css
 
@@ -151,5 +151,7 @@ Sunrise compiles your ``.less`` files with integrating blueprint so that you can
         width:750px;
         padding-right:40px;
    }
+
+.. warning:: We may change css framework in the future and define the css macro strictly.
 
 .. [#f1] Cheat sheet is available at http://blueprintcss.org/media/BlueprintV0.8byGJMS.pdf

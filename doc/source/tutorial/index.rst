@@ -8,8 +8,7 @@ This capter shows you how to develop your application running on sunrise step by
 
    introduction
    view
-   controller
-   db_access
-   design_doc
+   handler
+   db
    helper
 

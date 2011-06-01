@@ -90,3 +90,24 @@ The defaults are:
        }
    }
 
+
+log4js.json
+-------------------------------------------------------------------------------
+
+`log4js <https://github.com/csausdev/log4js-node>`_ configuration file.
+
+The defaults are:
+
+::
+
+   {
+       "appenders": [
+           {
+               "type": "logLevelFilter",
+               "level": "DEBUG",
+               "appender": {
+                   "type": "console"
+               }
+           }
+       ]
+   }

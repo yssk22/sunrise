@@ -8,9 +8,9 @@ var ddoc = {
 
 module.exports = ddoc;
 
-ddoc.init = function(app){
+ddoc.init = app => {
   var utils = require('middleware/utils');
-  app.get('/', function(req, res, next){
+  app.get('/', (req, res, next) => {
     res.send('Hello World');
   });
 };

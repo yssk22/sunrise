@@ -8,17 +8,17 @@ var ddoc = {
 
 module.exports = ddoc;
 
-ddoc.init = function(app){
-  app.get('/', function(req, res, next){
+ddoc.init = app => {
+  app.get('/', (req, res, next) => {
     res.send('Hello World');
   });
 
-  app.get('/test_helpers/:name', function(req, res, next){
+  app.get('/test_helpers/:name', (req, res, next) => {
     res.render('test_helpers/' + req.param('name') + '.ejs',
                {layout: false});
   });
 
-  app.get('/test_dynamicHelpers/:name', function(req, res, next){
+  app.get('/test_dynamicHelpers/:name', (req, res, next) => {
     res.render('test_dynamicHelpers/' + req.param('name') + '.ejs',
                {layout: false});
   });

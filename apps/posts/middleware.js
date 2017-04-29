@@ -8,14 +8,14 @@ var allowed_names = [
 
 
 module.exports = {
-  postList: function(options){
+  postList(options) {
     options = merge({
       perPage: 10,
       bindAs: 'posts',
       viewName: 'posts/by_updated_at'
     }, options);
     var db = this.db;
-    return function(req, res, next){
+    return (req, res, next) => {
       var params = {
         limit: options.perPage,
         descending: true
@@ -23,13 +23,13 @@ module.exports = {
       if( params.limit === 'unlimited' ){
         delete(params.limit);
       }
-      allowed_names.forEach(function(name){
+      allowed_names.forEach(name => {
         if( req.query[name] !== undefined ){
           params[name] = req.query[name];
         }
       });
       (db.bind('view', options.viewName, params, {
-        success: function(req, res, next){
+        success(req, res, next) {
           var rows = res.locals().posts.data;
           for(var i in rows){
             if( options.keyFormatter ){
@@ -45,26 +45,26 @@ module.exports = {
     };
   },
 
-  feedOrHtml: function(filename){
-    return function(req, res, next){
+  feedOrHtml(filename) {
+    return (req, res, next) => {
       res.render(filename);
     };
   },
 
-  byId: function(options){
+  byId(options) {
     options = merge({
       paramName: 'id',
       bindAs: 'post'
     }, options);
     var db = this.db;
-    return function(req, res, next){
+    return (req, res, next) => {
       db.bind('get', req.params[options.paramName], {
         as: options.bindAs
       })(req, res, next);
     };
   },
 
-  byUpdatedAt: function(options){
+  byUpdatedAt(options) {
     options = merge({
       perPage: 10,
       bindAs: 'posts',
@@ -76,7 +76,7 @@ module.exports = {
     return this.postList(options);
   },
 
-  byTag: function(options){
+  byTag(options) {
     options = merge({
       perPage: 10,
       bindAs: 'posts',
@@ -85,14 +85,12 @@ module.exports = {
     var db = this.db;
     options.viewName  = 'posts/' + (options.includeDraft === true ?
                                'all_by_tag' : 'by_tag');
-    options.keyFormatter = function(key){
-      return key[1];
-    };
+    options.keyFormatter = key => key[1];
     return this.postList(options);
   },
 
 
-  countByTag: function(options){
+  countByTag(options) {
     options = merge({
       bindAs: 'tags'
     }, options);
@@ -107,7 +105,7 @@ module.exports = {
     });
   },
 
-  countByDate: function(options){
+  countByDate(options) {
     options = merge({
       group: 'month',
       bindAs: 'archives'

@@ -4,8 +4,9 @@
  * Copyright (c) Yohei Sasaki <yssk22@gmail.com>
  * MIT Licensed
  */
-var assert = require('assert'),
-    path = require('path');
+var assert = require('assert');
+
+var path = require('path');
 var env = require('./env');
 var abspath = require('utils').abspath;
 var app = require('app');
@@ -30,7 +31,7 @@ module.exports = {
     assert.isNotNull(found);
     assert.eql(testAppPath, found);
 
-    assert.throws(function(){app.resolveAppPath('foo'); });
+    assert.throws(() => {app.resolveAppPath('foo'); });
 
   },
 
@@ -49,7 +50,7 @@ module.exports = {
 
   'test view rendering': function(){
     var test_app = app.createApp('test_app');
-    test_app.get('/test_template', function(req, res, next){
+    test_app.get('/test_template', (req, res, next) => {
       res.render('test.ejs', {layout: false});
     });
     assert.response(test_app, {

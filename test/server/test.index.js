@@ -14,7 +14,7 @@ module.exports = {
     assert.eql(s.i18n.defaultLocale, 'en');
 
     s.use(s.router);
-    s.get('/foo', function(req, res, next){
+    s.get('/foo', (req, res, next) => {
       res.writeHead(200);
       res.end("Hello World");
     });

@@ -13,11 +13,11 @@ var ddoc = {
 module.exports = ddoc;
 
 // site initialize script
-ddoc.init = function(site){
+ddoc.init = site => {
   var utils = require('sunrise').utils;
   require('sunrise').appPaths.push(utils.abspath('./apps'));
 
-  site.get('/', function(req, res, next){
+  site.get('/', (req, res, next) => {
     res.render('index');
   });
 

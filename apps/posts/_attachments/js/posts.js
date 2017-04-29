@@ -1,5 +1,5 @@
 /* posts.js */
-(function($){
+(($ => {
   function somethingWrong(){
     alert('something is wrong. try later ...');
   }
@@ -8,7 +8,7 @@
     var target = this;
     var link = target.find('.readmore');
     link.button();
-    link.bind('click', function(e){
+    link.bind('click', e => {
       var last = link.prev();
       var path = link.attr('data-apipath');
       var param = {
@@ -16,7 +16,7 @@
         startkey_docid: last.attr('data-docid'),
         skip: 1
       };
-      $.get(path, param, function(data){
+      $.get(path, param, data => {
         link.before(data);
         var newlast = link.prev();
         if( last.attr('data-docid') === newlast.attr('data-docid') ){
@@ -44,10 +44,10 @@
       tags.autocomplete(a, {
         multiple: true, mustMatch: false,
         scroll: true, scrollHeight: 300,
-        formatItem: function(data, i, n, value){
+        formatItem(data, i, n, value) {
           return data[0] + " (" + data[1] + ")";
         },
-        formatResult: function(data, i, n, value){
+        formatResult(data, i, n, value) {
           return data[0];
         }
       });
@@ -58,25 +58,25 @@
       var action = target.attr('action');
       var type = target.attr('method');
       var doc = {};
-      $(target.serializeArray()).each(function(i, v){
+      $(target.serializeArray()).each((i, v) => {
         doc[v.name] = v.value;
       });
       if( doc._id == '' ){
         delete(doc._id); delete(doc._rev);
       }
       $.ajax({
-        type: type, url: action,
+        type, url: action,
         contentType: 'application/json',
         processData: false,
         data: JSON.stringify(doc),
-        success: function(data, status, xhr){
+        success(data, status, xhr) {
           if( type == 'PUT' ){
             return location.href = action;
           }else{
             return location.href = xhr.getResponseHeader('Location');
           }
         },
-        failure: function(){
+        failure() {
           somethingWrong();
         }
       });
@@ -93,7 +93,7 @@
     target.bind('submit', onSubmit);
     $('#cancel').click(onCancel);
 
-    target.find('input').keypress(function(e){
+    target.find('input').keypress(e => {
       if( e.which === 13 || e.keyCode === 13 ){
         return false;
       }else{
@@ -112,12 +112,12 @@
         var link = target.attr('data-permalink');
         $.ajax({
           type: "DELETE", url: link,
-          success: function(data, status, xhr){
-            target.effect('drop', function(){
+          success(data, status, xhr) {
+            target.effect('drop', () => {
               target.trigger('deleted');
             });
           },
-          failure: function(data, status, xhr){
+          failure(data, status, xhr) {
             somethingWrong();
           }
         });
@@ -128,9 +128,9 @@
     button.bind('click', onClick);
   };
 
-})(jQuery);
+}))(jQuery);
 
-$(function(){
+$(() => {
   function f(s){
     if( s > 10 ){
       return s;

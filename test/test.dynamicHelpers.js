@@ -3,11 +3,12 @@
  * Copyright (c) 2011 Yohei Sasaki <yssk22@gmail.com>
  * MIT Licensed
  */
-var assert = require('assert'),
-    path = require('path');
+var assert = require('assert');
+
+var path = require('path');
 var env = require('./env');
-var createSite = require('site').createSite,
-    abspath = require('utils').abspath;
+var createSite = require('site').createSite;
+var abspath = require('utils').abspath;
 var app = require('app');
 app.paths.push(abspath(path.join(__dirname, '/fixtures/app/')));
 
@@ -18,7 +19,7 @@ module.exports = {
     var test_app = site.install('test_app', '/test_app/');
 
     assert.response(site, {url: '/test_dynamicHelpers/session'},
-                    function(res){
+                    res => {
                       var obj = JSON.parse(res.body);
                       assert.isNotNull(obj.lastAccess);
                       assert.isNotNull(obj.cookie);
@@ -49,7 +50,7 @@ module.exports = {
       headers: {
         host: 'example.com'
       }
-    }, function(res){
+    }, res => {
       var results = res.body.split('\n');
       assert.eql(results[0], '/foo');
       assert.eql(results[1], 'http://example.com/foo');
@@ -70,7 +71,7 @@ module.exports = {
       headers: {
         'accept-language' : 'ja'
       }
-    }, function(res){
+    }, res => {
       var results = res.body.split('\n');
       assert.eql(results[0], 'テスト');
       assert.eql(results[1], 'notfound');

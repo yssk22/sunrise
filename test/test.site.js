@@ -4,11 +4,12 @@
  * Copyright (c) Yohei Sasaki <yssk22@gmail.com>
  * MIT Licensed
  */
-var assert = require('assert'),
-    path = require('path');
+var assert = require('assert');
+
+var path = require('path');
 var env = require('./env');
-var createSite = require('site').createSite,
-    abspath = require('utils').abspath;
+var createSite = require('site').createSite;
+var abspath = require('utils').abspath;
 
 module.exports = {
   "test createSite": function(){
@@ -22,13 +23,13 @@ module.exports = {
 
   "test locals": function(){
     var site = createSite(path.join(__dirname, '/fixtures/site/test_site'));
-    site.get('/locals/page', function(req, res, next){
+    site.get('/locals/page', (req, res, next) => {
       res.send(JSON.stringify(res.local('page')));
     });
 
     assert.response(site, {
       url: '/locals/page', method: "GET"
-    }, function(res){
+    }, res => {
       var page = JSON.parse(res.body);
       assert.eql(page.title, '');
       assert.eql(page.feed, '');
@@ -41,7 +42,7 @@ module.exports = {
   "test session": function(){
     var site = createSite(path.join(__dirname, '/fixtures/site/test_site'));
     // session application
-    site.get('/test_session', function(req, res, next){
+    site.get('/test_session', (req, res, next) => {
       var sess = req.session;
       if( req.session.test_session === undefined ){
         sess.test_session = 0;
@@ -52,7 +53,7 @@ module.exports = {
 
     assert.response(site, {
       url: '/test_session', method: "GET"
-    }, function(res){
+    }, res => {
       var cookie = env.parseSetCookie(res);
       assert.eql('test_session = 1', res.body);
       assert.isNotNull(cookie['connect.sid']);

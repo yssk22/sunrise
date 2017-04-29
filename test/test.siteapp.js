@@ -4,11 +4,12 @@
  * Copyright (c) Yohei Sasaki <yssk22@gmail.com>
  * MIT Licensed
  */
-var assert = require('assert'),
-    path = require('path');
+var assert = require('assert');
+
+var path = require('path');
 var env = require('./env');
-var createSite = require('site').createSite,
-    abspath = require('utils').abspath;
+var createSite = require('site').createSite;
+var abspath = require('utils').abspath;
 var app = require('app');
 app.paths.push(abspath(path.join(__dirname, '/fixtures/app/')));
 
@@ -19,7 +20,7 @@ module.exports = {
   "test installed application": function(){
     var site = createSite(path.join(__dirname, '/fixtures/site/test_site'));
     var test_app = site.install('test_app', '/test_app/');
-    test_app.get('/test_template', function(req, res, next){
+    test_app.get('/test_template', (req, res, next) => {
       res.render('test.ejs', {layout: false});
     });
     assert.response(site, {
@@ -37,7 +38,7 @@ module.exports = {
   "test layout chain": function(){
     var site = createSite(path.join(__dirname, '/fixtures/site/test_site'));
     var test_app = site.install('test_app', '/test_app/');
-    test_app.get('/test_layout', function(req, res, next){
+    test_app.get('/test_layout', (req, res, next) => {
       res.render('test.ejs');
     });
     assert.response(site, {
@@ -53,12 +54,12 @@ module.exports = {
   "test helper": function(){
     var site = createSite(path.join(__dirname, '/fixtures/site/test_site'));
     var test_app = site.install('test_app', '/test_app/');
-    test_app.get('/test_helper', function(req, res, next){
+    test_app.get('/test_helper', (req, res, next) => {
       res.render('test_helper.ejs');
     });
     assert.response(site, {
       url: '/test_app/test_helper', method: "GET"
-    },  function(res){
+    },  res => {
       var lines = res.body.split('\n');
       var i = 0;
       assert.eql("isLogin: false", lines[++i]);

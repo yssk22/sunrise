@@ -15,9 +15,9 @@ module.exports = ddoc;
 
 ddoc.helpers = require('./helpers');
 ddoc.dynamicHelpers = require('./dynamicHelpers');
-ddoc.init = function(app){
+ddoc.init = app => {
   app.get('/',
-          function(req, res, next){
+          (req, res, next) => {
             res.render('index.ejs');
           });
 

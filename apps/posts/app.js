@@ -28,11 +28,11 @@ ddoc.validate_doc_update = require('./validate_doc_update');
 ddoc.middleware = require('./middleware');
 ddoc.views = require('./views');
 
-ddoc.init = function(app, config){
+ddoc.init = (app, config) => {
   var merge = require('sunrise').utils.merge;
-  var parallel = require('sunrise').middleware.utils.parallel,
-      js = require('sunrise').middleware.utils.js,
-      css = require('sunrise').middleware.utils.css;
+  var parallel = require('sunrise').middleware.utils.parallel;
+  var js = require('sunrise').middleware.utils.js;
+  var css = require('sunrise').middleware.utils.css;
   var raiseError = require('sunrise').raiseError;
 
 
@@ -56,9 +56,7 @@ ddoc.init = function(app, config){
       if( !Array.isArray(doc.tags) ){
         doc.tags = doc.tags.toString().split(',');
       }
-      doc.tags = doc.tags.map(function(t){
-        return t.replace(/^[\s　]+|[\s　]+$/g, '');
-      });
+      doc.tags = doc.tags.map(t => t.replace(/^[\s　]+|[\s　]+$/g, ''));
     }else{
       doc.tags = [];
     }
@@ -74,7 +72,7 @@ ddoc.init = function(app, config){
       delete(doc._rev);
     }
     return doc;
-  };
+  }
 
   function renderList(req, res, next){
     // TODO: content negotiation
@@ -105,7 +103,7 @@ ddoc.init = function(app, config){
           m.feedOrHtml('index.ejs'));
 
   app.get('/a/:year/:month/',
-          function(req, res, next){
+          (req, res, next) => {
             try{
               var y = parseInt(req.params.year);
               var m = parseInt(req.params.month[0] == '0' ? req.params.month.substr(1) : req.params.month);
@@ -129,7 +127,7 @@ ddoc.init = function(app, config){
           m.feedOrHtml('by_month.ejs'));
 
   app.get('/t/:tag/',
-          function(req, res, next){
+          (req, res, next) => {
             var t = req.params.tag;
             req.query.startkey = [t, "\uff00"];
             req.query.endkey = [t];
@@ -149,7 +147,7 @@ ddoc.init = function(app, config){
             m.countByDate(),
             m.countByTag()
           ),
-          function(req, res, next){
+          (req, res, next) => {
             // TODO; content negotiated response
             if( res.local('post').error ){
               raiseError(404);
@@ -159,12 +157,12 @@ ddoc.init = function(app, config){
          );
 
   app.post('/p/', // save a new entry
-           function(req, res, next){
+           (req, res, next) => {
              logger.debug('Creating a new post');
              logger.debug(JSON.stringify(req.headers));
              logger.debug(JSON.stringify(req.body));
              var doc = makeDoc(req);
-             app.db.save(doc, function(err, result){
+             app.db.save(doc, (err, result) => {
                // TODO: content negotiated response
                if( err ){
                  res.send(JSON.stringify(err), 400);
@@ -173,16 +171,16 @@ ddoc.init = function(app, config){
                  doc._id = result.id;
                  doc._rev = result.rev;
                  res.send(JSON.stringify(doc), {
-                   location: location
+                   location
                  }, 201);
                }
              });
            });
 
   app.put('/p/:id',  // update an entry
-          function(req, res, next){
+          (req, res, next) => {
             var doc = makeDoc(req, res.local('post').data);
-            app.db.merge(doc, function(err, result){
+            app.db.merge(doc, (err, result) => {
                // TODO: content negotiated response
                if( err ){
                  res.send(JSON.stringify(err), 400);
@@ -195,9 +193,9 @@ ddoc.init = function(app, config){
           });
 
   app.del('/p/:id', // delete an entry
-          function(req, res, next){
+          (req, res, next) => {
             var doc = res.local('post').data;
-            app.db.remove(doc._id, doc._rev, function(err, result){
+            app.db.remove(doc._id, doc._rev, (err, result) => {
                if( err ){
                  res.send(JSON.stringify(err), 400);
                }else{
@@ -212,7 +210,7 @@ ddoc.init = function(app, config){
           renderList);
 
   app.get('/-/t/:tag/',
-          function(req, res, next){
+          (req, res, next) => {
             var t = req.params.tag;
             req.query.startkey = [t, req.query.startkey || "\uff00"];
             req.query.endkey = [t];
@@ -232,7 +230,7 @@ ddoc.init = function(app, config){
             m.countByDate(),
             m.countByTag()
           ),
-          function(req, res, next){
+          (req, res, next) => {
             res.render('admin/index.ejs');
           });
 
@@ -241,7 +239,7 @@ ddoc.init = function(app, config){
             m.countByDate(),
             m.countByTag()
           ),
-          function(req, res, next){
+          (req, res, next) => {
             res.local('post', ddoc.docTemplates.post);
             res.render('admin/new.ejs');
           });
@@ -251,7 +249,7 @@ ddoc.init = function(app, config){
             m.countByDate(),
             m.countByTag()
           ),
-          function(req, res, next){
+          (req, res, next) => {
             res.render('admin/edit.ejs');
           });
 
@@ -263,7 +261,6 @@ ddoc.init = function(app, config){
             includeDraft: true
           }),
           renderList);
-
 };
 
 couchapp.loadAttachments(ddoc, path.join(__dirname, '_attachments'));

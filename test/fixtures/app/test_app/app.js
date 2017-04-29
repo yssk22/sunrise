@@ -9,8 +9,8 @@ var ddoc = {
 module.exports = ddoc;
 
 
-ddoc.init = function(app, options){
-  app.get('/', function(req, res, next){
+ddoc.init = (app, options) => {
+  app.get('/', (req, res, next) => {
     res.send('Hello World');
   });
   // all reoutes except above are defined in test script.

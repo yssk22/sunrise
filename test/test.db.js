@@ -15,7 +15,7 @@ module.exports = {
 
   "test uuid": function(){
     var instance = db.createConnection('foo');
-    instance.uuid(function(err, id){
+    instance.uuid((err, id) => {
       assert.isNotNull(id);
     });
   },
@@ -38,7 +38,7 @@ module.exports = {
   },
 
   "test userDB": function(){
-    db.userDB(function(userDB){
+    db.userDB(userDB => {
       assert.isNotNull(userDB);
       assert.eql('_users', userDB.name);
     });

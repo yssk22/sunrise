@@ -26,7 +26,7 @@ function main(){
   }else{
     var src = options.s ? path.join(skeletons, 'site') : path.join(skeletons, 'app');
     var dst = utils.abspath(options.s || options.a);
-    copyFromSkeleton(src, dst, function(err){
+    copyFromSkeleton(src, dst, err => {
       if( err ){
         console.error(err.toString());
         process.exit(1);
@@ -34,13 +34,13 @@ function main(){
         console.log(dst + ' has been created successfully');
         // site instllation
         if( options.s ){
-          copyFromSkeleton(config, path.join(dst, 'conf'), function(err){
+          copyFromSkeleton(config, path.join(dst, 'conf'), err => {
             if( err ){
               console.err(stderr);
               process.exit(1);
             }
             process.chdir(dst);
-            exec('npm link sunrise', function(err, stdout, stderr){
+            exec('npm link sunrise', (err, stdout, stderr) => {
               if( err ){
                 console.err(stderr);
                 process.exit(1);
@@ -62,12 +62,12 @@ function main(){
 }
 
 function copyFromSkeleton(src, dst, callback){
-  path.exists(dst, function(exists){
+  path.exists(dst, exists => {
     if( exists ){
       callback(new Error(dst + ' already exists!'));
     }else{
       var command = 'cp -r ' + src + ' ' + dst;
-      exec(command, function(err, stdout, stderr){
+      exec(command, (err, stdout, stderr) => {
         if( err ){
           callback(err);
         }else{

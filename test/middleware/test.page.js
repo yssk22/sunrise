@@ -1,8 +1,8 @@
-var assert = require('assert'),
-    path = require('path');
+var assert = require('assert');
+var path = require('path');
 var env = require(__dirname + '/../env');
-var createSite = require('site').createSite,
-    abspath = require('utils').abspath;
+var createSite = require('site').createSite;
+var abspath = require('utils').abspath;
 var app = require('app');
 app.paths.push(abspath(path.join(__dirname, '/../fixtures/app/')));
 
@@ -19,7 +19,7 @@ module.exports = {
              m.page.feed('page_middleware.xml'),
              m.page.javascripts('foo.js'),
              m.page.stylesheets('bar.css'),
-             function(req, res, next){
+             (req, res, next) => {
                res.send(JSON.stringify(res.local('page')));
              });
     assert.response(site, {
@@ -27,7 +27,7 @@ module.exports = {
       headers: {
         host: 'example.com'
       }
-    },function(res){
+    },res => {
       var obj = JSON.parse(res.body);
       assert.eql(obj.title, 'title');
       assert.eql(obj.canonical, 'http://example.com/page_middleware');
@@ -43,7 +43,7 @@ module.exports = {
              m.page.feed('page_middleware.xml'),
              m.page.javascripts('foo.js'),
              m.page.stylesheets('bar.css'),
-             function(req, res, next){
+             (req, res, next) => {
                res.send(JSON.stringify(res.local('page')));
              });
 
@@ -52,7 +52,7 @@ module.exports = {
       headers: {
         host: 'example.com'
       }
-    },function(res){
+    },res => {
       var obj = JSON.parse(res.body);
       assert.eql(obj.title, 'title');
       assert.eql(obj.canonical, 'http://example.com/test_app/page_middleware');

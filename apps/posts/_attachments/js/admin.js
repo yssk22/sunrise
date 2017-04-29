@@ -1,5 +1,5 @@
-$(function(){
-  $('#onlyDraft').click(function(){
+$(() => {
+  $('#onlyDraft').click(() => {
     $('div.list').toggleClass('onlyDraft');
   });
 });

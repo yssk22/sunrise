@@ -3,11 +3,12 @@
  * Copyright (c) Yohei Sasaki <yssk22@gmail.com>
  * MIT Licensed
  */
-var assert = require('assert'),
-    path = require('path');
+var assert = require('assert');
+
+var path = require('path');
 var env = require(__dirname + '/../env');
-var createSite = require('site').createSite,
-    abspath = require('utils').abspath;
+var createSite = require('site').createSite;
+var abspath = require('utils').abspath;
 var app = require('app');
 app.paths.push(abspath(path.join(__dirname, '/../fixtures/middleware/')));
 
@@ -15,28 +16,28 @@ module.exports = {
   "setup": function(done){
     this.site = createSite(path.join(__dirname, '/../fixtures/site/test_site'));
     this.db_app = site.install('db_app', '/db_app/');
-    this.db_app.deploy(function(){
+    this.db_app.deploy(() => {
       db_app.db.save('foo', {
         bar: "This is a test data"
-      }, function(err, data){
+      }, (err, data) => {
         done();
       });
     });
   },
 
   "test db.bind": function(){
-    var site = this.site,
-        db_app = this.db_app,
-        bind = db_app.middleware.db.bind;
+    var site = this.site;
+    var db_app = this.db_app;
+    var bind = db_app.middleware.db.bind;
     db_app.get('/bind/foo',
                bind('get', 'foo', { as: 'result' }),
-               function(req, res, next){
+               (req, res, next) => {
                  res.send(JSON.stringify(res.local('result')));
                }
               );
     assert.response(site, {
       url: "/db_app/bind/foo", method: "GET"
-    }, function(res){
+    }, res => {
       var obj = JSON.parse(res.body);
       assert.isNull(obj.error);
       assert.isNotNull(obj.data);
@@ -45,7 +46,7 @@ module.exports = {
 
     db_app.get('/bind/foo/with_template',
                bind('get', 'foo', { as: 'result', render: 'test_bind.ejs' }),
-               function(req, res, next){
+               (req, res, next) => {
                  res.send(res.local('result').toString());
                }
               );
@@ -57,20 +58,20 @@ module.exports = {
   },
 
   "test db.bind with success option": function(){
-    var site = this.site,
-        db_app = this.db_app,
-        bind = db_app.middleware.db.bind;
+    var site = this.site;
+    var db_app = this.db_app;
+    var bind = db_app.middleware.db.bind;
 
     db_app.get('/bind/success',
                bind('get', 'foo', {
                  as: 'result',
-                 success: function(req, res, next){
+                 success(req, res, next) {
                    res.send(JSON.stringify(res.local('result')));
                  }
                }));
     assert.response(site, {
       url: "/db_app/bind/success", method: "GET"
-    }, function(res){
+    }, res => {
       var obj = JSON.parse(res.body);
       assert.isNull(obj.error);
       assert.isNotNull(obj.data);
@@ -79,7 +80,7 @@ module.exports = {
 
     db_app.get('/bind/success/with_template',
                bind('get', 'foo', { as: 'result', success: 'test_bind.ejs' }),
-               function(req, res, next){
+               (req, res, next) => {
                  res.send(res.local('result').toString());
                });
     assert.response(site, {
@@ -90,20 +91,20 @@ module.exports = {
   },
 
   "test db.bind with failure option": function(){
-    var site = this.site,
-        db_app = this.db_app,
-        bind = db_app.middleware.db.bind;
+    var site = this.site;
+    var db_app = this.db_app;
+    var bind = db_app.middleware.db.bind;
 
     db_app.get('/bind/failure',
                bind('get', 'bar', {
                  as: 'result',
-                 failure: function(req, res, next){
+                 failure(req, res, next) {
                    res.send(JSON.stringify(res.local('result')));
                  }
                }));
     assert.response(site, {
       url: "/db_app/bind/failure", method: "GET"
-    }, function(res){
+    }, res => {
       var obj = JSON.parse(res.body);
       console.log(res.body);
       assert.isNotNull(obj.error);
@@ -113,7 +114,7 @@ module.exports = {
 
     db_app.get('/bind/failure/with_template',
                bind('get', 'bar', { as: 'result', failure: 'test_bind.ejs' }),
-               function(req, res, next){
+               (req, res, next) => {
                  res.send(res.local('result').toString());
                });
     assert.response(site, {

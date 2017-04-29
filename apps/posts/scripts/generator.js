@@ -36,7 +36,7 @@ function run(){
       created_at: ts,
       updated_at: ts
     };
-    db.save(doc, function(err, doc){
+    db.save(doc, (err, doc) => {
       if( err ){
         console.error("Error: " + err.error);
       }else{

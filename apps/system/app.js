@@ -15,12 +15,12 @@ module.exports = ddoc;
 
 ddoc.helpers = require('./helpers');
 ddoc.dynamicHelpers = require('./dynamicHelpers');
-ddoc.init = function(app){
+ddoc.init = app => {
   var merge = require('sunrise').utils.merge;
-  var parallel = require('sunrise').middleware.utils.parallel,
-      js = require('sunrise').middleware.utils.js,
-      css = require('sunrise').middleware.utils.css,
-      auth = require('sunrise').middleware.auth;
+  var parallel = require('sunrise').middleware.utils.parallel;
+  var js = require('sunrise').middleware.utils.js;
+  var css = require('sunrise').middleware.utils.css;
+  var auth = require('sunrise').middleware.auth;
   var raiseError = require('sunrise').raiseError;
 
   var version = {
@@ -32,14 +32,14 @@ ddoc.init = function(app){
     serverBootTime: new Date()
   };
 
-  app.db.connection.info(function(err, v){
+  app.db.connection.info((err, v) => {
     version.couchdb = v.version;
   });
 
 
   app.get('/',
           css('css/system.css'),
-          function(req, res, next){
+          (req, res, next) => {
             res.local('version', version);
             res.local('stats', merge({}, stats, process.memoryUsage()));
             res.render('index.ejs');
@@ -52,7 +52,7 @@ ddoc.init = function(app){
 
 
   // Login endpoint.
-  app.get('/login/:providerName', function(req, res, next){
+  app.get('/login/:providerName', (req, res, next) => {
     var provider = auth.providers[req.params.providerName];
     if( provider ){
       if( req.isLogin ){

@@ -44,7 +44,7 @@ $(function(){
  */
 
 
-(function($) {
+(($ => {
 	
 	var ajax = $.ajax;
 	
@@ -67,13 +67,13 @@ $(function(){
 			return pendingRequests[port] = ajax.apply(this, arguments);
 		case "queue": 
 			var _old = settings.complete;
-			settings.complete = function(){
+			settings.complete = function(...args) {
 				if ( _old )
-					_old.apply( this, arguments );
+					_old.apply( this, args );
 				jQuery([ajax]).dequeue("ajax" + port );;
 			};
 		
-			jQuery([ ajax ]).queue("ajax" + port, function(){
+			jQuery([ ajax ]).queue("ajax" + port, () => {
 				ajax( settings );
 			});
 			return;
@@ -93,10 +93,10 @@ $(function(){
 				complete: []
 			};
 		
-			settings.error = function(){ syncedData[ pos ].error = arguments; };
-			settings.success = function(){ syncedData[ pos ].success = arguments; };
-			settings.complete = function(){
-				syncedData[ pos ].complete = arguments;
+			settings.error = function(...args) { syncedData[ pos ].error = args; };
+			settings.success = function(...args) { syncedData[ pos ].success = args; };
+			settings.complete = function(...args) {
+				syncedData[ pos ].complete = args;
 				synced[ pos ].done = true;
 		
 				if ( pos == 0 || !synced[ pos-1 ] )
@@ -113,4 +113,4 @@ $(function(){
 		return ajax.apply(this, arguments);
 	};
 	
-})(jQuery);
+}))(jQuery);

@@ -58,33 +58,33 @@ module.exports = {
   "test bindContext": function(){
     // number, string, boolean, null, undefined
 
-    utils.bindContext(1, function(err, result){
+    utils.bindContext(1, (err, result) => {
       assert.eql(1, result);
     });
 
-    utils.bindContext("String", function(err, result){
+    utils.bindContext("String", (err, result) => {
       assert.eql("String", result);
     });
 
-    utils.bindContext(true, function(err, result){
+    utils.bindContext(true, (err, result) => {
       assert.eql(true, result);
     });
 
-    utils.bindContext(null, function(err, result){
+    utils.bindContext(null, (err, result) => {
       assert.eql(null, result);
     });
 
-    utils.bindContext(undefined, function(err, result){
+    utils.bindContext(undefined, (err, result) => {
       assert.eql(undefined, result);
     });
 
     // Array (Simple)
-    utils.bindContext([1,2,3], function(err, result){
+    utils.bindContext([1,2,3], (err, result) => {
       assert.eql([1,2,3], result);
     });
 
     // Object (Simple)
-    utils.bindContext({foo: "bar"}, function(err, result){
+    utils.bindContext({foo: "bar"}, (err, result) => {
       assert.eql({foo: "bar"}, result);
     });
 
@@ -100,22 +100,22 @@ module.exports = {
 
     function asyncFun(callback){
       var self = this;
-      return setTimeout(function(){
+      return setTimeout(() => {
         callback(undefined, self.asyncResult);
       }, 100);
     }
 
     // function
-    utils.bindContext(syncFun, ctx, function(err, result){
+    utils.bindContext(syncFun, ctx, (err, result) => {
       assert.eql("sync", result);
     });
-    utils.bindContext(asyncFun, ctx, function(err, result){
+    utils.bindContext(asyncFun, ctx, (err, result) => {
       assert.eql("async", result);
     });
 
     // nested objects
     var nested1 = [syncFun, asyncFun, 1];
-    utils.bindContext(nested1, ctx, function(err, result){
+    utils.bindContext(nested1, ctx, (err, result) => {
       assert.eql("sync", result[0]);
       assert.eql("async", result[1]);
       assert.eql(1, result[2]);
@@ -129,7 +129,7 @@ module.exports = {
       b: asyncFun,
       c: 1
     };
-    utils.bindContext(nested2, ctx, function(err, result){
+    utils.bindContext(nested2, ctx, (err, result) => {
       assert.eql("sync", result.a);
       assert.eql("async", result.b);
       assert.eql(1, result.c);
@@ -146,7 +146,7 @@ module.exports = {
         a: [syncFun, asyncFun, 1]
       }
     };
-    utils.bindContext(nested3, ctx, function(err, result){
+    utils.bindContext(nested3, ctx, (err, result) => {
       assert.eql("sync", result.a[0]);
       assert.eql("async", result.a[1]);
       assert.eql(1, result.a[2]);
@@ -166,17 +166,17 @@ module.exports = {
 
   "test parallel": function(){
     var a = 0;
-    utils.parallel(function(done){
-      setTimeout(function(){
+    utils.parallel(done => {
+      setTimeout(() => {
         a++;
         done();
       }, 100);
-    }, function(done){
-      setTimeout(function(){
+    }, done => {
+      setTimeout(() => {
         a++;
         done();
       }, 200);
-    }, function(){
+    }, () => {
       assert.eql(2, a);
     });
   }

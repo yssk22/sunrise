@@ -3,11 +3,12 @@
  * Copyright (c) 2011 Yohei Sasaki <yssk22@gmail.com>
  * MIT Licensed
  */
-var assert = require('assert'),
-    path = require('path');
+var assert = require('assert');
+
+var path = require('path');
 var env = require('./env');
-var createSite = require('site').createSite,
-    abspath = require('utils').abspath;
+var createSite = require('site').createSite;
+var abspath = require('utils').abspath;
 var app = require('app');
 app.paths.push(abspath(path.join(__dirname, '/fixtures/app/')));
 
